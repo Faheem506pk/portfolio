@@ -39,7 +39,7 @@ const About = () => {
   ]
 
   return (
-    <section className="section-spacing relative pt-20">
+    <section className="section-spacing relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
         <motion.div
           variants={containerVariants}

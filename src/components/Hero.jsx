@@ -124,7 +124,7 @@ const Hero = ({ setActiveSection }) => {
               href="https://github.com/faheem506pk"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 sm:w-12 sm:h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-green-400 transition-colors hover:scale-105"
+              className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-gray-300 hover:text-green-400 hover:bg-white/20 transition-all duration-300"
             >
               <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
@@ -133,14 +133,14 @@ const Hero = ({ setActiveSection }) => {
               href="https://www.linkedin.com/in/faheem506pk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 sm:w-12 sm:h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-blue-400 transition-colors hover:scale-105"
+              className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-gray-300 hover:text-blue-400 hover:bg-white/20 transition-all duration-300"
             >
               <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             
             <a
               href="mailto:faheemiqbalm@gmail.com"
-              className="w-10 h-10 sm:w-12 sm:h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-purple-400 transition-colors hover:scale-105"
+              className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-gray-300 hover:text-purple-400 hover:bg-white/20 transition-all duration-300"
             >
               <FaEnvelope className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>

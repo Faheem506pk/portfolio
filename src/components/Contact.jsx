@@ -96,7 +96,7 @@ const Contact = () => {
   }
 
   return (
-    <section className="min-h-screen py-20 relative">
+    <section className="min-h-screen py-20 relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
         <motion.div
           variants={containerVariants}

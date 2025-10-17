@@ -104,7 +104,7 @@ const Experience = () => {
   }
 
   return (
-    <section className="section-spacing relative">
+    <section className="section-spacing relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
         <motion.div
           variants={containerVariants}

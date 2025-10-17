@@ -111,6 +111,14 @@
   .grid-spacing {
     @apply gap-4 sm:gap-6 lg:gap-8;
   }
+
+  /* Clean glass effect - no extra animations */
+  .glass-navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
 }
 
 @layer utilities {

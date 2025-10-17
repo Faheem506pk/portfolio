@@ -33,37 +33,39 @@ const Navigation = ({ activeSection, setActiveSection }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'code-card shadow-lg' : 'bg-gray-900/80 backdrop-blur-sm'
+      className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-2xl ${
+        scrolled 
+          ? 'glass-navbar' 
+          : 'bg-transparent'
       }`}
     >
-      <div className="container-max section-padding">
-        <div className="flex items-center justify-between h-16">
+      <div className={`px-6 py-4 ${scrolled ? 'rounded-2xl' : ''}`}>
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold gradient-text cursor-pointer font-mono"
             onClick={() => handleNavClick('hero')}
           >
-            &lt;MFI/&gt;
+            &lt;faheem506pk/&gt;
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+                className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'bg-green-500 text-gray-900 shadow-lg'
-                    : 'text-gray-300 hover:text-green-400 hover:bg-gray-800/50'
+                    ? 'bg-white/20 text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <item.icon className="w-4 h-4" />
-                <span className="font-medium">{item.label}</span>
+                <span className="font-medium text-sm">{item.label}</span>
               </motion.button>
             ))}
           </div>
@@ -72,9 +74,9 @@ const Navigation = ({ activeSection, setActiveSection }) => {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white hover:text-primary-400 transition-colors"
+            className="md:hidden w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300"
           >
-            {isOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+            {isOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
           </motion.button>
         </div>
 
@@ -83,7 +85,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
           initial={false}
           animate={{ height: isOpen ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-gray-800/95 backdrop-blur-md border border-gray-700/50 rounded-b-2xl shadow-lg"
+          className="md:hidden overflow-hidden mt-4 bg-white/10 backdrop-blur-md rounded-xl"
         >
           <div className="py-4 space-y-2">
             {navItems.map((item) => (
@@ -91,10 +93,10 @@ const Navigation = ({ activeSection, setActiveSection }) => {
                 key={item.id}
                 whileHover={{ x: 10 }}
                 onClick={() => handleNavClick(item.id)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                className={`w-full flex items-center space-x-3 px-4 py-3 mx-2 rounded-lg transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'bg-green-500 text-gray-900'
-                    : 'text-gray-300 hover:text-green-400 hover:bg-gray-800/50'
+                    ? 'bg-white/20 text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <item.icon className="w-5 h-5" />
