@@ -39,7 +39,7 @@ const About = () => {
   ]
 
   return (
-    <section className="min-h-screen py-20 relative">
+    <section className="section-spacing relative pt-20">
       <div className="container-max section-padding">
         <motion.div
           variants={containerVariants}
@@ -58,24 +58,26 @@ const About = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Column - Story */}
-            <motion.div variants={itemVariants} className="space-y-8">
-              <div className="glass-effect rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                  <FaGraduationCap className="w-6 h-6 text-primary-400 mr-3" />
+            <motion.div variants={itemVariants} className="space-y-6">
+              <div className="code-card rounded-2xl card-spacing">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
+                  <FaGraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-green-400 mr-3" />
                   My Journey
                 </h3>
-                <p className="text-gray-300 leading-relaxed mb-6">
-                  I'm a passionate ReactJS Frontend Developer with over 1 year of professional experience 
-                  building scalable, responsive, and user-friendly web applications. My expertise spans 
-                  ReactJS, Next.js, TypeScript, JavaScript, and modern frontend technologies.
-                </p>
-                <p className="text-gray-300 leading-relaxed mb-6">
-                  Based in Islamabad, Pakistan, I specialize in converting Figma designs to pixel-perfect, 
-                  production-ready code with attention to detail and design fidelity. I have strong 
-                  understanding of SEO best practices, semantic HTML, and web performance optimization.
-                </p>
+                <div className="text-spacing">
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    I'm a passionate ReactJS Frontend Developer with over 1 year of professional experience 
+                    building scalable, responsive, and user-friendly web applications. My expertise spans 
+                    ReactJS, Next.js, TypeScript, JavaScript, and modern frontend technologies.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Based in Islamabad, Pakistan, I specialize in converting Figma designs to pixel-perfect, 
+                    production-ready code with attention to detail and design fidelity. I have strong 
+                    understanding of SEO best practices, semantic HTML, and web performance optimization.
+                  </p>
+                </div>
                 <div className="flex items-center text-gray-400">
                   <FaMapMarkerAlt className="w-4 h-4 mr-2" />
                   <span>Islamabad, Pakistan</span>

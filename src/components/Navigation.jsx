@@ -34,7 +34,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'code-card shadow-lg' : 'bg-transparent'
+        scrolled ? 'code-card shadow-lg' : 'bg-gray-900/80 backdrop-blur-sm'
       }`}
     >
       <div className="container-max section-padding">
@@ -83,7 +83,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
           initial={false}
           animate={{ height: isOpen ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden"
+          className="md:hidden overflow-hidden bg-gray-800/95 backdrop-blur-md border border-gray-700/50 rounded-b-2xl shadow-lg"
         >
           <div className="py-4 space-y-2">
             {navItems.map((item) => (

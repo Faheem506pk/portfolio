@@ -104,7 +104,7 @@ const Experience = () => {
   }
 
   return (
-    <section className="min-h-screen py-20 relative">
+    <section className="section-spacing relative">
       <div className="container-max section-padding">
         <motion.div
           variants={containerVariants}
@@ -114,11 +114,11 @@ const Experience = () => {
           className="max-w-6xl mx-auto"
         >
           {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
+          <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-4 sm:mb-6">
               Experience & Education
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
               My professional journey and academic background
             </p>
           </motion.div>

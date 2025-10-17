@@ -25,41 +25,30 @@ const Hero = ({ setActiveSection }) => {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-code-bg">
-      {/* Code Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 text-green-400 font-mono text-sm">
-          <div>&lt;div className="hero"&gt;</div>
-          <div className="ml-4">&lt;h1&gt;Muhammad Faheem Iqbal&lt;/h1&gt;</div>
-          <div className="ml-4">&lt;p&gt;ReactJS Developer&lt;/p&gt;</div>
-          <div>&lt;/div&gt;</div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-code-bg py-8">
+      {/* Simplified background pattern - better performance */}
+      <div className="absolute inset-0 opacity-3">
+        <div className="absolute top-20 left-4 text-green-400 font-mono text-xs opacity-50">
+          <div>&lt;React&gt;</div>
+          <div className="ml-2">&lt;Developer/&gt;</div>
         </div>
-        <div className="absolute top-32 right-20 text-blue-400 font-mono text-sm">
-          <div>const developer = {`{`}</div>
-          <div className="ml-4">name: "Faheem",</div>
-          <div className="ml-4">skills: ["React", "TypeScript"],</div>
-          <div className="ml-4">experience: "1+ years"</div>
-          <div>{`};`}</div>
-        </div>
-        <div className="absolute bottom-20 left-1/4 text-purple-400 font-mono text-sm">
-          <div>npm install react</div>
-          <div>npm install typescript</div>
-          <div>npm install tailwindcss</div>
+        <div className="absolute bottom-20 right-4 text-blue-400 font-mono text-xs opacity-50">
+          <div>const dev = "Faheem"</div>
         </div>
       </div>
 
       <div className="container-max section-padding text-center relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-6xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className="max-w-5xl mx-auto"
         >
           {/* Terminal Window */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="terminal-window max-w-4xl mx-auto mb-8"
           >
             <div className="terminal-header">
@@ -68,27 +57,27 @@ const Hero = ({ setActiveSection }) => {
               <div className="terminal-dot bg-green-500"></div>
               <span className="text-gray-300 text-sm ml-4 font-mono">portfolio.js</span>
             </div>
-            <div className="p-8 text-left">
-              <div className="space-y-4">
+            <div className="p-4 sm:p-6 lg:p-8 text-left">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center space-x-2">
                   <span className="text-green-400">$</span>
                   <span className="text-gray-300">whoami</span>
                 </div>
-                <div className="text-4xl md:text-6xl font-bold gradient-text mb-4">
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold gradient-text mb-3 sm:mb-4">
                   Muhammad Faheem Iqbal
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-green-400">$</span>
                   <span className="text-gray-300">cat role.txt</span>
                 </div>
-                <div className="text-2xl md:text-3xl text-green-400 mb-6">
+                <div className="text-xl sm:text-2xl md:text-3xl text-green-400 mb-4 sm:mb-6">
                   {texts[currentText]}
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-green-400">$</span>
                   <span className="text-gray-300">cat description.txt</span>
                 </div>
-                <div className="text-gray-300 leading-relaxed max-w-3xl">
+                <div className="text-gray-300 leading-relaxed text-sm sm:text-base max-w-2xl">
                   ReactJS Frontend Developer with 1+ year of professional experience building scalable, 
                   responsive web applications. Passionate about converting Figma designs to pixel-perfect code 
                   and creating exceptional user experiences.
@@ -99,10 +88,10 @@ const Hero = ({ setActiveSection }) => {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.0 }}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4 mb-8 sm:mb-12"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -126,41 +115,35 @@ const Hero = ({ setActiveSection }) => {
 
           {/* Social Links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="flex items-center justify-center space-x-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.5 }}
+            className="flex items-center justify-center space-x-4 sm:space-x-6"
           >
-            <motion.a
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
+            <a
               href="https://github.com/faheem506pk"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-green-400 transition-colors"
+              className="w-10 h-10 sm:w-12 sm:h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-green-400 transition-colors hover:scale-105"
             >
-              <FaGithub className="w-6 h-6" />
-            </motion.a>
+              <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
+            </a>
             
-            <motion.a
-              whileHover={{ scale: 1.2, rotate: -5 }}
-              whileTap={{ scale: 0.9 }}
+            <a
               href="https://www.linkedin.com/in/faheem506pk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-blue-400 transition-colors"
+              className="w-10 h-10 sm:w-12 sm:h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-blue-400 transition-colors hover:scale-105"
             >
-              <FaLinkedin className="w-6 h-6" />
-            </motion.a>
+              <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
+            </a>
             
-            <motion.a
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
+            <a
               href="mailto:faheemiqbalm@gmail.com"
-              className="w-12 h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-purple-400 transition-colors"
+              className="w-10 h-10 sm:w-12 sm:h-12 code-card rounded-lg flex items-center justify-center text-gray-300 hover:text-purple-400 transition-colors hover:scale-105"
             >
-              <FaEnvelope className="w-6 h-6" />
-            </motion.a>
+              <FaEnvelope className="w-5 h-5 sm:w-6 sm:h-6" />
+            </a>
           </motion.div>
         </motion.div>
 
