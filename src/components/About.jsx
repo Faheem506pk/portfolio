@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaCode, FaRocket, FaLightbulb, FaHeart, FaGraduationCap, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaCode, FaRocket, FaLightbulb, FaHeart, FaGraduationCap, FaMapMarkerAlt, FaDownload } from 'react-icons/fa'
 
 const About = () => {
   const containerVariants = {
@@ -61,6 +61,22 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Column - Story */}
             <motion.div variants={itemVariants} className="space-y-6">
+              {/* Profile Image */}
+              <div className="flex justify-center lg:justify-start mb-6">
+                <div className="relative">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden profile-frame">
+                    <img 
+                      src="/images/faheem506pk.jpeg" 
+                      alt="Muhammad Faheem Iqbal"
+                      className="w-full h-full object-cover profile-image"
+                    />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </div>
+                </div>
+              </div>
+              
               <div className="code-card rounded-2xl card-spacing">
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
                   <FaGraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-green-400 mr-3" />
@@ -78,9 +94,21 @@ const About = () => {
                     understanding of SEO best practices, semantic HTML, and web performance optimization.
                   </p>
                 </div>
-                <div className="flex items-center text-gray-400">
-                  <FaMapMarkerAlt className="w-4 h-4 mr-2" />
-                  <span>Islamabad, Pakistan</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-gray-400">
+                    <FaMapMarkerAlt className="w-4 h-4 mr-2" />
+                    <span>Islamabad, Pakistan</span>
+                  </div>
+                  <motion.a
+                    href="/cv/M Faheem Iqbal Resume GCC.pdf"
+                    download="Muhammad_Faheem_Iqbal_Resume.pdf"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center space-x-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm"
+                  >
+                    <FaDownload className="w-4 h-4" />
+                    <span>Download CV</span>
+                  </motion.a>
                 </div>
               </div>
 

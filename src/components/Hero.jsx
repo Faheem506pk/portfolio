@@ -25,7 +25,7 @@ const Hero = ({ setActiveSection }) => {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-code-bg py-8">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-code-bg py-[130px]">
       {/* Simplified background pattern - better performance */}
       <div className="absolute inset-0 opacity-3">
         <div className="absolute top-20 left-4 text-green-400 font-mono text-xs opacity-50">
@@ -44,11 +44,32 @@ const Hero = ({ setActiveSection }) => {
           transition={{ duration: 0.5 }}
           className="max-w-5xl mx-auto"
         >
+          {/* Profile Image */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-12 mt-8 flex justify-center"
+          >
+            <div className="relative">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden profile-frame">
+                <img 
+                  src="/images/faheem506pk.jpeg" 
+                  alt="Muhammad Faheem Iqbal"
+                  className="w-full h-full object-cover profile-image"
+                />
+              </div>
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full animate-pulse flex items-center justify-center shadow-lg">
+                <span className="text-white text-xs font-bold">✓</span>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Terminal Window */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.4 }}
             className="terminal-window max-w-4xl mx-auto mb-8"
           >
             <div className="terminal-header">
@@ -103,14 +124,16 @@ const Hero = ({ setActiveSection }) => {
               <span>View Projects</span>
             </motion.button>
             
-            <motion.button
+            <motion.a
+              href="/cv/M Faheem Iqbal Resume GCC.pdf"
+              download="Muhammad_Faheem_Iqbal_Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn-secondary flex items-center space-x-2"
             >
               <FaDownload className="w-4 h-4" />
               <span>Download CV</span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Social Links */}

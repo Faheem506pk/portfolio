@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaPaperPlane } from 'react-icons/fa'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,15 +24,44 @@ const Contact = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      // EmailJS configuration - Your actual IDs
+      const serviceId = 'service_e3mg9bl'
+      const templateId = 'template_b8exa6y'
+      const publicKey = 'YOUR_PUBLIC_KEY' // Get from https://dashboard.emailjs.com/admin/account
+      
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, {
+        name: formData.name,
+        email: formData.email,
+        title: formData.subject,
+        message: formData.message,
+        time: new Date().toLocaleString()
+      }, publicKey)
+      
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
       
+      // Show success toast
+      alert('✅ Message sent successfully! I\'ll get back to you soon.')
+      
       // Reset status after 3 seconds
       setTimeout(() => setSubmitStatus(null), 3000)
-    }, 2000)
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      setSubmitStatus('error')
+      
+      // Show error toast with helpful message
+      if (error.text && error.text.includes('Public Key is invalid')) {
+        alert('❌ EmailJS configuration error. Please check your Public Key setup.')
+      } else {
+        alert('❌ Failed to send message. Please try again or contact me directly.')
+      }
+      
+      setTimeout(() => setSubmitStatus(null), 3000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -115,10 +145,10 @@ const Contact = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Information */}
-            <motion.div variants={itemVariants} className="space-y-8">
-              <div className="glass-effect rounded-2xl p-8">
+            <motion.div variants={itemVariants} className="space-y-6">
+              <div className="code-card rounded-2xl card-spacing">
                 <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
                 <p className="text-gray-300 mb-8 leading-relaxed">
                   I'm always interested in new opportunities and exciting projects. 
@@ -189,7 +219,7 @@ const Contact = () => {
             </motion.div>
 
             {/* Contact Form */}
-            <motion.div variants={itemVariants} className="glass-effect rounded-2xl p-8">
+            <motion.div variants={itemVariants} className="code-card rounded-2xl card-spacing">
               <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">

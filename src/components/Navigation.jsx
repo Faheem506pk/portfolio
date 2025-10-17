@@ -51,14 +51,14 @@ const Navigation = ({ activeSection, setActiveSection }) => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl transition-all duration-300 ${
+                className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all duration-300 ${
                   activeSection === item.id
                     ? 'bg-white/20 text-white'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
