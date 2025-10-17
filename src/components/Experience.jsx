@@ -14,12 +14,13 @@ const Experience = () => {
       type: "Full-time",
       description: "Develop dynamic ReactJS applications and WordPress solutions using ACF, converting Figma designs to pixel-perfect code.",
       achievements: [
-        "Developed Speedy Eats, a dynamic WordPress website with custom CMS integration",
+        "Develop dynamic ReactJS applications and WordPress solutions using ACF",
         "Convert Figma designs to pixel-perfect, responsive React components",
         "Implement SEO best practices including semantic HTML, meta tags, structured data",
         "Build responsive dashboards and admin panels with Ant Design, HTML5, CSS3, JavaScript",
         "Work with Frappe framework basics for business applications",
-        "Deploy applications to Vercel and maintain production environments"
+        "Deploy applications to Vercel and maintain production environments",
+        "Delivered Speedy Eats, a dynamic WordPress website with custom CMS integration"
       ],
       technologies: ["React", "WordPress", "ACF", "Ant Design", "JavaScript", "Vercel", "Frappe"]
     },
@@ -47,10 +48,12 @@ const Experience = () => {
       type: "Contract",
       description: "Designed, developed and maintained web applications using React.js, Tailwind CSS, and JavaScript.",
       achievements: [
+        "Designed, developed and maintained web applications using React.js, Tailwind CSS, and JavaScript",
         "Built the JUHUU Marketplace and BikeBox websites, optimizing for performance and responsive design",
         "Collaborated remotely with the JUHUU team to iterate on UI/UX and implement new features",
-        "Developed responsive web applications using React.js, Tailwind CSS, and JavaScript",
-        "Optimized performance and mobile responsiveness to improve customer engagement"
+        "Developed an e-commerce platform for bike rentals and accessories",
+        "Optimized performance and mobile responsiveness to improve customer engagement",
+        "Integrated product listing, filtering, and booking functionalities"
       ],
       technologies: ["React", "Tailwind CSS", "JavaScript", "HTML", "CSS", "Git"]
     },

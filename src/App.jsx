@@ -9,20 +9,10 @@ import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
-import LoadingScreen from './components/LoadingScreen'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
   const [activeSection, setActiveSection] = useState('hero')
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
-
-    return () => clearTimeout(timer)
-  }, [])
 
   const particlesInit = async (main) => {
     await loadFull(main)
@@ -100,10 +90,6 @@ function App() {
       },
     },
     detectRetina: true,
-  }
-
-  if (isLoading) {
-    return <LoadingScreen />
   }
 
   return (

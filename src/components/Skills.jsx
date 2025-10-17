@@ -13,12 +13,12 @@ const Skills = () => {
       skills: [
         { name: 'ReactJS', level: 95, experience: '1+ years' },
         { name: 'JavaScript', level: 90, experience: '2+ years' },
-        { name: 'TypeScript', level: 85, experience: '1+ years' },
+        { name: 'TypeScript', level: 90, experience: '1+ years' },
         { name: 'HTML/CSS', level: 95, experience: '3+ years' },
         { name: 'Tailwind CSS', level: 90, experience: '1+ years' },
-        { name: 'Next.js', level: 80, experience: '6+ months' },
+        { name: 'Next.js', level: 85, experience: '1+ years' },
         { name: 'Material UI', level: 85, experience: '1+ years' },
-        { name: 'Ant Design', level: 80, experience: '6+ months' }
+        { name: 'Ant Design', level: 85, experience: '1+ years' }
       ]
     },
     backend: {
@@ -29,11 +29,11 @@ const Skills = () => {
         { name: 'WordPress', level: 85, experience: '1+ years' },
         { name: 'PHP', level: 80, experience: '1+ years' },
         { name: 'Firebase', level: 85, experience: '1+ years' },
-        { name: 'MySQL', level: 75, experience: '1+ years' },
-        { name: 'REST APIs', level: 80, experience: '1+ years' },
-        { name: 'Node.js', level: 70, experience: '6+ months' },
-        { name: 'Express.js', level: 65, experience: '6+ months' },
-        { name: 'MongoDB', level: 70, experience: '6+ months' }
+        { name: 'MySQL', level: 80, experience: '1+ years' },
+        { name: 'REST APIs', level: 85, experience: '1+ years' },
+        { name: 'Node.js', level: 75, experience: '1+ years' },
+        { name: 'Express.js', level: 70, experience: '1+ years' },
+        { name: 'MongoDB', level: 75, experience: '1+ years' }
       ]
     },
     database: {
@@ -43,8 +43,8 @@ const Skills = () => {
       skills: [
         { name: 'Firebase', level: 85, experience: '1+ years' },
         { name: 'MySQL', level: 80, experience: '1+ years' },
-        { name: 'MongoDB', level: 75, experience: '6+ months' },
-        { name: 'IndexedDB', level: 80, experience: '6+ months' },
+        { name: 'MongoDB', level: 75, experience: '1+ years' },
+        { name: 'IndexedDB', level: 80, experience: '1+ years' },
         { name: 'LocalStorage', level: 90, experience: '1+ years' },
         { name: 'Firestore', level: 85, experience: '1+ years' },
         { name: 'SQLite', level: 70, experience: '6+ months' },
@@ -57,13 +57,13 @@ const Skills = () => {
       color: 'from-orange-500 to-red-500',
       skills: [
         { name: 'Vercel', level: 90, experience: '1+ years' },
-        { name: 'Git', level: 85, experience: '2+ years' },
+        { name: 'Git', level: 90, experience: '2+ years' },
         { name: 'GitHub', level: 90, experience: '2+ years' },
         { name: 'Firebase Hosting', level: 85, experience: '1+ years' },
         { name: 'Netlify', level: 75, experience: '6+ months' },
-        { name: 'Linux', level: 70, experience: '1+ years' },
+        { name: 'Linux', level: 80, experience: '1+ years' },
         { name: 'Docker', level: 60, experience: '3+ months' },
-        { name: 'CI/CD', level: 65, experience: '6+ months' }
+        { name: 'CI/CD', level: 70, experience: '1+ years' }
       ]
     },
     mobile: {
@@ -91,9 +91,9 @@ const Skills = () => {
         { name: 'After Effects', level: 80, experience: '2+ years' },
         { name: 'Framer Motion', level: 85, experience: '1+ years' },
         { name: 'Canva', level: 90, experience: '2+ years' },
-        { name: 'UI/UX Design', level: 85, experience: '1+ years' },
-        { name: 'Wireframing', level: 80, experience: '1+ years' },
-        { name: 'Prototyping', level: 75, experience: '6+ months' }
+        { name: 'UI/UX Design', level: 90, experience: '1+ years' },
+        { name: 'Wireframing', level: 85, experience: '1+ years' },
+        { name: 'Prototyping', level: 80, experience: '1+ years' }
       ]
     }
   }
@@ -171,7 +171,7 @@ const Skills = () => {
           >
             <div className="flex items-center mb-8">
               <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skillCategories[activeCategory].color} flex items-center justify-center mr-4`}>
-                <skillCategories[activeCategory].icon className="w-6 h-6 text-white" />
+                {React.createElement(skillCategories[activeCategory].icon, { className: "w-6 h-6 text-white" })}
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white">{skillCategories[activeCategory].title}</h3>

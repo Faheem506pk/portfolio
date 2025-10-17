@@ -34,7 +34,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
+        scrolled ? 'code-card shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container-max section-padding">
@@ -42,10 +42,10 @@ const Navigation = ({ activeSection, setActiveSection }) => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text cursor-pointer"
+            className="text-2xl font-bold gradient-text cursor-pointer font-mono"
             onClick={() => handleNavClick('hero')}
           >
-            MFI
+            &lt;MFI/&gt;
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -56,10 +56,10 @@ const Navigation = ({ activeSection, setActiveSection }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'bg-primary-500 text-white shadow-lg'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    ? 'bg-green-500 text-gray-900 shadow-lg'
+                    : 'text-gray-300 hover:text-green-400 hover:bg-gray-800/50'
                 }`}
               >
                 <item.icon className="w-4 h-4" />
@@ -93,8 +93,8 @@ const Navigation = ({ activeSection, setActiveSection }) => {
                 onClick={() => handleNavClick(item.id)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'bg-primary-500 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    ? 'bg-green-500 text-gray-900'
+                    : 'text-gray-300 hover:text-green-400 hover:bg-gray-800/50'
                 }`}
               >
                 <item.icon className="w-5 h-5" />

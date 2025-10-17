@@ -31,11 +31,11 @@ const About = () => {
 
   const skills = [
     { name: "ReactJS Development", level: 95 },
-    { name: "TypeScript", level: 85 },
-    { name: "WordPress Development", level: 80 },
-    { name: "UI/UX Design", level: 85 },
-    { name: "Next.js", level: 75 },
-    { name: "Firebase Integration", level: 70 }
+    { name: "TypeScript", level: 90 },
+    { name: "Next.js", level: 85 },
+    { name: "WordPress Development", level: 85 },
+    { name: "UI/UX Design", level: 90 },
+    { name: "Firebase Integration", level: 85 }
   ]
 
   return (
@@ -68,13 +68,13 @@ const About = () => {
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
                   I'm a passionate ReactJS Frontend Developer with over 1 year of professional experience 
-                  building scalable, responsive web applications. My journey began with a curiosity about 
-                  how websites work, which led me to dive deep into modern frontend technologies.
+                  building scalable, responsive, and user-friendly web applications. My expertise spans 
+                  ReactJS, Next.js, TypeScript, JavaScript, and modern frontend technologies.
                 </p>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  Based in Islamabad, Pakistan, I specialize in ReactJS, Next.js, TypeScript, and WordPress 
-                  development. I excel at converting Figma designs to pixel-perfect code and creating 
-                  exceptional user experiences with attention to detail and design fidelity.
+                  Based in Islamabad, Pakistan, I specialize in converting Figma designs to pixel-perfect, 
+                  production-ready code with attention to detail and design fidelity. I have strong 
+                  understanding of SEO best practices, semantic HTML, and web performance optimization.
                 </p>
                 <div className="flex items-center text-gray-400">
                   <FaMapMarkerAlt className="w-4 h-4 mr-2" />
