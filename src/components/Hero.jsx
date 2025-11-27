@@ -125,7 +125,7 @@ const Hero = ({ setActiveSection }) => {
             </motion.button>
             
             <motion.a
-              href="/cv/M Faheem Iqbal Resume GCC.pdf"
+              href="/cv/M_Faheem_Iqbal_Resume.pdf"
               download="Muhammad_Faheem_Iqbal_Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
