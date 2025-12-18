@@ -31,8 +31,8 @@ const Footer = () => {
       {/* Decorative gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
       
-      <div className="container-max section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-8 lg:mb-12">
+      <div className="container-max section-padding py-12 sm:py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 mb-8 md:mb-10 lg:mb-12">
           {/* Brand Section */}
           <RevealText direction="up" delay={0} className="lg:col-span-5">
             <div className="space-y-4">
@@ -152,8 +152,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-slate-800/50 pt-6 sm:pt-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-t border-slate-800/50 pt-6 md:pt-8 lg:pt-10">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 md:gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
               <p className="text-slate-500 text-xs sm:text-sm">
                 © {currentYear} <span className="text-white font-semibold">{Mydata.Name}</span>. All rights reserved.
@@ -164,13 +164,7 @@ const Footer = () => {
               </p>
             </div>
             
-            {/* Scroll to Top Button */}
-            <button
-              onClick={scrollToTop}
-              className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 flex items-center justify-center text-slate-400 hover:text-white hover:bg-gradient-to-r hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300"
-            >
-              <FaArrowUp className="w-4 h-4" />
-            </button>
+           
           </div>
         </div>
       </div>

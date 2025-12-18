@@ -37,14 +37,10 @@ const Hero = ({ setActiveSection }) => {
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 sm:py-24 md:py-28 lg:py-32">
       {/* Animated background pattern */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-4 md:left-8 text-blue-400 font-mono text-xs opacity-30 animate-pulse">
-          <div>&lt;React&gt;</div>
-          <div className="ml-2">&lt;Developer/&gt;</div>
-        </div>
-        <div className="absolute bottom-20 right-4 md:right-8 text-purple-400 font-mono text-xs opacity-30 animate-pulse">
+        <div className="absolute bottom-20 right-4 md:right-8 text-purple-400 font-mono text-xs opacity-20 animate-pulse">
           <div>const dev = "Faheem"</div>
         </div>
-        <div className="absolute top-1/2 left-1/4 text-pink-400 font-mono text-xs opacity-20">
+        <div className="absolute top-1/2 left-1/4 text-pink-400 font-mono text-xs opacity-15">
           <div>function create()</div>
         </div>
       </div>
