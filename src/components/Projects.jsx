@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt, FaCode, FaEye } from 'react-icons/fa'
+import RevealText from './reactbits/RevealText'
+import AnimatedCard from './reactbits/AnimatedCard'
+import HoverCard from './reactbits/HoverCard'
+import AnimatedButton from './reactbits/AnimatedButton'
+import SplitText from './reactbits/SplitText'
+import { Mydata } from '../utils/MyCv'
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all')
@@ -108,134 +113,87 @@ const Projects = () => {
     activeFilter === 'all' || project.category === activeFilter
   )
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  }
-
   return (
     <section className="min-h-screen py-20 relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="max-w-7xl mx-auto"
-        >
+        <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-              Featured Projects
+          <RevealText direction="up" delay={0} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <SplitText text="Featured Projects" className="gradient-text" delay={0.2} />
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               A showcase of my recent work and side projects
             </p>
-          </motion.div>
+          </RevealText>
 
           {/* Filter Buttons */}
-          <motion.div variants={itemVariants} className="flex justify-center mb-12">
+          <RevealText delay={0.3} className="flex justify-center mb-12">
             <div className="glass-effect rounded-full p-2">
               <div className="flex flex-wrap justify-center gap-2">
                 {filters.map((filter) => (
-                  <motion.button
+                  <AnimatedButton
                     key={filter.key}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveFilter(filter.key)}
-                    className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                      activeFilter === filter.key
-                        ? 'bg-primary-500 text-white shadow-lg'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                    }`}
+                    variant={activeFilter === filter.key ? 'primary' : 'ghost'}
+                    className="px-6 py-3 rounded-full"
                   >
                     {filter.label}
-                  </motion.button>
+                  </AnimatedButton>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </RevealText>
 
           {/* Projects Grid */}
-          <motion.div
-            variants={containerVariants}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            <AnimatePresence>
-              {filteredProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  variants={itemVariants}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  whileHover={{ y: -10 }}
-                  onHoverStart={() => setHoveredProject(project.id)}
-                  onHoverEnd={() => setHoveredProject(null)}
-                  className={`glass-effect rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 ${
-                    project.featured ? 'ring-2 ring-primary-500/50' : ''
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project, index) => (
+              <RevealText 
+                key={project.id} 
+                delay={0.4 + index * 0.1} 
+                direction="up"
+              >
+                <HoverCard
+                  className={`glass-effect rounded-2xl overflow-hidden group cursor-pointer ${
+                    project.featured ? 'ring-2 ring-blue-500/50' : ''
                   }`}
-                >
-                  {/* Project Image */}
-                  <div className="relative h-48 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/30 to-secondary-500/30 flex items-center justify-center">
-                      <FaCode className="w-16 h-16 text-white/50" />
-                    </div>
-                    {project.featured && (
-                      <div className="absolute top-4 left-4 px-3 py-1 bg-accent-500 text-white text-sm font-medium rounded-full">
-                        Featured
-                      </div>
-                    )}
-                    
-                    {/* Overlay */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ 
-                        opacity: hoveredProject === project.id ? 1 : 0 
-                      }}
-                      className="absolute inset-0 bg-black/70 flex items-center justify-center space-x-4"
-                    >
-                      <motion.a
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                  overlay={true}
+                  overlayContent={
+                    <div className="flex space-x-4">
+                      <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-primary-500 transition-colors"
+                        className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors"
                       >
                         <FaGithub className="w-5 h-5" />
-                      </motion.a>
-                      <motion.a
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                      </a>
+                      <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-primary-500 transition-colors"
+                        className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors"
                       >
                         <FaExternalLinkAlt className="w-5 h-5" />
-                      </motion.a>
-                    </motion.div>
+                      </a>
+                    </div>
+                  }
+                >
+                  {/* Project Image */}
+                  <div className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-500/20 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 flex items-center justify-center">
+                      <FaCode className="w-16 h-16 text-white/50" />
+                    </div>
+                    {project.featured && (
+                      <div className="absolute top-4 left-4 px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">
+                        Featured
+                      </div>
+                    )}
                   </div>
 
                   {/* Project Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-gray-400 mb-4 line-clamp-3">
@@ -244,10 +202,10 @@ const Projects = () => {
                     
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.slice(0, 3).map((tech, index) => (
+                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
                         <span
-                          key={index}
-                          className="px-2 py-1 bg-primary-500/20 text-primary-400 rounded text-xs"
+                          key={techIndex}
+                          className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs"
                         >
                           {tech}
                         </span>
@@ -261,9 +219,7 @@ const Projects = () => {
 
                     {/* Action Buttons */}
                     <div className="flex space-x-3">
-                      <motion.a
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                      <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -271,36 +227,30 @@ const Projects = () => {
                       >
                         <FaGithub className="w-4 h-4" />
                         <span>Code</span>
-                      </motion.a>
-                      <motion.a
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                      </a>
+                      <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 bg-primary-500/20 text-primary-400 rounded-lg hover:bg-primary-500/30 transition-colors"
+                        className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors"
                       >
                         <FaEye className="w-4 h-4" />
                         <span>Live</span>
-                      </motion.a>
+                      </a>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                </HoverCard>
+              </RevealText>
+            ))}
+          </div>
 
           {/* Call to Action */}
-          <motion.div variants={itemVariants} className="text-center mt-16">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary"
-            >
+          <RevealText delay={0.8} className="text-center mt-16">
+            <AnimatedButton variant="primary">
               View All Projects on GitHub
-            </motion.button>
-          </motion.div>
-        </motion.div>
+            </AnimatedButton>
+          </RevealText>
+        </div>
       </div>
     </section>
   )

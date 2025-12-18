@@ -1,16 +1,38 @@
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState, lazy, Suspense } from 'react'
 import Navigation from './components/Navigation'
-import Hero from './components/Hero'
-import About from './components/About'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
+import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import RevealText from './components/reactbits/RevealText'
+
+// Lazy load components for better performance
+const Hero = lazy(() => import('./components/Hero'))
+const About = lazy(() => import('./components/About'))
+const Experience = lazy(() => import('./components/Experience'))
+const Projects = lazy(() => import('./components/Projects'))
+const Skills = lazy(() => import('./components/Skills'))
+const Contact = lazy(() => import('./components/Contact'))
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'hero':
+        return <Hero setActiveSection={setActiveSection} />
+      case 'about':
+        return <About />
+      case 'experience':
+        return <Experience />
+      case 'projects':
+        return <Projects />
+      case 'skills':
+        return <Skills />
+      case 'contact':
+        return <Contact />
+      default:
+        return <Hero setActiveSection={setActiveSection} />
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -20,24 +42,18 @@ function App() {
       <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
       
       <main className="relative z-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-          >
-            {activeSection === 'hero' && <Hero setActiveSection={setActiveSection} />}
-            {activeSection === 'about' && <About />}
-            {activeSection === 'experience' && <Experience />}
-            {activeSection === 'projects' && <Projects />}
-            {activeSection === 'skills' && <Skills />}
-            {activeSection === 'contact' && <Contact />}
-          </motion.div>
-        </AnimatePresence>
+        <RevealText key={activeSection} delay={0} duration={0.5} direction="up">
+          <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            {renderSection()}
+          </Suspense>
+        </RevealText>
       </main>
       
+      <Footer />
       <ScrollToTop />
     </div>
   )

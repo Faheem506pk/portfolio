@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import { FaCode, FaServer, FaDatabase, FaCloud, FaMobile, FaPalette } from 'react-icons/fa'
+import RevealText from './reactbits/RevealText'
+import AnimatedCard from './reactbits/AnimatedCard'
+import ProgressBar from './reactbits/ProgressBar'
+import AnimatedTabs from './reactbits/AnimatedTabs'
+import SplitText from './reactbits/SplitText'
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('frontend')
@@ -24,7 +28,7 @@ const Skills = () => {
     backend: {
       title: 'Backend Development',
       icon: FaServer,
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-blue-500 to-cyan-500',
       skills: [
         { name: 'WordPress', level: 85, experience: '1+ years' },
         { name: 'PHP', level: 80, experience: '1+ years' },
@@ -98,132 +102,99 @@ const Skills = () => {
     }
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  }
-
   return (
     <section className="min-h-screen py-20 relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="max-w-7xl mx-auto"
-        >
+        <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-              Skills & Expertise
+          <RevealText direction="up" delay={0} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <SplitText text="Skills & Expertise" className="gradient-text" delay={0.2} />
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               A comprehensive overview of my technical skills and experience
             </p>
-          </motion.div>
+          </RevealText>
 
           {/* Category Tabs */}
-          <motion.div variants={itemVariants} className="flex justify-center mb-12">
+          <RevealText delay={0.3} className="flex justify-center mb-12">
             <div className="glass-effect rounded-2xl p-2">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
                 {Object.entries(skillCategories).map(([key, category]) => (
-                  <motion.button
+                  <AnimatedCard
                     key={key}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setActiveCategory(key)}
-                    className={`flex flex-col items-center p-4 rounded-xl transition-all duration-300 ${
+                    hoverScale={true}
+                    className={`flex flex-col items-center p-4 rounded-xl transition-all duration-300 cursor-pointer ${
                       activeCategory === key
-                        ? 'bg-primary-500 text-white shadow-lg'
+                        ? 'bg-blue-500 text-white shadow-lg'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
+                    onClick={() => setActiveCategory(key)}
                   >
                     <category.icon className="w-6 h-6 mb-2" />
                     <span className="text-xs font-medium text-center">{category.title}</span>
-                  </motion.button>
+                  </AnimatedCard>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </RevealText>
 
           {/* Skills Content */}
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="glass-effect rounded-2xl p-8"
-          >
-            <div className="flex items-center mb-8">
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skillCategories[activeCategory].color} flex items-center justify-center mr-4`}>
-                {React.createElement(skillCategories[activeCategory].icon, { className: "w-6 h-6 text-white" })}
+          <RevealText key={activeCategory} delay={0.4} direction="up">
+            <AnimatedCard className="glass-effect rounded-2xl p-8" hoverScale={false}>
+              <div className="flex items-center mb-8">
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skillCategories[activeCategory].color} flex items-center justify-center mr-4`}>
+                  {React.createElement(skillCategories[activeCategory].icon, { className: "w-6 h-6 text-white" })}
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">{skillCategories[activeCategory].title}</h3>
+                  <p className="text-gray-400">Proficiency levels and experience</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">{skillCategories[activeCategory].title}</h3>
-                <p className="text-gray-400">Proficiency levels and experience</p>
-              </div>
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {skillCategories[activeCategory].skills.map((skill, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="space-y-3"
-                >
-                  <div className="flex justify-between items-center">
-                    <span className="text-white font-medium">{skill.name}</span>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-primary-400 font-bold">{skill.level}%</span>
-                      <span className="text-gray-400 text-sm">({skill.experience})</span>
+              <div className="grid md:grid-cols-2 gap-6">
+                {skillCategories[activeCategory].skills.map((skill, index) => (
+                  <RevealText
+                    key={index}
+                    delay={0.5 + index * 0.1}
+                    direction="left"
+                    className="space-y-3"
+                  >
+                    <div className="flex justify-between items-center">
+                      <span className="text-white font-medium">{skill.name}</span>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-blue-400 font-bold">{skill.level}%</span>
+                        <span className="text-gray-400 text-sm">({skill.experience})</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-3">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${skill.level}%` }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                      className={`h-3 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full`}
+                    <ProgressBar
+                      value={skill.level}
+                      delay={0.6 + index * 0.1}
+                      showLabel={false}
+                      color={skillCategories[activeCategory].color}
                     />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  </RevealText>
+                ))}
+              </div>
+            </AnimatedCard>
+          </RevealText>
 
           {/* Additional Info */}
-          <motion.div variants={itemVariants} className="grid md:grid-cols-3 gap-8 mt-16">
-            <div className="glass-effect rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-primary-400 mb-2">34+</div>
+          <RevealText delay={0.7} className="grid md:grid-cols-3 gap-8 mt-16">
+            <AnimatedCard className="glass-effect rounded-2xl p-6 text-center" hoverScale={true}>
+              <div className="text-3xl font-bold text-blue-400 mb-2">34+</div>
               <div className="text-gray-300">GitHub Repositories</div>
-            </div>
-            <div className="glass-effect rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-secondary-400 mb-2">1+</div>
+            </AnimatedCard>
+            <AnimatedCard className="glass-effect rounded-2xl p-6 text-center" hoverScale={true}>
+              <div className="text-3xl font-bold text-blue-400 mb-2">1+</div>
               <div className="text-gray-300">Years Experience</div>
-            </div>
-            <div className="glass-effect rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-accent-400 mb-2">100%</div>
+            </AnimatedCard>
+            <AnimatedCard className="glass-effect rounded-2xl p-6 text-center" hoverScale={true}>
+              <div className="text-3xl font-bold text-purple-400 mb-2">100%</div>
               <div className="text-gray-300">Client Satisfaction</div>
-            </div>
-          </motion.div>
-        </motion.div>
+            </AnimatedCard>
+          </RevealText>
+        </div>
       </div>
     </section>
   )
