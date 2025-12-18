@@ -53,20 +53,18 @@ const Hero = ({ setActiveSection }) => {
               <div className="text-center lg:text-left space-y-6">
                 {/* Profile Image */}
                 <div className="flex justify-center lg:justify-start">
-                  <AnimatedCard hoverScale={true} glow={true}>
-                    <div className="relative">
-                      <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden profile-frame">
-                        <img 
-                          src="/images/faheem506pk.jpeg" 
-                          alt="Muhammad Faheem Iqbal"
-                          className="w-full h-full object-cover profile-image"
-                        />
-                      </div>
-                      <div className="absolute -top-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-blue-500 rounded-full animate-pulse flex items-center justify-center shadow-lg border-2 border-slate-900">
-                        <span className="text-white text-xs md:text-sm font-bold">✓</span>
-                      </div>
+                  <div className="relative">
+                    <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden profile-frame cursor-pointer">
+                      <img 
+                        src="/images/faheem506pk.jpeg" 
+                        alt="Muhammad Faheem Iqbal"
+                        className="w-full h-full object-cover profile-image"
+                      />
                     </div>
-                  </AnimatedCard>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-blue-500 rounded-full animate-pulse flex items-center justify-center shadow-lg border-2 border-slate-900 z-10">
+                      <span className="text-white text-xs md:text-sm font-bold">✓</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Quick Info */}
@@ -223,18 +221,6 @@ const Hero = ({ setActiveSection }) => {
             </div>
           </RevealText>
         </div>
-
-        {/* Scroll Indicator */}
-        <RevealText delay={1.5} direction="up">
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <button
-              onClick={scrollToNext}
-              className="text-slate-400 hover:text-blue-400 transition-colors animate-bounce"
-            >
-              <FaChevronDown className="w-6 h-6 md:w-8 md:h-8" />
-            </button>
-          </div>
-        </RevealText>
       </div>
     </section>
   )

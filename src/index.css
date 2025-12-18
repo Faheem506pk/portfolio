@@ -112,26 +112,33 @@
 
   /* Profile image styling */
   .profile-image {
-    filter: grayscale(30%) contrast(1.1) brightness(0.95);
-    transition: all 0.5s ease;
-  }
-
-  .profile-image:hover {
-    filter: grayscale(0%) contrast(1.05) brightness(1.05);
-    transform: scale(1.05);
+    filter: grayscale(15%) contrast(1.05) brightness(0.98);
+    transition: filter 0.3s ease;
   }
 
   .profile-frame {
     background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.2) 0%, 
-      rgba(139, 92, 246, 0.2) 50%, 
-      rgba(236, 72, 153, 0.2) 100%
+      rgba(59, 130, 246, 0.15) 0%, 
+      rgba(139, 92, 246, 0.15) 50%, 
+      rgba(236, 72, 153, 0.15) 100%
     );
     backdrop-filter: blur(10px);
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     box-shadow: 
-      0 20px 60px rgba(59, 130, 246, 0.3),
+      0 10px 40px rgba(59, 130, 246, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .profile-frame:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 
+      0 15px 50px rgba(59, 130, 246, 0.35),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .profile-frame:hover .profile-image {
+    filter: grayscale(0%) contrast(1) brightness(1);
   }
 }
 
