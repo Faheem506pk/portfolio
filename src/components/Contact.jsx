@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaPaperPlane } from 'react-icons/fa'
-import emailjs from '@emailjs/browser'
 import RevealText from './reactbits/RevealText'
 import AnimatedCard from './reactbits/AnimatedCard'
 import AnimatedInput from './reactbits/AnimatedInput'
@@ -15,8 +14,6 @@ const Contact = () => {
     subject: '',
     message: ''
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleChange = (e) => {
     setFormData({
@@ -25,48 +22,31 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
     
-    try {
-      // EmailJS configuration - Your actual IDs
-      const serviceId = 'service_e3mg9bl'
-      const templateId = 'template_b8exa6y'
-      const publicKey = 'YOUR_PUBLIC_KEY' // Get from https://dashboard.emailjs.com/admin/account
-      
-      // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, {
-        name: formData.name,
-        email: formData.email,
-        title: formData.subject,
-        message: formData.message,
-        time: new Date().toLocaleString()
-      }, publicKey)
-      
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      
-      // Show success toast
-      alert('✅ Message sent successfully! I\'ll get back to you soon.')
-      
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus(null), 3000)
-    } catch (error) {
-      console.error('EmailJS Error:', error)
-      setSubmitStatus('error')
-      
-      // Show error toast with helpful message
-      if (error.text && error.text.includes('Public Key is invalid')) {
-        alert('❌ EmailJS configuration error. Please check your Public Key setup.')
-      } else {
-        alert('❌ Failed to send message. Please try again or contact me directly.')
-      }
-      
-      setTimeout(() => setSubmitStatus(null), 3000)
-    } finally {
-      setIsSubmitting(false)
-    }
+    // Format email body with all form data
+    const emailBody = `Hello ${Mydata.Name.split(' ')[0]},
+
+My name is ${formData.name} and my email is ${formData.email}.
+
+${formData.message}
+
+Best regards,
+${formData.name}`
+
+    // Encode the subject and body for URL
+    const encodedSubject = encodeURIComponent(formData.subject || 'Contact from Portfolio')
+    const encodedBody = encodeURIComponent(emailBody)
+    
+    // Create Gmail compose URL
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(Mydata.Email)}&su=${encodedSubject}&body=${encodedBody}`
+    
+    // Open Gmail compose in new tab
+    window.open(gmailUrl, '_blank')
+    
+    // Reset form after opening Gmail
+    setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
   const contactInfo = [
@@ -252,28 +232,16 @@ const Contact = () => {
 
                 <AnimatedButton
                   type="submit"
-                  disabled={isSubmitting}
                   variant="primary"
-                  className="w-full flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center space-x-2"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <FaPaperPlane className="w-5 h-5" />
-                      <span>Send Message</span>
-                    </>
-                  )}
+                  <FaPaperPlane className="w-5 h-5" />
+                  <span>Send Message</span>
                 </AnimatedButton>
 
-                {submitStatus === 'success' && (
-                  <RevealText delay={0} className="text-center text-blue-400 bg-blue-500/20 border border-blue-500/30 rounded-xl py-3">
-                    Message sent successfully! I'll get back to you soon.
-                  </RevealText>
-                )}
+                <p className="text-xs text-slate-500 text-center mt-4">
+                  Clicking "Send Message" will open Gmail with your message pre-filled
+                </p>
               </form>
             </RevealText>
           </div>
