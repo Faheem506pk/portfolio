@@ -72,7 +72,7 @@ const Skills = () => {
   }
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 relative" style={{ paddingTop: '120px' }}>
+    <section id="skills" className="py-12 sm:py-16 md:py-20 relative" style={{ paddingTop: '120px' }}>
       <div className="container-max section-padding">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}

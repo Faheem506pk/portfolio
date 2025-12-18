@@ -7,7 +7,7 @@ import AnimatedButton from './reactbits/AnimatedButton'
 import AnimatedCard from './reactbits/AnimatedCard'
 import { Mydata } from '../utils/MyCv'
 
-const Hero = ({ setActiveSection }) => {
+const Hero = () => {
   const texts = [
     "ReactJS Developer",
     "Frontend Specialist", 
@@ -29,12 +29,22 @@ const Hero = ({ setActiveSection }) => {
     { icon: FaEnvelope, text: Mydata.Email }
   ]
 
-  const scrollToNext = () => {
-    setActiveSection('about')
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const offset = 80 // Navbar height offset
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 sm:py-24 md:py-28 lg:py-32">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 sm:py-24 md:py-28 lg:py-32">
       {/* Animated background pattern */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-20 right-4 md:right-8 text-purple-400 font-mono text-xs opacity-20 animate-pulse">
@@ -163,7 +173,7 @@ const Hero = ({ setActiveSection }) => {
           <RevealText delay={0.9} direction="up" className="mt-6 sm:mt-8 lg:mt-12">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 md:gap-6">
               <AnimatedButton
-                onClick={() => setActiveSection('projects')}
+                onClick={() => scrollToSection('projects')}
                 variant="primary"
                 className="flex items-center justify-center space-x-2 w-full sm:w-auto text-sm sm:text-base"
               >

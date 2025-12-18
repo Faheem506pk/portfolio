@@ -33,7 +33,7 @@ const Experience = () => {
   ]
 
   return (
-    <section className="section-spacing relative" style={{ paddingTop: '150px' }}>
+    <section id="experience" className="section-spacing relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}

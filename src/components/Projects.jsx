@@ -114,7 +114,7 @@ const Projects = () => {
   )
 
   return (
-    <section className="min-h-screen py-20 relative" style={{ paddingTop: '150px' }}>
+    <section id="projects" className="min-h-screen py-20 relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
@@ -246,9 +246,15 @@ const Projects = () => {
 
           {/* Call to Action */}
           <RevealText delay={0.8} className="text-center mt-16">
-            <AnimatedButton variant="primary">
-              View All Projects on GitHub
-            </AnimatedButton>
+            <a
+              href="https://github.com/faheem506pk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <AnimatedButton variant="primary">
+                View All Projects on GitHub
+              </AnimatedButton>
+            </a>
           </RevealText>
         </div>
       </div>

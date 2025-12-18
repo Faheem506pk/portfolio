@@ -4,7 +4,7 @@ import RevealText from './reactbits/RevealText'
 import AnimatedCard from './reactbits/AnimatedCard'
 import { Mydata } from '../utils/MyCv'
 
-const Navigation = ({ activeSection, setActiveSection }) => {
+const Navigation = ({ activeSection }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -26,9 +26,18 @@ const Navigation = ({ activeSection, setActiveSection }) => {
   ]
 
   const handleNavClick = (sectionId) => {
-    setActiveSection(sectionId)
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const offset = 80 // Navbar height offset
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
     setIsOpen(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (

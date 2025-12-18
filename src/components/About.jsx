@@ -25,7 +25,7 @@ const About = () => {
   ]
 
   return (
-    <section className="section-spacing relative" style={{ paddingTop: '150px' }}>
+    <section id="about" className="section-spacing relative" style={{ paddingTop: '150px' }}>
       <div className="container-max section-padding">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -147,7 +147,18 @@ const About = () => {
 
           {/* Call to Action */}
           <RevealText delay={0.8} className="text-center mt-16">
-            <AnimatedButton variant="primary">
+            <AnimatedButton 
+              variant="primary"
+              onClick={() => {
+                const element = document.getElementById('contact')
+                if (element) {
+                  const offset = 80
+                  const elementPosition = element.getBoundingClientRect().top
+                  const offsetPosition = elementPosition + window.pageYOffset - offset
+                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+                }
+              }}
+            >
               Let's Work Together
             </AnimatedButton>
           </RevealText>

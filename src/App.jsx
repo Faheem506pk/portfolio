@@ -1,8 +1,7 @@
-import React, { useState, lazy, Suspense } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
-import RevealText from './components/reactbits/RevealText'
 
 // Lazy load components for better performance
 const Hero = lazy(() => import('./components/Hero'))
@@ -15,42 +14,46 @@ const Contact = lazy(() => import('./components/Contact'))
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
 
-  const renderSection = () => {
-    switch (activeSection) {
-      case 'hero':
-        return <Hero setActiveSection={setActiveSection} />
-      case 'about':
-        return <About />
-      case 'experience':
-        return <Experience />
-      case 'projects':
-        return <Projects />
-      case 'skills':
-        return <Skills />
-      case 'contact':
-        return <Contact />
-      default:
-        return <Hero setActiveSection={setActiveSection} />
+  // Scroll spy to detect active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'contact']
+      const scrollPosition = window.scrollY + 100 // Offset for navbar
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i])
+          break
+        }
+      }
     }
-  }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Initial check
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Simplified background - no heavy particles for better performance */}
       <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-50"></div>
       
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
+      <Navigation activeSection={activeSection} />
       
       <main className="relative z-10">
-        <RevealText key={activeSection} delay={0} duration={0.5} direction="up">
-          <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
-            {renderSection()}
-          </Suspense>
-        </RevealText>
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        }>
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Skills />
+          <Contact />
+        </Suspense>
       </main>
       
       <Footer />

@@ -92,7 +92,7 @@ ${formData.name}`
   ]
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 relative" style={{ paddingTop: '120px' }}>
+    <section id="contact" className="py-12 sm:py-16 md:py-20 relative" style={{ paddingTop: '120px' }}>
       <div className="container-max section-padding">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
