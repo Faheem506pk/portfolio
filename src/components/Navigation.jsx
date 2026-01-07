@@ -98,7 +98,7 @@ const Navigation = ({ activeSection }) => {
               </button>
             ))}
             <a
-              href="/cv/M_Faheem_Iqbal_Resume.pdf"
+              href="/cv/Muhammad_Faheem_Iqbal_CV.pdf"
               download="Muhammad_Faheem_Iqbal_Resume.pdf"
               className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center space-x-2"
             >
@@ -142,7 +142,7 @@ const Navigation = ({ activeSection }) => {
                 </button>
               ))}
               <a
-                href="/cv/M_Faheem_Iqbal_Resume.pdf"
+                href="/cv/Muhammad_Faheem_Iqbal_CV.pdf"
                 download="Muhammad_Faheem_Iqbal_Resume.pdf"
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium mt-2"
               >

@@ -140,7 +140,7 @@ const Footer = () => {
               
               {/* Download CV Button */}
               <a
-                href="/cv/M_Faheem_Iqbal_Resume.pdf"
+                href="/cv/Muhammad_Faheem_Iqbal_CV.pdf"
                 download="Muhammad_Faheem_Iqbal_Resume.pdf"
                 className="mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
               >

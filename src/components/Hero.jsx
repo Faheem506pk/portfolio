@@ -182,7 +182,7 @@ const Hero = () => {
               </AnimatedButton>
               
               <a
-                href="/cv/M_Faheem_Iqbal_Resume.pdf"
+                href="/cv/Muhammad_Faheem_Iqbal_CV.pdf"
                 download="Muhammad_Faheem_Iqbal_Resume.pdf"
                 className="w-full sm:w-auto"
               >
