@@ -78,8 +78,8 @@ const About = () => {
                     <span>{Mydata.Address.split(',')[1]}, {Mydata.Address.split(',')[2]}</span>
                   </div>
                   <a
-                    href="/cv/M_Faheem_Iqbal_Resume.pdf"
-                    download="Muhammad_Faheem_Iqbal_Resume.pdf"
+                    href="/cv/M_Faheem_Iqbal_CV.pdf"
+                    download="Muhammad_Faheem_Iqbal_CV.pdf"
                     className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
                   >
                     <FaDownload className="w-4 h-4" />
