@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Mail, MessageSquare, Send } from "lucide-react"
+import { Mail, MessageSquare, Send, Loader2 } from "lucide-react"
+import emailjs from "@emailjs/browser"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,17 +13,46 @@ import { Textarea } from "@/components/ui/textarea"
 import { Mydata } from "@/lib/data"
 
 export function Contact() {
-  const handleSubmit = (e) => {
+  const formRef = React.useRef(null)
+  const [isSending, setIsSending] = React.useState(false)
+  const [feedback, setFeedback] = React.useState(null)
+
+  const sendEmail = (e) => {
     e.preventDefault()
-    const formData = new FormData(e.target)
-    const name = formData.get("name")
-    const subject = formData.get("subject")
-    const message = formData.get("message")
-    
-    // Construct mailto link
-    const mailtoLink = `mailto:${Mydata.Email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\n\n${message}`)}`
-    
-    window.location.href = mailtoLink
+    setIsSending(true)
+    setFeedback(null)
+
+    // Using environment variables or fallback to hardcoded (for immediate verification)
+    // It's safer to use env variables, but I will include fallback logic if env is missing in client bundle
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+    // Fallback check - if env vars are missing, we can try to use the values directly as provided by user
+    // However, best practice is env vars. I added them to .env.local, so they should be picked up.
+
+    emailjs
+      .sendForm(
+        serviceId,
+        templateId,
+        formRef.current,
+        {
+          publicKey: publicKey,
+        }
+      )
+      .then(
+        () => {
+          setFeedback({ type: "success", message: "Message sent successfully!" })
+          formRef.current.reset()
+        },
+        (error) => {
+          console.error("FAILED...", error.text)
+          setFeedback({ type: "error", message: "Failed to send message. Please try again." })
+        }
+      )
+      .finally(() => {
+        setIsSending(false)
+      })
   }
 
   return (
@@ -96,21 +126,36 @@ export function Contact() {
                  </CardDescription>
               </CardHeader>
               <CardContent>
-                 <form onSubmit={handleSubmit} className="space-y-4">
+                 <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
                     <div className="grid gap-2">
-                       <Label htmlFor="name">Name</Label>
-                       <Input id="name" name="name" placeholder="Your name" required className="bg-background/50" />
+                       <Label htmlFor="from_name">Name</Label>
+                       <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-background/50" disabled={isSending} />
                     </div>
                     <div className="grid gap-2">
-                       <Label htmlFor="subject">Subject</Label>
-                       <Input id="subject" name="subject" placeholder="Project inquiry" required className="bg-background/50" />
+                       <Label htmlFor="from_email">Email</Label>
+                       <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-background/50" disabled={isSending} />
                     </div>
                     <div className="grid gap-2">
                        <Label htmlFor="message">Message</Label>
-                       <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-background/50" required />
+                       <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-background/50" required disabled={isSending} />
                     </div>
-                    <Button type="submit" className="w-full bg-burnt-peach hover:bg-burnt-peach/90 text-white font-bold">
-                       <Send className="mr-2 h-4 w-4" /> Send Message
+                    
+                    {feedback && (
+                        <div className={`p-3 rounded-md text-sm ${feedback.type === 'success' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                            {feedback.message}
+                        </div>
+                    )}
+
+                    <Button type="submit" className="w-full bg-burnt-peach hover:bg-burnt-peach/90 text-white font-bold" disabled={isSending}>
+                       {isSending ? (
+                           <>
+                               <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
+                           </>
+                       ) : (
+                           <>
+                               <Send className="mr-2 h-4 w-4" /> Send Message
+                           </>
+                       )}
                     </Button>
                  </form>
               </CardContent>

@@ -129,14 +129,6 @@
   --color-tuscan-sun: var(--tuscan-sun);
   --color-sandy-brown: var(--sandy-brown);
   --color-burnt-peach: var(--burnt-peach);
-
-  /* Animations */
-  --animate-marquee: marquee 25s linear infinite;
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
 }
 
 /* Scoped via .body class as requested */

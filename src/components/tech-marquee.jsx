@@ -1,11 +1,37 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { 
-  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, 
-  SiNodedotjs, SiHtml5, SiCss3, SiPython, SiPhp, SiMysql, 
-  SiFirebase, SiMongodb, SiGit, SiFigma, SiWordpress 
-} from "react-icons/si"
+import { useRef } from "react";
+import {
+  motion,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useAnimationFrame
+} from "framer-motion";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiJavascript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiHtml5,
+  SiCss3,
+  SiPython,
+  SiPhp,
+  SiMysql,
+  SiFirebase,
+  SiMongodb,
+  SiGit,
+  SiFigma,
+  SiWordpress,
+} from "react-icons/si";
+
+// Utility function to replace @motionone/utils wrap
+const wrap = (min, max, v) => {
+  const rangeSize = max - min;
+  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+};
 
 const techs = [
   { name: "React", icon: SiReact, color: "text-cyan-400" },
@@ -24,31 +50,53 @@ const techs = [
   { name: "Git", icon: SiGit, color: "text-orange-600" },
   { name: "Figma", icon: SiFigma, color: "text-pink-500" },
   { name: "WordPress", icon: SiWordpress, color: "text-blue-700" },
-]
+];
+
+function MarqueeContent({ children, baseVelocity = -1 }) {
+  const baseX = useMotionValue(0);
+  const xVelocity = useMotionValue(baseVelocity);
+  const smoothXVelocity = useSpring(xVelocity, {
+    damping: 20, 
+    stiffness: 50,
+    mass: 1
+  });
+
+  const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
+
+  useAnimationFrame((t, delta) => {
+    let moveBy = smoothXVelocity.get() * (delta / 1000);
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  return (
+    <div 
+        className="overflow-hidden m-0 whitespace-nowrap flex flex-nowrap cursor-pointer"
+        onMouseEnter={() => xVelocity.set(0)}
+        onMouseLeave={() => xVelocity.set(baseVelocity)}
+    >
+      <motion.div className="flex font-semibold uppercase text-3xl whitespace-nowrap flex-nowrap" style={{ x }}>
+        {children}
+        {children}
+        {children}
+        {children}
+      </motion.div>
+    </div>
+  );
+}
 
 export function TechMarquee() {
   return (
-    <section className="w-full py-12 bg-background/50 border-y border-border/40 overflow-hidden">
-      <div className="relative flex overflow-x-hidden group">
-        <div className="animate-marquee whitespace-nowrap flex gap-12 sm:gap-24 items-center group-hover:[animation-play-state:paused]">
-          {techs.map((tech, index) => (
-            <div key={index} className="flex flex-col items-center gap-2 group/icon cursor-pointer">
-              <tech.icon className={`w-8 h-8 sm:w-12 sm:h-12 ${tech.color} opacity-70 grayscale transition-all duration-300 group-hover/icon:grayscale-0 group-hover/icon:opacity-100 group-hover/icon:scale-110`} />
-              <span className="text-xs sm:text-sm font-mono text-muted-foreground opacity-0 group-hover/icon:opacity-100 transition-opacity">{tech.name}</span>
-            </div>
-          ))}
-          {/* Duplicate for seamless loop */}
-          {techs.map((tech, index) => (
-            <div key={`dup-${index}`} className="flex flex-col items-center gap-2 group/icon cursor-pointer">
-              <tech.icon className={`w-8 h-8 sm:w-12 sm:h-12 ${tech.color} opacity-70 grayscale transition-all duration-300 group-hover/icon:grayscale-0 group-hover/icon:opacity-100 group-hover/icon:scale-110`} />
-              <span className="text-xs sm:text-sm font-mono text-muted-foreground opacity-0 group-hover/icon:opacity-100 transition-opacity">{tech.name}</span>
-            </div>
-          ))}
+    <section className="bg-background/50  overflow-hidden">
+      <MarqueeContent baseVelocity={-1.5} >
+        <div className="flex gap-12 sm:gap-24 pr-12 sm:pr-24 items-center">
+            {techs.map((tech, index) => (
+                <div key={index} className="flex flex-col items-center gap-3 group/icon py-8">
+                    <tech.icon className={`w-10 h-10 sm:w-14 sm:h-14 ${tech.color} opacity-60 grayscale transition-all duration-500 group-hover/icon:grayscale-0 group-hover/icon:opacity-100 group-hover/icon:scale-110`} />
+                    <span className="text-xs sm:text-sm font-mono font-normal tracking-wider text-muted-foreground opacity-0 group-hover/icon:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover/icon:translate-y-0 text-center">{tech.name}</span>
+                </div>
+            ))}
         </div>
-
-        <div className="absolute top-0 right-0 w-8 sm:w-32 h-full bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-0 left-0 w-8 sm:w-32 h-full bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
-      </div>
+      </MarqueeContent>
     </section>
-  )
+  );
 }

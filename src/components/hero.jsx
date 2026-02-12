@@ -45,10 +45,7 @@ export function Hero() {
             animate="show"
             className="flex flex-col gap-6"
           >
-            <motion.div variants={item} className="inline-flex items-center rounded-full border border-charcoal-blue/20 bg-charcoal-blue/5 px-3 py-1 text-sm font-medium text-charcoal-blue dark:border-verdigris/30 dark:bg-verdigris/10 dark:text-verdigris w-fit">
-              <Terminal className="mr-2 h-4 w-4" />
-              <span>v2.0.0 Initialized</span>
-            </motion.div>
+   
 
             <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-charcoal-blue to-verdigris dark:from-verdigris dark:to-tuscan-sun">{Mydata.Name}</span>
@@ -96,7 +93,7 @@ export function Hero() {
               {/* Retro geometric shapes background */}
               <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-tuscan-sun to-sandy-brown opacity-30 blur-2xl group-hover:opacity-50 transition-opacity duration-500" />
               
-              <Card className="relative overflow-hidden border-2 border-charcoal-blue/10 bg-background/50 backdrop-blur-sm dark:border-verdigris/20 w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-xl">
+              <Card className="relative overflow-hidden border-2 py-0 border-charcoal-blue/10 bg-background/50 backdrop-blur-sm dark:border-verdigris/20 w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-xl">
                 <CardContent className="p-0">
                    <div className="relative aspect-square overflow-hidden bg-muted">
                      {/* Image with Grayscale Filter */}
