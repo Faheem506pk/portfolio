@@ -38,7 +38,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="mr-8 flex items-center space-x-2">
           <span className="font-serif text-xl font-bold tracking-tight text-charcoal-blue dark:text-verdigris">
-            Faheem<span className="text-burnt-peach">.dev</span>
+            Faheem506pk<span className="text-burnt-peach">.dev</span>
           </span>
         </Link>
         

@@ -2,13 +2,46 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Check } from "lucide-react"
+import { Loader2 } from "lucide-react"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Mydata } from "@/lib/data"
 
 export function Skills() {
+  const [skillCategories, setSkillCategories] = useState(
+    Object.entries(Mydata.Skills).map(([category, items], id) => ({ id, category, items }))
+  )
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchSkills() {
+      try {
+        const { data, error } = await supabase
+          .from("skills")
+          .select("*")
+          .order("id", { ascending: true })
+        
+        if (data) setSkillCategories(data)
+      } catch (err) {
+        console.error("Error loading skills:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchSkills()
+  }, [])
+
+  if (loading && skillCategories.length === 0) {
+    return (
+      <div className="flex justify-center p-24">
+        <Loader2 className="h-8 w-8 animate-spin text-sandy-brown" />
+      </div>
+    )
+  }
+
   return (
     <section id="skills" className="container py-12 md:py-24 lg:py-32">
       <div className="flex flex-col items-center gap-4 text-center mb-16">
@@ -28,9 +61,9 @@ export function Skills() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {Object.entries(Mydata.Skills).map(([category, skills], index) => (
+        {skillCategories.map((cat, index) => (
           <motion.div
-            key={category}
+            key={cat.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -38,11 +71,11 @@ export function Skills() {
           >
             <Card className="h-full border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-tuscan-sun dark:hover:border-tuscan-sun transition-colors duration-300">
               <CardHeader>
-                <CardTitle className="text-xl font-serif text-charcoal-blue dark:text-verdigris">{category}</CardTitle>
+                <CardTitle className="text-xl font-serif text-charcoal-blue dark:text-verdigris">{cat.category}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {skills.map((skill, i) => (
+                  {cat.items && cat.items.map((skill, i) => (
                     <Badge key={i} variant="secondary" className="px-3 py-1 bg-background hover:bg-muted transition-colors border border-border/50 text-sm font-normal">
                       {skill}
                     </Badge>
@@ -52,6 +85,12 @@ export function Skills() {
             </Card>
           </motion.div>
         ))}
+
+        {skillCategories.length === 0 && (
+          <div className="col-span-full text-center text-muted-foreground py-12">
+            Stay tuned for updates...
+          </div>
+        )}
       </div>
     </section>
   )

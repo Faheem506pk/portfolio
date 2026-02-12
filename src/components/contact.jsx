@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "framer-motion"
 import { Mail, MessageSquare, Send, Loader2 } from "lucide-react"
 import emailjs from "@emailjs/browser"
+import { supabase } from "@/lib/supabase"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -17,42 +18,39 @@ export function Contact() {
   const [isSending, setIsSending] = React.useState(false)
   const [feedback, setFeedback] = React.useState(null)
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault()
     setIsSending(true)
     setFeedback(null)
 
-    // Using environment variables or fallback to hardcoded (for immediate verification)
-    // It's safer to use env variables, but I will include fallback logic if env is missing in client bundle
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    const formData = new FormData(formRef.current)
+    const name = formData.get("from_name")
+    const email = formData.get("from_email")
+    const message = formData.get("message")
 
-    // Fallback check - if env vars are missing, we can try to use the values directly as provided by user
-    // However, best practice is env vars. I added them to .env.local, so they should be picked up.
+    try {
+      // 1. Save to Supabase (Database Log)
+      const { error: dbError } = await supabase
+        .from("messages")
+        .insert([{ name, email, message }])
 
-    emailjs
-      .sendForm(
-        serviceId,
-        templateId,
-        formRef.current,
-        {
-          publicKey: publicKey,
-        }
-      )
-      .then(
-        () => {
-          setFeedback({ type: "success", message: "Message sent successfully!" })
-          formRef.current.reset()
-        },
-        (error) => {
-          console.error("FAILED...", error.text)
-          setFeedback({ type: "error", message: "Failed to send message. Please try again." })
-        }
-      )
-      .finally(() => {
-        setIsSending(false)
-      })
+      if (dbError) throw dbError
+
+      // 2. Send via EmailJS (Notification)
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+      await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey })
+
+      setFeedback({ type: "success", message: "Message sent and saved successfully!" })
+      formRef.current.reset()
+    } catch (error) {
+      console.error("FAILED...", error)
+      setFeedback({ type: "error", message: "Failed to process message. Please try again." })
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (

@@ -2,12 +2,55 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Briefcase } from "lucide-react"
+import { Briefcase, Loader2 } from "lucide-react"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mydata } from "@/lib/data"
 
 export function Experience() {
+  const [experiences, setExperiences] = useState(Mydata.Experience.map((e, idx) => ({
+    id: idx,
+    company: e.Company,
+    position: e.Position,
+    location: e.Location,
+    description: e.Description,
+    duration: e.Duration,
+    is_development: e.Company !== "BestMobile.pk", // Fallback logic
+    skills: [] 
+  })))
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchExperience() {
+      try {
+        const { data, error } = await supabase
+          .from("experience")
+          .select("*")
+          .order("id", { ascending: true })
+        
+        if (data) setExperiences(data)
+      } catch (err) {
+        console.error("Error loading experience:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchExperience()
+  }, [])
+
+  if (loading && experiences.length === 0) {
+    return (
+      <div className="flex justify-center p-24">
+        <Loader2 className="h-8 w-8 animate-spin text-tuscan-sun" />
+      </div>
+    )
+  }
+
+  const devRoles = experiences.filter(job => job.is_development !== false);
+  const otherRoles = experiences.filter(job => job.is_development === false);
+
   return (
     <section id="experience" className="container py-12 md:py-24 lg:py-32">
         <motion.div
@@ -25,14 +68,17 @@ export function Experience() {
             </p>
         </motion.div>
 
-        <div className="relative max-w-3xl mx-auto pl-8 sm:pl-0">
+        {/* Development Experience */}
+        <div className="relative max-w-3xl mx-auto pl-8 sm:pl-0 mb-20">
+            <h3 className="text-xl font-bold mb-10 text-tuscan-sun uppercase tracking-widest text-center sm:text-left">Software Development</h3>
+            
             {/* Vertical Line */}
-            <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 hidden sm:block"></div>
-            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-border sm:hidden"></div>
+            <div className="absolute left-8 sm:left-1/2 top-16 bottom-0 w-0.5 bg-border -translate-x-1/2 hidden sm:block"></div>
+            <div className="absolute left-0 top-16 bottom-0 w-0.5 bg-border sm:hidden"></div>
 
-            {Mydata.Experience.map((job, index) => (
+            {devRoles.map((job, index) => (
                 <motion.div
-                    key={index}
+                    key={job.id}
                     initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -49,24 +95,64 @@ export function Experience() {
                         <Card className="retro-card border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:shadow-lg transition-shadow duration-300 bg-card/50 backdrop-blur-sm">
                             <CardHeader className="pb-2">
                                 <div className={`flex flex-col ${index % 2 === 0 ? "sm:items-end" : "sm:items-start"}`}>
-                                    <span className="text-sm font-mono text-burnt-peach mb-1">{job.Duration}</span>
-                                    <CardTitle className="text-xl font-bold text-charcoal-blue dark:text-verdigris">{job.Position}</CardTitle>
+                                    <span className="text-sm font-mono text-burnt-peach mb-1">{job.duration}</span>
+                                    <CardTitle className="text-xl font-bold text-charcoal-blue dark:text-verdigris">{job.position}</CardTitle>
                                     <h4 className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
                                         <Briefcase className="w-3 h-3" />
-                                        {job.Company}
+                                        {job.company}
                                     </h4>
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-sm text-foreground/80 leading-relaxed">
-                                    {job.Description}
+                                <p className="text-sm text-foreground/80 leading-relaxed mb-4">
+                                    {job.description}
                                 </p>
+                                {job.skills && job.skills.length > 0 && (
+                                  <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? "sm:justify-end" : "sm:justify-start"}`}>
+                                    {job.skills.map((skill, i) => (
+                                      <span key={i} className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-tuscan-sun/20 text-tuscan-sun">
+                                        {skill}
+                                      </span>
+                                    ))}
+                                  </div>
+                                )}
                             </CardContent>
                         </Card>
                     </div>
                 </motion.div>
             ))}
         </div>
+
+        {/* Other Experience */}
+        {otherRoles.length > 0 && (
+            <div className="max-w-3xl mx-auto border-t border-border pt-12">
+                <h3 className="text-xl font-bold mb-8 text-muted-foreground uppercase tracking-widest text-center">Other Professional Experience</h3>
+                <div className="grid gap-6">
+                    {otherRoles.map((job) => (
+                        <Card key={job.id} className="border-l-4 border-l-muted hover:border-l-sandy-brown transition-colors">
+                            <CardHeader className="py-4">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                    <div>
+                                        <CardTitle className="text-lg font-bold">{job.position}</CardTitle>
+                                        <div className="text-sm text-muted-foreground font-medium">{job.company}</div>
+                                    </div>
+                                    <div className="text-sm font-mono text-burnt-peach">{job.duration}</div>
+                                </div>
+                            </CardHeader>
+                            <CardContent className="pb-4">
+                                <p className="text-sm text-muted-foreground">{job.description}</p>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+        )}
+
+        {experiences.length === 0 && (
+          <div className="text-center text-muted-foreground py-12">
+            Stay tuned for updates...
+          </div>
+        )}
     </section>
   )
 }

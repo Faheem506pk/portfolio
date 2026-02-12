@@ -2,13 +2,135 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Terminal } from "lucide-react"
+import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Terminal, Loader2 } from "lucide-react"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Mydata } from "@/lib/data"
 
 export function Hero() {
+  const [profile, setProfile] = useState(Mydata);
+  const [loading, setLoading] = useState(true);
+  const [projectCount, setProjectCount] = useState(0);
+  const [experienceYears, setExperienceYears] = useState(1); // Default fallback
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Fetch Profile
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('*')
+          .single();
+        
+        if (profileData) {
+           setProfile({
+             Name: profileData.name,
+             Role: profileData.role,
+             Summary: profileData.summary,
+             Email: profileData.email,
+             Socials: {
+               LinkedIn: profileData.social_linkedin,
+               GitHub: profileData.social_github,
+               Portfolio: profileData.social_portfolio
+             },
+             ResumeUrl: profileData.resume_url || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf", 
+             ImageUrl: profileData.image_url || "/assets/images/faheem506pk.jpeg"
+           });
+        }
+
+        // Fetch Projects Count
+        const { count: pCount } = await supabase
+          .from('projects')
+          .select('*', { count: 'exact', head: true });
+        
+        if (pCount !== null) setProjectCount(pCount);
+
+        // Fetch Experience to calculate years (Only Dev roles)
+        const { data: expData } = await supabase
+          .from('experience')
+          .select('duration')
+          .eq('is_development', true)
+          .order('id', { ascending: false });
+
+        if (expData && expData.length > 0) {
+          const intervals = []
+          const now = new Date()
+
+          expData.forEach(exp => {
+            const parts = exp.duration.split(/[–—-]/).map(p => p.trim())
+            if (parts.length >= 2) {
+              const start = parseHeroDate(parts[0])
+              const end = parts[1].toLowerCase().includes("present") ? now : parseHeroDate(parts[1])
+              if (start && end) intervals.push({ start, end })
+            }
+          })
+
+          if (intervals.length > 0) {
+            const merged = mergeHeroIntervals(intervals)
+            let totalMonths = 0
+            merged.forEach(interval => {
+              const diff = (interval.end.getFullYear() - interval.start.getFullYear()) * 12 + 
+                           (interval.end.getMonth() - interval.start.getMonth()) + 1
+              totalMonths += Math.max(0, diff)
+            })
+            const yearsExp = Math.floor(totalMonths / 12)
+            setExperienceYears(yearsExp > 0 ? yearsExp : 1)
+          }
+        }
+      } catch (err) {
+        console.error("Error loading data:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function parseHeroDate(dateStr) {
+      if (!dateStr) return null
+      const monthsMap = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+      const parts = dateStr.toLowerCase().replace(/,/g, "").trim().split(/\s+/)
+      let month = 0
+      let year = 0
+      if (parts.length >= 2) {
+        const mIdx = monthsMap.findIndex(m => parts[0].startsWith(m))
+        month = mIdx !== -1 ? mIdx : 0
+        year = parseInt(parts[parts.length - 1])
+      } else if (parts.length === 1) {
+        year = parseInt(parts[0])
+      }
+      if (isNaN(year) || year < 1900) return null
+      return new Date(year, month, 1)
+    }
+
+    function mergeHeroIntervals(intervals) {
+      if (intervals.length <= 1) return intervals
+      const sorted = [...intervals].sort((a, b) => a.start - b.start)
+      const result = [sorted[0]]
+      for (let i = 1; i < sorted.length; i++) {
+        const last = result[result.length - 1]
+        const current = sorted[i]
+        if (current.start <= last.end) {
+          last.end = new Date(Math.max(last.end, current.end))
+        } else {
+          result.push(current)
+        }
+      }
+      return result
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading && !profile.Name) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-charcoal-blue" />
+      </div>
+    );
+  }
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -48,15 +170,15 @@ export function Hero() {
    
 
             <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-charcoal-blue to-verdigris dark:from-verdigris dark:to-tuscan-sun">{Mydata.Name}</span>
+              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-charcoal-blue to-verdigris dark:from-verdigris dark:to-tuscan-sun">{profile.Name}</span>
             </motion.h1>
 
             <motion.div variants={item} className="space-y-4">
               <h2 className="text-xl sm:text-2xl font-medium text-muted-foreground">
-                <span className="text-burnt-peach">&lt;Dev&gt;</span> {Mydata.Role} <span className="text-burnt-peach">/&gt;</span>
+                <span className="text-burnt-peach">&lt;Dev&gt;</span> {profile.Role} <span className="text-burnt-peach">/&gt;</span>
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                ReactJS Frontend Developer with over 1 year of experience building scalable, responsive, and user-friendly web applications.
+                {profile.Summary}
               </p>
             </motion.div>
 
@@ -65,18 +187,18 @@ export function Hero() {
                 <a href="#portfolio">View Projects <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
               <Button size="lg" variant="outline" className="border-2 border-sandy-brown text-sandy-brown hover:bg-sandy-brown hover:text-white dark:border-sandy-brown dark:text-sandy-brown dark:hover:bg-sandy-brown dark:hover:text-charcoal-blue bg-transparent" asChild>
-                <a href="/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf" download="Muhammad_Faheem_Iqbal_CV.pdf">Download CV <Download className="ml-2 h-4 w-4" /></a>
+                <a href={profile.ResumeUrl || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf"} download="Muhammad_Faheem_Iqbal_CV.pdf">Download CV <Download className="ml-2 h-4 w-4" /></a>
               </Button>
             </motion.div>
 
             <motion.div variants={item} className="flex gap-4 text-muted-foreground">
-               <a href={Mydata.Socials.GitHub} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+               <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
                  <Github className="h-6 w-6" />
                </a>
-               <a href={Mydata.Socials.LinkedIn} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+               <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
                  <Linkedin className="h-6 w-6" />
                </a>
-               <a href={`mailto:${Mydata.Email}`} className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+               <a href={`mailto:${profile.Email}`} className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
                  <Mail className="h-6 w-6" />
                </a>
             </motion.div>
@@ -98,11 +220,15 @@ export function Hero() {
                    <div className="relative aspect-square overflow-hidden bg-muted">
                      {/* Image with Grayscale Filter */}
                      <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-muted-foreground w-full h-full grayscale hover:grayscale-0 transition-all duration-500">
-                        <img 
-                          src="/assets/Images/faheem506pk.jpeg" 
-                          alt="Profile" 
-                          className="object-cover w-full h-full"
-                        />
+                        {profile.ImageUrl ? (
+                          <img 
+                            src={profile.ImageUrl} 
+                            alt="Profile" 
+                            className="object-cover w-full h-full"
+                          />
+                        ) : (
+                          <span className="text-4xl font-serif opacity-20">&lt; /&gt;</span>
+                        )}
                      </div>
                    </div>
                    
@@ -124,14 +250,14 @@ export function Hero() {
                       <div className="space-y-2 font-mono text-sm border-t border-border pt-4">
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Experience:</span>
-                          <span className="text-foreground">1+ Years</span>
+                          <span className="text-foreground">{experienceYears}+ Years</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Projects:</span>
-                          <span className="text-foreground">{Mydata.Projects.length}+</span>
+                          <span className="text-foreground">{projectCount}+</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">Stack:</span>
+                          <span className="text-foreground">Stack:</span>
                           <span className="text-foreground">MERN / Next.js</span>
                         </div>
                       </div>
