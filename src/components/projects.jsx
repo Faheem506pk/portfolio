@@ -79,7 +79,7 @@ export function Projects() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full flex flex-col overflow-hidden border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-burnt-peach dark:hover:border-tuscan-sun transition-colors duration-300 group bg-card">
+            <Card className="h-full pt-0 flex flex-col overflow-hidden border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-burnt-peach dark:hover:border-tuscan-sun transition-colors duration-300 group bg-card">
               <div className="relative h-48 w-full overflow-hidden bg-muted flex items-center justify-center group-hover:bg-charcoal-blue/5 dark:group-hover:bg-verdigris/5 transition-colors">
                  {project.image_url ? (
                    <img src={project.image_url} alt={project.name} className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" />
