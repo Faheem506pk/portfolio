@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Mail, MessageSquare, Send, ExternalLink } from "lucide-react"
+import { Mail, MessageSquare, Send, ExternalLink, Phone } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 import { Button } from "@/components/ui/button"
@@ -99,10 +99,30 @@ This message was sent via faheem506pk.dev contact form.`
                     </div>
                     <div>
                        <p className="text-sm font-medium text-muted-foreground">Email</p>
-                       <p className="text-foreground font-semibold">{Mydata.Email}</p>
+                       <a href={`mailto:${Mydata.Email}`} className="text-foreground font-semibold hover:text-verdigris transition-colors">{Mydata.Email}</a>
                     </div>
                  </div>
-                 
+
+                 <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
+                    <div className="h-10 w-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
+                       <Phone className="h-5 w-5" />
+                    </div>
+                    <div>
+                       <p className="text-sm font-medium text-muted-foreground">Phone</p>
+                       <a href="tel:+923325194976" className="text-foreground font-semibold hover:text-blue-500 transition-colors">+92 332 5194976</a>
+                    </div>
+                 </div>
+
+                 <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
+                    <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                       <MessageSquare className="h-5 w-5" />
+                    </div>
+                    <div>
+                       <p className="text-sm font-medium text-muted-foreground">WhatsApp</p>
+                       <a href="https://wa.me/923325194976" target="_blank" rel="noreferrer" className="text-foreground font-semibold hover:text-green-500 transition-colors">Start a Chat</a>
+                    </div>
+                 </div>
+
                  <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
                     <div className="h-10 w-10 rounded-full bg-tuscan-sun/10 flex items-center justify-center text-tuscan-sun">
                        <MessageSquare className="h-5 w-5" />
@@ -151,7 +171,7 @@ This message was sent via faheem506pk.dev contact form.`
                     )}
 
                     <Button type="submit" className="w-full bg-burnt-peach hover:bg-burnt-peach/90 text-white font-bold">
-                       <Send className="mr-2 h-4 w-4" /> Send Message <ExternalLink className="ml-2 h-3 w-3" />
+                       <Send className="mr-2 h-4 w-4" /> Send Message 
                     </Button>
                  </form>
               </CardContent>
