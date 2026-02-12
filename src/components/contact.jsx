@@ -28,25 +28,20 @@ export function Contact() {
     const message = formData.get("message")
 
     // Build Gmail compose URL
-    const subject = encodeURIComponent(`New Portfolio Message from ${name}`)
+    const subject = encodeURIComponent(`Portfolio Inquiry — ${name}`)
     const body = encodeURIComponent(
-`Hi Faheem,
+`Hello Faheem,
 
-You have received a new contact message from your portfolio website.
+A new message has been received from your portfolio contact form.
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-👤 Sender Details
-━━━━━━━━━━━━━━━━━━━━━━━━
 Name: ${name}
 Email: ${email}
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-💬 Message
-━━━━━━━━━━━━━━━━━━━━━━━━
+Message:
 ${message}
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-Sent via Portfolio Contact Form`
+--
+This message was sent via faheem506pk.dev contact form.`
     )
 
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${RECIPIENT_EMAIL}&su=${subject}&body=${body}`
