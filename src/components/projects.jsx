@@ -111,21 +111,27 @@ export function Projects() {
                 </p>
               </CardContent>
               
-              <CardFooter className="gap-2 pt-0">
-                {project.github_url && (
-                  <Button variant="outline" size="sm" className="w-full gap-2 border-charcoal-blue/20 dark:border-verdigris/30" asChild>
-                      <a href={project.github_url} target="_blank" rel="noreferrer">
-                          <Github className="h-4 w-4" /> Code
-                      </a>
-                  </Button>
-                )}
-                {project.live_url && (
-                  <Button size="sm" className="w-full gap-2 bg-charcoal-blue text-white hover:bg-charcoal-blue/90 dark:bg-verdigris dark:text-charcoal-blue dark:hover:bg-verdigris/90" asChild>
-                      <a href={project.live_url} target="_blank" rel="noreferrer">
-                          <ExternalLink className="h-4 w-4" /> Live Demo
-                      </a>
-                  </Button>
-                )}
+              <CardFooter className="gap-0 pt-0 overflow-hidden">
+                <div className="flex w-full gap-0 relative">
+                  <div className={`transition-all duration-300 ease-out ${project.github_url ? 'w-full group-hover:w-1/2' : 'w-full'}`}>
+                    {project.live_url && (
+                      <Button size="sm" className="w-full gap-2 bg-charcoal-blue text-white hover:bg-charcoal-blue/90 dark:bg-verdigris dark:text-charcoal-blue dark:hover:bg-verdigris/90" asChild>
+                          <a href={project.live_url} target="_blank" rel="noreferrer">
+                              <ExternalLink className="h-4 w-4" /> Live Demo
+                          </a>
+                      </Button>
+                    )}
+                  </div>
+                  {project.github_url && (
+                    <div className="w-0 group-hover:w-1/2 opacity-0 group-hover:opacity-100 overflow-hidden transition-all duration-300 ease-out group-hover:ml-2">
+                      <Button variant="outline" size="sm" className="w-full gap-2 border-charcoal-blue/20 dark:border-verdigris/30 whitespace-nowrap" asChild>
+                          <a href={project.github_url} target="_blank" rel="noreferrer">
+                              <Github className="h-4 w-4" /> Code
+                          </a>
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </CardFooter>
             </Card>
           </motion.div>
