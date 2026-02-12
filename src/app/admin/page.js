@@ -1,17 +1,47 @@
-import { UserButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+"use client";
 
-export default async function AdminPage() {
-  const user = await currentUser();
-  
-  // Check if user is authenticated and matches the admin email
-  // If ADMIN_EMAIL is not set, we block access for safety
-  const adminEmail = process.env.ADMIN_EMAIL;
-  
-  if (!user || !adminEmail || user.emailAddresses[0].emailAddress !== adminEmail) {
-    redirect("/");
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+
+export default function AdminPage() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+      } else {
+        // Optional: Check specific email if you want double security
+        // const adminEmail = "faheemiqbalm@gmail.com"; 
+        // if (user.email !== adminEmail) { ... }
+        setUser(user);
+      }
+      setLoading(false);
+    };
+
+    checkUser();
+  }, [router]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-charcoal-blue" />
+      </div>
+    );
   }
+
+  if (!user) return null;
 
   return (
     <div className="container py-12">
@@ -21,9 +51,11 @@ export default async function AdminPage() {
         </h1>
         <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground hidden sm:inline-block">
-                Welcome, {user.firstName}
+                Welcome, {user.email}
             </span>
-            <UserButton afterSignOutUrl="/" />
+            <Button variant="outline" onClick={handleLogout}>
+              Sign Out
+            </Button>
         </div>
       </div>
       
@@ -33,7 +65,7 @@ export default async function AdminPage() {
           Welcome to the admin panel. Here you will be able to update your portfolio content.
         </p>
         <div className="mt-6 p-4 bg-muted/50 rounded-md border border-dashed border-muted-foreground/30 flex items-center justify-center text-sm text-muted-foreground">
-          Connect your Supabase database to start managing content dynamically.
+          Supabase Connected. Ready for data integration.
         </div>
       </div>
     </div>

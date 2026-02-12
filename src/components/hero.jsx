@@ -56,7 +56,7 @@ export function Hero() {
                 <span className="text-burnt-peach">&lt;Dev&gt;</span> {Mydata.Role} <span className="text-burnt-peach">/&gt;</span>
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {Mydata.Summary.split('. ')[0]}. Building digital experiences with a retro touch.
+                ReactJS Frontend Developer with over 1 year of experience building scalable, responsive, and user-friendly web applications.
               </p>
             </motion.div>
 
