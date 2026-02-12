@@ -1,0 +1,19 @@
+{
+  "name": "Muhammad Faheem Iqbal — Software Engineer",
+  "short_name": "Faheem506pk",
+  "description": "Portfolio of Muhammad Faheem Iqbal — Software Engineer & Frontend Developer from Islamabad, Pakistan",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a2332",
+  "theme_color": "#2a9d8f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/images/faheem506pk.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "technology", "web development"]
+}
