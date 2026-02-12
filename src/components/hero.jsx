@@ -48,11 +48,10 @@ export function Hero() {
         
         if (pCount !== null) setProjectCount(pCount);
 
-        // Fetch Experience to calculate years (Only Dev roles)
+        // Fetch Experience to calculate years
         const { data: expData } = await supabase
           .from('experience')
-          .select('duration')
-          .eq('is_development', true)
+          .select('duration, is_development')
           .order('id', { ascending: false });
 
         if (expData && expData.length > 0) {
@@ -60,6 +59,8 @@ export function Hero() {
           const now = new Date()
 
           expData.forEach(exp => {
+            // Skip non-development roles (default to dev if column missing)
+            if (exp.is_development === false) return
             const parts = exp.duration.split(/[–—-]/).map(p => p.trim())
             if (parts.length >= 2) {
               const start = parseHeroDate(parts[0])

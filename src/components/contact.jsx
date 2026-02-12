@@ -2,8 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Mail, MessageSquare, Send, Loader2 } from "lucide-react"
-import emailjs from "@emailjs/browser"
+import { Mail, MessageSquare, Send, ExternalLink } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 import { Button } from "@/components/ui/button"
@@ -13,14 +12,14 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Mydata } from "@/lib/data"
 
+const RECIPIENT_EMAIL = "faheemiqbalm@gmail.com"
+
 export function Contact() {
   const formRef = React.useRef(null)
-  const [isSending, setIsSending] = React.useState(false)
   const [feedback, setFeedback] = React.useState(null)
 
-  const sendEmail = async (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault()
-    setIsSending(true)
     setFeedback(null)
 
     const formData = new FormData(formRef.current)
@@ -28,29 +27,41 @@ export function Contact() {
     const email = formData.get("from_email")
     const message = formData.get("message")
 
+    // Build Gmail compose URL
+    const subject = encodeURIComponent(`New Portfolio Message from ${name}`)
+    const body = encodeURIComponent(
+`Hi Faheem,
+
+You have received a new contact message from your portfolio website.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+👤 Sender Details
+━━━━━━━━━━━━━━━━━━━━━━━━
+Name: ${name}
+Email: ${email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+💬 Message
+━━━━━━━━━━━━━━━━━━━━━━━━
+${message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+Sent via Portfolio Contact Form`
+    )
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${RECIPIENT_EMAIL}&su=${subject}&body=${body}`
+
+    // Save to Supabase (optional backup)
     try {
-      // 1. Save to Supabase (Database Log)
-      const { error: dbError } = await supabase
-        .from("messages")
-        .insert([{ name, email, message }])
-
-      if (dbError) throw dbError
-
-      // 2. Send via EmailJS (Notification)
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-
-      await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey })
-
-      setFeedback({ type: "success", message: "Message sent and saved successfully!" })
-      formRef.current.reset()
-    } catch (error) {
-      console.error("FAILED...", error)
-      setFeedback({ type: "error", message: "Failed to process message. Please try again." })
-    } finally {
-      setIsSending(false)
+      await supabase.from("messages").insert([{ name, email, message }])
+    } catch (dbErr) {
+      console.warn("Supabase save skipped:", dbErr)
     }
+
+    // Open Gmail compose in new tab
+    window.open(gmailUrl, "_blank")
+    setFeedback({ type: "success", message: "Gmail opened! Please click Send in the new tab." })
+    formRef.current.reset()
   }
 
   return (
@@ -120,22 +131,22 @@ export function Contact() {
               <CardHeader>
                  <CardTitle>Send a Message</CardTitle>
                  <CardDescription>
-                    Fill out the form below to initiate an email.
+                    Fill out the form below — Gmail will open with your message ready to send.
                  </CardDescription>
               </CardHeader>
               <CardContent>
-                 <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+                 <form ref={formRef} onSubmit={sendMessage} className="space-y-4">
                     <div className="grid gap-2">
                        <Label htmlFor="from_name">Name</Label>
-                       <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-background/50" disabled={isSending} />
+                       <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-background/50" />
                     </div>
                     <div className="grid gap-2">
                        <Label htmlFor="from_email">Email</Label>
-                       <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-background/50" disabled={isSending} />
+                       <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-background/50" />
                     </div>
                     <div className="grid gap-2">
                        <Label htmlFor="message">Message</Label>
-                       <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-background/50" required disabled={isSending} />
+                       <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-background/50" required />
                     </div>
                     
                     {feedback && (
@@ -144,16 +155,8 @@ export function Contact() {
                         </div>
                     )}
 
-                    <Button type="submit" className="w-full bg-burnt-peach hover:bg-burnt-peach/90 text-white font-bold" disabled={isSending}>
-                       {isSending ? (
-                           <>
-                               <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
-                           </>
-                       ) : (
-                           <>
-                               <Send className="mr-2 h-4 w-4" /> Send Message
-                           </>
-                       )}
+                    <Button type="submit" className="w-full bg-burnt-peach hover:bg-burnt-peach/90 text-white font-bold">
+                       <Send className="mr-2 h-4 w-4" /> Send Message <ExternalLink className="ml-2 h-3 w-3" />
                     </Button>
                  </form>
               </CardContent>
