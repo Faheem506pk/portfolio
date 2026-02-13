@@ -4,6 +4,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
+import { Toaster } from "@/components/ui/sonner"
+import Script from "next/script"
+import GAListener from "@/components/ga-listener"
 
 const outfit = Outfit({
   variable: "--font-sans",
@@ -116,6 +119,20 @@ export default function RootLayout({ children }) {
             <main className="flex-1 w-full flex flex-col items-center">
               {children}
             </main>
+            <Toaster />
+            <GAListener />
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-GEP8VCBFXE"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-GEP8VCBFXE');
+              `}
+            </Script>
             <Footer />
           </ThemeProvider>
       </body>

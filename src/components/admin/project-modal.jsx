@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { MediaUploader } from "@/components/admin/media-uploader";
 
 export function ProjectModal({
   open,
@@ -35,13 +36,15 @@ export function ProjectModal({
   useEffect(() => {
     if (open) {
       if (initialData) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line
         setFormData({
           ...initialData,
           tech: initialData.tech ? initialData.tech.join(", ") : "",
         });
       } else {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+
         setFormData({
           name: "",
           description: "",
@@ -152,17 +155,15 @@ export function ProjectModal({
                 }
               />
             </div>
-            <div className="space-y-2">
-               <Label htmlFor="image_url">Image URL</Label>
-               <Input
-                 id="image_url"
-                 placeholder="/assets/images/..."
-                 value={formData.image_url || ""}
-                 onChange={(e) =>
-                   setFormData({ ...formData, image_url: e.target.value })
-                 }
-               />
-            </div>
+            {/* Empty column or move Featured here if desired */}
+          </div>
+
+          <div className="space-y-2">
+             <Label htmlFor="image_url">Image</Label>
+             <MediaUploader
+               value={formData.image_url}
+               onChange={(url) => setFormData({ ...formData, image_url: url })}
+             />
           </div>
 
           <div className="flex items-center space-x-2">
