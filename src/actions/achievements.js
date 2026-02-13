@@ -33,7 +33,7 @@ export async function saveAchievementAction(formData, id = null) {
         console.error("Supabase update error:", error);
         return { success: false, error: error.message };
       }
-      revalidatePath("/admin");
+      revalidatePath("/mfiadmin");
       return { success: true, data };
     } else {
       const { data, error } = await supabase.from("achievements").insert([cleanData]).select();
@@ -42,7 +42,7 @@ export async function saveAchievementAction(formData, id = null) {
         console.error("Supabase insert error:", error);
         return { success: false, error: error.message };
       }
-      revalidatePath("/admin");
+      revalidatePath("/mfiadmin");
       return { success: true, data };
     }
   } catch (error) {
@@ -60,7 +60,7 @@ export async function deleteAchievementAction(id) {
       console.error("Supabase delete error:", error);
       return { success: false, error: error.message };
     }
-    revalidatePath("/admin");
+    revalidatePath("/mfiadmin");
     return { success: true };
   } catch (error) {
     console.error("Server action error:", error);

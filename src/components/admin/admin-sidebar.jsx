@@ -25,42 +25,42 @@ import { useRouter } from "next/navigation";
 const sidebarItems = [
   {
     title: "Dashboard",
-    href: "/admin",
+    href: "/mfiadmin",
     icon: LayoutDashboard,
   },
   {
     title: "Experience",
-    href: "/admin/experience",
+    href: "/mfiadmin/experience",
     icon: Briefcase,
   },
   {
     title: "Education",
-    href: "/admin/education",
+    href: "/mfiadmin/education",
     icon: GraduationCap,
   },
   {
     title: "Skills",
-    href: "/admin/skills",
+    href: "/mfiadmin/skills",
     icon: Wrench,
   },
   {
     title: "Messages",
-    href: "/admin/messages",
+    href: "/mfiadmin/messages",
     icon: MessageSquare,
   },
   {
     title: "Users",
-    href: "/admin/users",
+    href: "/mfiadmin/users",
     icon: Users,
   },
   {
     title: "Achievements",
-    href: "/admin#achievements",
+    href: "/mfiadmin#achievements",
     icon: Trophy,
   },
   {
     title: "Settings",
-    href: "/admin/profile",
+    href: "/mfiadmin/profile",
     icon: Settings,
   },
 ];
@@ -77,11 +77,11 @@ export function AdminSidebar({ className }) {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    router.push("/login");
+    router.push("/mfiadmin/login");
   };
 
   const sidebarContent = (
-    <div className="flex bg-card/80 backdrop-blur-xl flex-col h-full border-r border-border/50">
+    <div className="flex bg-card/80 backdrop-blur-xl flex-col h-full border-r border-border/50 ">
       <div className="p-8">
         <div className="flex items-center gap-3 group px-2">
           <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-verdigris to-charcoal-blue flex items-center justify-center text-white shadow-lg shadow-verdigris/20 group-hover:scale-105 transition-transform">
@@ -96,7 +96,7 @@ export function AdminSidebar({ className }) {
         </div>
       </div>
 
-      <div className="flex-1 px-4 py-2 space-y-1 overflow-y-auto custom-scrollbar">
+      <div className="flex-1 px-4 py-2 space-y-1 overflow-y-auto custom-scrollbar  max-h-[calc(100vh-40px)]">
         {sidebarItems.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -152,7 +152,7 @@ export function AdminSidebar({ className }) {
 
   return (
     <>
-      <div className="md:hidden h-16 border-b border-border/50 bg-background/80 backdrop-blur-md sticky top-0 z-50 px-4 flex items-center justify-between">
+      <div className="md:hidden h-16 border-b border-border/50 bg-background/80 backdrop-blur-md sticky top-0 z-50 px-4 flex items-center justify-between ">
         <h2 className="text-lg font-serif font-bold text-charcoal-blue dark:text-verdigris">Faheem<span className="text-foreground">.dev</span></h2>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
@@ -166,7 +166,7 @@ export function AdminSidebar({ className }) {
         </Sheet>
       </div>
 
-      <aside className={cn("hidden md:block w-64 fixed inset-y-0 left-0 z-40 bg-background", className)}>
+      <aside className={cn("hidden md:block w-64 fixed inset-y-0 left-0 z-40 bg-background max-h-[100vh]", className)}>
         {sidebarContent}
       </aside>
     </>
