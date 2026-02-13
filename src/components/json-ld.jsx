@@ -1,19 +1,19 @@
 "use client"
 
-export function JsonLd() {
+export function JsonLd({ profile }) {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": "https://faheem506pk.vercel.app/#person",
-    name: "Muhammad Faheem Iqbal",
+    name: profile?.name || "Muhammad Faheem Iqbal",
     alternateName: ["Faheem Iqbal", "Faheem Awan", "faheem506pk", "Muhammad Faheem", "Faheem Iqbal Awan"],
     givenName: "Muhammad Faheem",
     familyName: "Iqbal",
-    jobTitle: "Software Engineer",
-    description: "Software Engineer & Frontend Developer from Islamabad, Pakistan. Expert in React.js, Next.js, TypeScript, and modern web technologies.",
+    jobTitle: profile?.role || "Software Engineer",
+    description: profile?.summary || "Software Engineer & Frontend Developer from Islamabad, Pakistan. Expert in React.js, Next.js, TypeScript, and modern web technologies.",
     url: "https://faheem506pk.vercel.app",
-    image: "https://faheem506pk.vercel.app/assets/images/faheem506pk.jpeg",
-    email: "faheemiqbalm@gmail.com",
+    image: profile?.image_url || "https://faheem506pk.vercel.app/assets/images/faheem506pk.jpeg",
+    email: profile?.email || "faheemiqbalm@gmail.com",
     telephone: "+92-332-5194976",
     nationality: {
       "@type": "Country",
@@ -51,9 +51,9 @@ export function JsonLd() {
       }
     },
     sameAs: [
-      "https://www.linkedin.com/in/faheem506pk/",
-      "https://github.com/faheem506pk",
-      "https://faheem506pk.vercel.app"
+      profile?.social_linkedin || "https://www.linkedin.com/in/faheem506pk/",
+      profile?.social_github || "https://github.com/faheem506pk",
+      profile?.social_portfolio || "https://faheem506pk.vercel.app"
     ]
   }
 
@@ -62,8 +62,8 @@ export function JsonLd() {
     "@type": "WebSite",
     "@id": "https://faheem506pk.vercel.app/#website",
     url: "https://faheem506pk.vercel.app",
-    name: "Faheem506pk — Developer Portfolio",
-    description: "Portfolio of Muhammad Faheem Iqbal, Software Engineer & Frontend Developer from Pakistan",
+    name: `${profile?.name || "Faheem506pk"} — Developer Portfolio`,
+    description: profile?.summary || "Portfolio of Muhammad Faheem Iqbal, Software Engineer & Frontend Developer from Pakistan",
     publisher: { "@id": "https://faheem506pk.vercel.app/#person" },
     inLanguage: "en-US"
   }
@@ -73,7 +73,7 @@ export function JsonLd() {
     "@type": "ProfilePage",
     "@id": "https://faheem506pk.vercel.app/#profilepage",
     url: "https://faheem506pk.vercel.app",
-    name: "Muhammad Faheem Iqbal — Portfolio",
+    name: `${profile?.name || "Muhammad Faheem Iqbal"} — Portfolio`,
     mainEntity: { "@id": "https://faheem506pk.vercel.app/#person" },
     dateCreated: "2024-01-01",
     dateModified: new Date().toISOString().split("T")[0],

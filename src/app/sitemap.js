@@ -1,36 +1,11 @@
 export default function sitemap() {
-  const baseUrl = "https://faheem506pk.vercel.app"
-
   return [
     {
-      url: baseUrl,
+      url: "https://faheem506pk.vercel.app",
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 1.0,
+      priority: 1,
     },
-    {
-      url: `${baseUrl}/#skills`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#experience`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#portfolio`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-  ]
+    // Add other routes if valid, e.g. /projects if it exists as a separate page
+  ];
 }
