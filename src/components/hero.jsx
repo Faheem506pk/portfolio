@@ -185,7 +185,7 @@ export function Hero() {
 
             <motion.div variants={item} className="flex flex-col gap-3 min-[400px]:flex-row">
               <Button size="lg" className="bg-charcoal-blue hover:bg-charcoal-blue/90 text-white dark:bg-verdigris dark:hover:bg-verdigris/90 dark:text-charcoal-blue font-bold" asChild>
-                <a href="#portfolio">View Projects <ArrowRight className="ml-2 h-4 w-4" /></a>
+                <a href="/projects">View Projects <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
               <Button size="lg" variant="outline" className="border-2 border-sandy-brown text-sandy-brown hover:bg-sandy-brown hover:text-white dark:border-sandy-brown dark:text-sandy-brown dark:hover:bg-sandy-brown dark:hover:text-charcoal-blue bg-transparent" asChild>
                 <a href={profile.ResumeUrl || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf"} download="Muhammad_Faheem_Iqbal_CV.pdf">Download CV <Download className="ml-2 h-4 w-4" /></a>
