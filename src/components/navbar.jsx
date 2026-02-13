@@ -22,6 +22,7 @@ const navItems = [
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#portfolio" },
+  { name: "Achievements", href: "#achievements" },
   { name: "Contact", href: "#contact" },
 ]
 
@@ -41,7 +42,7 @@ export function Navbar() {
             Faheem506pk<span className="text-burnt-peach">.dev</span>
           </span>
         </Link>
-        
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navItems.map((item) => (
@@ -64,7 +65,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <ModeToggle />
-          
+
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -87,8 +88,8 @@ export function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className={cn(
                       "text-lg font-medium transition-all hover:translate-x-2",
-                      pathname === item.href 
-                        ? "text-burnt-peach font-bold translate-x-2" 
+                      pathname === item.href
+                        ? "text-burnt-peach font-bold translate-x-2"
                         : "text-foreground"
                     )}
                   >

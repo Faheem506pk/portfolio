@@ -4,6 +4,7 @@ import { Hero } from "@/components/hero";
 import { Projects } from "@/components/projects";
 import { Skills } from "@/components/skills";
 import { TechMarquee } from "@/components/tech-marquee";
+import { Achievements } from "@/components/achievements";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Skills />
       <Experience />
       <Projects />
+      <Achievements />
       <Contact />
     </div>
   );
