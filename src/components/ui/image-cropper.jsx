@@ -21,7 +21,7 @@ export function ImageCropper({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
-  const [aspect, setAspect] = useState(16 / 9);
+  const [aspect, setAspect] = useState(2 / 1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
   const onCropChange = (crop) => {
@@ -209,6 +209,8 @@ export function ImageCropper({
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="free">Free</SelectItem>
+                        <SelectItem value={(2.4).toString()}>Ultra-Wide (2.4:1)</SelectItem>
+                        <SelectItem value={(2).toString()}>Wide (2:1)</SelectItem>
                         <SelectItem value={(16/9).toString()}>16:9 (Landscape)</SelectItem>
                         <SelectItem value={(4/3).toString()}>4:3 (Standard)</SelectItem>
                         <SelectItem value={(1).toString()}>1:1 (Square)</SelectItem>

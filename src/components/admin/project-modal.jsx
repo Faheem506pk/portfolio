@@ -30,7 +30,7 @@ export function ProjectModal({
     live_url: "",
     featured: false,
     year: "",
-    image_url: "",
+    images: [], // Support multiple images
   });
 
   useEffect(() => {
@@ -41,6 +41,7 @@ export function ProjectModal({
         setFormData({
           ...initialData,
           tech: initialData.tech ? initialData.tech.join(", ") : "",
+          images: initialData.images || (initialData.image_url ? [initialData.image_url] : []),
         });
       } else {
 
@@ -53,7 +54,7 @@ export function ProjectModal({
           live_url: "",
           featured: false,
           year: new Date().getFullYear().toString(),
-          image_url: "",
+          images: [],
         });
       }
     }
@@ -159,10 +160,9 @@ export function ProjectModal({
           </div>
 
           <div className="space-y-2">
-             <Label htmlFor="image_url">Image</Label>
              <MediaUploader
-               value={formData.image_url}
-               onChange={(url) => setFormData({ ...formData, image_url: url })}
+               value={formData.images}
+               onChange={(urls) => setFormData({ ...formData, images: urls })}
              />
           </div>
 

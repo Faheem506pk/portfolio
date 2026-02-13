@@ -1,10 +1,12 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { ExternalLink, Github, Code2, Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
+import { ProjectCarousel } from "@/components/project-carousel"
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -32,6 +34,7 @@ export function Projects() {
           .from("projects")
           .select("*")
           .order("featured", { ascending: false })
+          .order("year", { ascending: false })
           .order("id", { ascending: false })
         
         if (data) setProjects(data)
@@ -80,9 +83,17 @@ export function Projects() {
             viewport={{ once: true }}
           >
             <Card className="h-full pt-0 flex flex-col overflow-hidden border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-burnt-peach dark:hover:border-tuscan-sun transition-colors duration-300 group bg-card">
-              <div className="relative h-48 w-full overflow-hidden bg-muted flex items-center justify-center group-hover:bg-charcoal-blue/5 dark:group-hover:bg-verdigris/5 transition-colors">
-                 {project.image_url ? (
-                   <img src={project.image_url} alt={project.name} className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" />
+              <div className="relative aspect-[2/1] w-full overflow-hidden bg-muted flex items-center justify-center group-hover:bg-charcoal-blue/5 dark:group-hover:bg-verdigris/5 transition-colors">
+                 {project.images && project.images.length > 0 ? (
+                   <ProjectCarousel 
+                     images={project.images} 
+                     name={project.name} 
+                   />
+                 ) : project.image_url ? (
+                   <ProjectCarousel 
+                     images={[project.image_url]} 
+                     name={project.name} 
+                   />
                  ) : (
                    <Code2 className="h-16 w-16 text-muted-foreground/30 group-hover:text-burnt-peach/50 transition-colors" />
                  )}
