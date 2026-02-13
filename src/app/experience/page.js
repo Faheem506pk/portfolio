@@ -1,4 +1,5 @@
 import { Experience } from "@/components/experience";
+import { PageWrapper } from "@/components/page-wrapper";
 
 export const metadata = {
   title: "Professional Experience | Muhammad Faheem Iqbal",
@@ -11,8 +12,11 @@ export const metadata = {
 
 export default function ExperiencePage() {
   return (
-    <div className="pt-20 min-h-screen">
+    <PageWrapper title="Professional Journey">
+      <div className="prose dark:prose-invert max-w-none mb-8">
+        <p className="text-xl text-muted-foreground">A timeline of my professional career and key roles in the industry.</p>
+      </div>
       <Experience />
-    </div>
+    </PageWrapper>
   );
 }

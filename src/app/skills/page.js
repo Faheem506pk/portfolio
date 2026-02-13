@@ -1,7 +1,7 @@
 import { Skills } from "@/components/skills";
 import { createClient } from "@supabase/supabase-js";
+import { PageWrapper } from "@/components/page-wrapper";
 
-// SEO Metadata for Skills Page
 export const metadata = {
   title: "Skills & Expertise | Muhammad Faheem Iqbal",
   description:
@@ -13,8 +13,11 @@ export const metadata = {
 
 export default function SkillsPage() {
   return (
-    <div className="pt-20 min-h-screen">
+    <PageWrapper title="Technical Expertise" className="bg-background/50">
+      <div className="prose dark:prose-invert max-w-none mb-8">
+        <p className="text-xl text-muted-foreground">My technical toolkit and proficiency levels across various domains.</p>
+      </div>
       <Skills />
-    </div>
+    </PageWrapper>
   );
 }

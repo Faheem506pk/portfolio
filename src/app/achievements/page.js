@@ -1,4 +1,5 @@
 import { Achievements } from "@/components/achievements";
+import { PageWrapper } from "@/components/page-wrapper";
 
 export const metadata = {
   title: "Achievements & Certifications | Muhammad Faheem Iqbal",
@@ -10,8 +11,8 @@ export const metadata = {
 
 export default function AchievementsPage() {
   return (
-    <div className="pt-20 min-h-screen">
+    <PageWrapper title="Awards & Recognitions">
       <Achievements />
-    </div>
+    </PageWrapper>
   );
 }

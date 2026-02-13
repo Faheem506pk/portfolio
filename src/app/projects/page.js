@@ -1,4 +1,5 @@
 import { Projects } from "@/components/projects";
+import { PageWrapper } from "@/components/page-wrapper";
 
 export const metadata = {
   title: "Projects & Portfolio | Muhammad Faheem Iqbal",
@@ -11,8 +12,11 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="pt-20 min-h-screen">
+    <PageWrapper title="Featured Projects">
+      <div className="prose dark:prose-invert max-w-none mb-8">
+        <p className="text-xl text-muted-foreground">A selection of projects that showcase my skills and problem-solving abilities.</p>
+      </div>
       <Projects />
-    </div>
+    </PageWrapper>
   );
 }

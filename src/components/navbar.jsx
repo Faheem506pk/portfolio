@@ -18,7 +18,7 @@ import {
 import { ModeToggle } from "@/components/mode-toggle"
 
 const navItems = [
-  { name: "Home", href: "/" },
+  { name: "About", href: "/" },
   { name: "Skills", href: "/skills" },
   { name: "Experience", href: "/experience" },
   { name: "Projects", href: "/projects" },
@@ -29,10 +29,40 @@ const navItems = [
 export function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
-  const [activeSection, setActiveSection] = React.useState("")
+  const [activeSection, setActiveSection] = React.useState("/")
+
+  const handleNavClick = (e, href) => {
+    setIsOpen(false);
+
+    // Logic: If on home page and link is for a section, scroll to it.
+    // If link is Home ('/'), scroll to top.
+    if (pathname === "/") {
+      e.preventDefault();
+      let targetId = "";
+
+      if (href === "/") targetId = "home";
+      else if (href === "/skills") targetId = "skills";
+      else if (href === "/experience") targetId = "experience";
+      else if (href === "/projects") targetId = "portfolio"; // ID mismatch handling
+      else if (href === "/achievements") targetId = "achievements";
+      else if (href === "/contact") targetId = "contact";
+
+      const element = document.getElementById(targetId);
+      if (element) {
+        // Update URL hash without reload
+        window.history.pushState({}, "", href === "/" ? "/" : `#${targetId}`);
+        // Scroll
+        const yOffset = -64; // Navbar height
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+    // Else: Let standard navigation happen to the separate page
+  }
 
   React.useEffect(() => {
-    if (pathname !== "/") return
+    // Only run scroll spy on Home page
+    if (pathname !== "/") return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -45,7 +75,7 @@ export function Navbar() {
           }
         })
       },
-      { rootMargin: "-50% 0px -50% 0px" }
+      { rootMargin: "-30% 0px -70% 0px" } // Adjusted logic for better trigger
     )
 
     const sections = document.querySelectorAll("section[id]")
@@ -61,7 +91,7 @@ export function Navbar() {
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="mr-8 flex items-center space-x-2">
+        <Link href="/" className="mr-8 flex items-center space-x-2" onClick={(e) => handleNavClick(e, "/")}>
           <span className="font-serif text-xl font-bold tracking-tight text-charcoal-blue dark:text-verdigris">
             Faheem506pk<span className="text-burnt-peach">.dev</span>
           </span>
@@ -71,9 +101,12 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
               className={cn(
                 "transition-colors hover:text-foreground/80 text-foreground/60 relative group",
-                (pathname === item.href) || (pathname === "/" && activeSection === item.href)
+                (pathname === "/"
+                  ? activeSection === item.href
+                  : pathname === item.href)
                   ? "text-foreground font-semibold"
                   : ""
               )}
@@ -81,7 +114,9 @@ export function Navbar() {
               {item.name}
               <span className={cn(
                 "absolute -bottom-1 left-0 w-full h-[2px] bg-sandy-brown scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
-                (pathname === item.href) || (pathname === "/" && activeSection === item.href)
+                (pathname === "/"
+                  ? activeSection === item.href
+                  : pathname === item.href)
                   ? "scale-x-100 bg-tuscan-sun"
                   : ""
               )} />
