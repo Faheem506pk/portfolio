@@ -18,7 +18,7 @@ import {
 import { ModeToggle } from "@/components/mode-toggle"
 
 const navItems = [
-  { name: "Home", href: "/" },
+  { name: "Home", href: "/#home" },
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#portfolio" },
@@ -29,6 +29,26 @@ const navItems = [
 export function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
+  const [activeSection, setActiveSection] = React.useState("")
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`)
+          }
+        })
+      },
+      { rootMargin: "-50% 0px -50% 0px" }
+    )
+
+    const sections = document.querySelectorAll("section[id]")
+    sections.forEach((section) => observer.observe(section))
+
+    return () => sections.forEach((section) => observer.unobserve(section))
+  }, []) // Remove pathname dependency effectively by empty array, layout wrapper handles path change remount if needed? Actually path changes shouldn't unmount navbar if it's in layout.
+
 
   return (
     <motion.header
@@ -51,13 +71,17 @@ export function Navbar() {
               href={item.href}
               className={cn(
                 "transition-colors hover:text-foreground/80 text-foreground/60 relative group",
-                pathname === item.href ? "text-foreground font-semibold" : ""
+                pathname === "/"
+                  ? (activeSection === item.href.substring(item.href.indexOf('#')) || (item.name === "Home" && !activeSection) ? "text-foreground font-semibold" : "")
+                  : (pathname === item.href ? "text-foreground font-semibold" : "")
               )}
             >
               {item.name}
               <span className={cn(
                 "absolute -bottom-1 left-0 w-full h-[2px] bg-sandy-brown scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
-                pathname === item.href ? "scale-x-100 bg-tuscan-sun" : ""
+                pathname === "/"
+                  ? (activeSection === item.href.substring(item.href.indexOf('#')) || (item.name === "Home" && !activeSection) ? "scale-x-100 bg-tuscan-sun" : "")
+                  : (pathname === item.href ? "scale-x-100 bg-tuscan-sun" : "")
               )} />
             </Link>
           ))}

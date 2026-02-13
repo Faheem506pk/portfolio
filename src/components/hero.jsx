@@ -24,28 +24,28 @@ export function Hero() {
           .from('profiles')
           .select('*')
           .single();
-        
+
         if (profileData) {
-           setProfile({
-             Name: profileData.name,
-             Role: profileData.role,
-             Summary: profileData.summary,
-             Email: profileData.email,
-             Socials: {
-               LinkedIn: profileData.social_linkedin,
-               GitHub: profileData.social_github,
-               Portfolio: profileData.social_portfolio
-             },
-             ResumeUrl: profileData.resume_url || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf", 
-             ImageUrl: profileData.image_url || "/assets/images/faheem506pk.jpeg"
-           });
+          setProfile({
+            Name: profileData.name,
+            Role: profileData.role,
+            Summary: profileData.summary,
+            Email: profileData.email,
+            Socials: {
+              LinkedIn: profileData.social_linkedin,
+              GitHub: profileData.social_github,
+              Portfolio: profileData.social_portfolio
+            },
+            ResumeUrl: profileData.resume_url || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf",
+            ImageUrl: profileData.image_url || "/assets/images/faheem506pk.jpeg"
+          });
         }
 
         // Fetch Projects Count
         const { count: pCount } = await supabase
           .from('projects')
           .select('*', { count: 'exact', head: true });
-        
+
         if (pCount !== null) setProjectCount(pCount);
 
         // Fetch Experience to calculate years
@@ -73,8 +73,8 @@ export function Hero() {
             const merged = mergeHeroIntervals(intervals)
             let totalMonths = 0
             merged.forEach(interval => {
-              const diff = (interval.end.getFullYear() - interval.start.getFullYear()) * 12 + 
-                           (interval.end.getMonth() - interval.start.getMonth()) + 1
+              const diff = (interval.end.getFullYear() - interval.start.getFullYear()) * 12 +
+                (interval.end.getMonth() - interval.start.getMonth()) + 1
               totalMonths += Math.max(0, diff)
             })
             const yearsExp = Math.floor(totalMonths / 12)
@@ -149,26 +149,26 @@ export function Hero() {
   }
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] w-full overflow-hidden bg-background py-12 md:py-24 lg:py-32 flex items-center justify-center">
+    <section id="home" className="relative min-h-[calc(100vh-4rem)] w-full overflow-hidden bg-background py-12 md:py-24 lg:py-32 flex items-center justify-center">
       {/* Background Pattern */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]" 
-           style={{ 
-             backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)", 
-             backgroundSize: "40px 40px" 
-           }} 
+      <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+          backgroundSize: "40px 40px"
+        }}
       />
-      
+
       <div className="container relative z-10 px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-          
+
           {/* Left Column: Text Content */}
-          <motion.div 
+          <motion.div
             variants={container}
             initial="hidden"
             animate="show"
             className="flex flex-col gap-6"
           >
-   
+
 
             <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-charcoal-blue to-verdigris dark:from-verdigris dark:to-tuscan-sun">{profile.Name}</span>
@@ -179,7 +179,7 @@ export function Hero() {
                 <span className="text-burnt-peach">&lt;Dev&gt;</span> {profile.Role} <span className="text-burnt-peach">/&gt;</span>
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {profile.Summary}
+                {profile.Summary?.replace(/over \d+ year(s?)/, `over ${experienceYears} year${experienceYears > 1 ? 's' : ''}`)}
               </p>
             </motion.div>
 
@@ -193,20 +193,20 @@ export function Hero() {
             </motion.div>
 
             <motion.div variants={item} className="flex gap-4 text-muted-foreground">
-               <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
-                 <Github className="h-6 w-6" />
-               </a>
-               <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
-                 <Linkedin className="h-6 w-6" />
-               </a>
-               <a href={`mailto:${profile.Email}`} className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
-                 <Mail className="h-6 w-6" />
-               </a>
+              <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+                <Github className="h-6 w-6" />
+              </a>
+              <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+                <Linkedin className="h-6 w-6" />
+              </a>
+              <a href={`mailto:${profile.Email}`} className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+                <Mail className="h-6 w-6" />
+              </a>
             </motion.div>
           </motion.div>
 
           {/* Right Column: Visual/Profile */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -215,54 +215,54 @@ export function Hero() {
             <div className="relative group">
               {/* Retro geometric shapes background */}
               <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-tuscan-sun to-sandy-brown opacity-30 blur-2xl group-hover:opacity-50 transition-opacity duration-500" />
-              
+
               <Card className="relative overflow-hidden border-2 py-0 border-charcoal-blue/10 bg-background/50 backdrop-blur-sm dark:border-verdigris/20 w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-xl">
                 <CardContent className="p-0">
-                   <div className="relative aspect-square overflow-hidden bg-muted">
-                     {/* Image with Grayscale Filter */}
-                     <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-muted-foreground w-full h-full grayscale hover:grayscale-0 transition-all duration-500">
-                        {profile.ImageUrl ? (
-                          <img 
-                            src={profile.ImageUrl} 
-                            alt="Profile" 
-                            className="object-cover w-full h-full"
-                          />
-                        ) : (
-                          <span className="text-4xl font-serif opacity-20">&lt; /&gt;</span>
-                        )}
-                     </div>
-                   </div>
-                   
-                   <div className="p-6 space-y-4">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                         <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                            <MapPin className="h-4 w-4 text-burnt-peach" />
-                            <span className="whitespace-nowrap">Islamabad, PK</span>
-                         </div>
-                         <div className="flex items-center space-x-1">
-                            <span className="relative flex h-3 w-3">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-verdigris opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-3 w-3 bg-verdigris"></span>
-                            </span>
-                            <span className="text-xs font-medium text-verdigris ml-1 whitespace-nowrap">Available to Work</span>
-                         </div>
+                  <div className="relative aspect-square overflow-hidden bg-muted">
+                    {/* Image with Grayscale Filter */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-muted-foreground w-full h-full grayscale hover:grayscale-0 transition-all duration-500">
+                      {profile.ImageUrl ? (
+                        <img
+                          src={profile.ImageUrl}
+                          alt="Profile"
+                          className="object-cover w-full h-full"
+                        />
+                      ) : (
+                        <span className="text-4xl font-serif opacity-20">&lt; /&gt;</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                        <MapPin className="h-4 w-4 text-burnt-peach" />
+                        <span className="whitespace-nowrap">Islamabad, PK</span>
                       </div>
-                      
-                      <div className="space-y-2 font-mono text-sm border-t border-border pt-4">
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">Experience:</span>
-                          <span className="text-foreground">{experienceYears}+ Years</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">Projects:</span>
-                          <span className="text-foreground">{projectCount}+</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-foreground">Stack:</span>
-                          <span className="text-foreground">MERN / Next.js</span>
-                        </div>
+                      <div className="flex items-center space-x-1">
+                        <span className="relative flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-verdigris opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-verdigris"></span>
+                        </span>
+                        <span className="text-xs font-medium text-verdigris ml-1 whitespace-nowrap">Available to Work</span>
                       </div>
-                   </div>
+                    </div>
+
+                    <div className="space-y-2 font-mono text-sm border-t border-border pt-4">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Experience:</span>
+                        <span className="text-foreground">{experienceYears}+ Years</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Projects:</span>
+                        <span className="text-foreground">{projectCount}+</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-foreground">Stack:</span>
+                        <span className="text-foreground">MERN / Next.js</span>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>

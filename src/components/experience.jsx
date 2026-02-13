@@ -126,38 +126,36 @@ export function Experience() {
       {otherRoles.length > 0 && (
         <div className="max-w-3xl mx-auto border-t border-border pt-12">
           <h3 className="text-xl font-bold mb-8 text-muted-foreground uppercase tracking-widest text-center">Other Professional Experience</h3>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="relative border-l border-white/10 ml-3 md:ml-6 space-y-10 py-2">
             {otherRoles.map((job, idx) => (
               <motion.div
                 key={job.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
+                className="relative pl-8 md:pl-12"
               >
-                <Card className="h-full bg-card/30 backdrop-blur-md border border-white/10 hover:border-white/20 hover:bg-card/40 transition-all duration-300 group overflow-hidden">
-                  <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start gap-4">
-                      <div className="space-y-1.5">
-                        <CardTitle className="text-lg font-bold text-foreground group-hover:text-tuscan-sun transition-colors">
-                          {job.position}
-                        </CardTitle>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
-                          <Briefcase className="w-3.5 h-3.5 text-tuscan-sun/70" />
-                          {job.company}
-                        </div>
-                      </div>
-                      <span className="text-xs font-mono font-medium text-burnt-peach bg-burnt-peach/10 px-2 py-1 rounded">
-                        {job.duration}
-                      </span>
+                <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-tuscan-sun ring-4 ring-background" />
+
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-bold text-foreground hover:text-tuscan-sun transition-colors">
+                      {job.position}
+                    </h4>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                      <Briefcase className="w-3.5 h-3.5 text-tuscan-sun/70" />
+                      {job.company}
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground/80 leading-relaxed border-t border-white/5 pt-4">
-                      {job.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <span className="text-xs font-mono font-medium text-burnt-peach/80 bg-burnt-peach/5 px-2 py-0.5 rounded border border-burnt-peach/10 w-fit">
+                    {job.duration}
+                  </span>
+                </div>
+
+                <p className="text-sm text-muted-foreground/80 leading-relaxed max-w-2xl">
+                  {job.description}
+                </p>
               </motion.div>
             ))}
           </div>
