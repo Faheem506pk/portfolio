@@ -43,7 +43,7 @@ export function Navbar() {
       if (href === "/") targetId = "home";
       else if (href === "/skills") targetId = "skills";
       else if (href === "/experience") targetId = "experience";
-      else if (href === "/projects") targetId = "portfolio"; // ID mismatch handling
+      else if (href === "/projects") targetId = "projects";
       else if (href === "/achievements") targetId = "achievements";
       else if (href === "/contact") targetId = "contact";
 
@@ -70,7 +70,6 @@ export function Navbar() {
           if (entry.isIntersecting) {
             const id = entry.target.id
             if (id === "home") setActiveSection("/")
-            else if (id === "portfolio") setActiveSection("/projects")
             else setActiveSection(`/${id}`)
           }
         })

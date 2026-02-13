@@ -17,7 +17,7 @@ export default function SkillsPage() {
       <div className="prose dark:prose-invert max-w-none mb-8">
         <p className="text-xl text-muted-foreground">My technical toolkit and proficiency levels across various domains.</p>
       </div>
-      <Skills />
+      <Skills isPage={true} />
     </PageWrapper>
   );
 }

@@ -16,7 +16,7 @@ export default function ProjectsPage() {
       <div className="prose dark:prose-invert max-w-none mb-8">
         <p className="text-xl text-muted-foreground">A selection of projects that showcase my skills and problem-solving abilities.</p>
       </div>
-      <Projects />
+      <Projects isPage={true} />
     </PageWrapper>
   );
 }

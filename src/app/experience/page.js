@@ -16,7 +16,7 @@ export default function ExperiencePage() {
       <div className="prose dark:prose-invert max-w-none mb-8">
         <p className="text-xl text-muted-foreground">A timeline of my professional career and key roles in the industry.</p>
       </div>
-      <Experience />
+      <Experience isPage={true} />
     </PageWrapper>
   );
 }
