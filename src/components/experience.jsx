@@ -52,7 +52,7 @@ export function Experience() {
   const otherRoles = experiences.filter(job => job.is_development === false);
 
   return (
-    <section id="experience" className="container py-12 md:py-24 lg:py-32">
+    <section id="experience" className="container py-12 md:py-24 lg:py-32 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

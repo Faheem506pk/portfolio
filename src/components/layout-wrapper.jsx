@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -11,10 +10,9 @@ export default function LayoutWrapper({ children }) {
   return (
     <>
       {!isAdmin && <Navbar />}
-      <main className={`flex-1 w-full flex flex-col items-center min-h-screen`}>
+      <main className={`flex-1 w-full flex flex-col items-center min-h-screen overflow-x-hidden`}>
         {children}
       </main>
-      {!isAdmin && <Footer />}
     </>
   );
 }
