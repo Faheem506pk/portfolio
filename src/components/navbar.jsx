@@ -111,11 +111,11 @@ export function Navbar() {
             >
               {item.name}
               <span className={cn(
-                "absolute -bottom-1 left-0 w-full h-[2px] bg-sandy-brown scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
+                "absolute -bottom-1 left-0 w-full h-[2px] bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
                 (pathname === "/"
                   ? activeSection === item.href
                   : pathname === item.href)
-                  ? "scale-x-100 bg-tuscan-sun"
+                  ? "scale-x-100 bg-red-500"
                   : ""
               )} />
             </Link>
@@ -133,9 +133,9 @@ export function Navbar() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] border-l-2 border-charcoal-blue dark:border-verdigris">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] border-l border-border dark:border-red-900/50">
               <SheetHeader>
-                <SheetTitle className="font-serif text-left text-2xl font-bold text-charcoal-blue dark:text-verdigris">
+                <SheetTitle className="font-serif text-left text-2xl font-bold text-foreground">
                   Menu
                 </SheetTitle>
               </SheetHeader>
@@ -148,7 +148,7 @@ export function Navbar() {
                     className={cn(
                       "text-lg font-medium transition-all hover:translate-x-2",
                       pathname === item.href
-                        ? "text-burnt-peach font-bold translate-x-2"
+                        ? "text-primary font-bold translate-x-2"
                         : "text-foreground"
                     )}
                   >

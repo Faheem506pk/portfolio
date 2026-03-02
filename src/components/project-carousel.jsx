@@ -49,7 +49,7 @@ export function ProjectCarousel({ images, name }) {
               key={index}
               className={`h-1 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? "w-4 bg-verdigris" 
+                  ? "w-4 bg-primary" 
                   : "w-1.5 bg-white/30"
               }`}
             />

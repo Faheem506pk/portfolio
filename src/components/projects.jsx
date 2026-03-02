@@ -38,16 +38,21 @@ export function Projects({ isPage = false }) {
   }
 
   return (
-    <section id="projects" className={isPage ? "w-full" : "container py-12 md:py-24 lg:py-32 bg-background/50"}>
+    <section id="projects" className={isPage ? "w-full" : "relative container py-12 md:py-24 lg:py-32"}>
       {!isPage && (
-        <div className="flex flex-col items-center gap-4 text-center mb-16">
+        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
+          <div className="w-[800px] h-[800px] bg-red-600/10 blur-[140px] rounded-full translate-y-1/4 text-transparent" />
+        </div>
+      )}
+      {!isPage && (
+        <div className="relative flex flex-col items-center gap-4 text-center mb-16 z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-verdigris pb-2 inline-block">
+            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
               Selected Works
             </h2>
           </motion.div>
@@ -57,7 +62,7 @@ export function Projects({ isPage = false }) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 z-10">
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
@@ -66,8 +71,8 @@ export function Projects({ isPage = false }) {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full pt-0 flex flex-col overflow-hidden border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-burnt-peach dark:hover:border-tuscan-sun transition-colors duration-300 group bg-card">
-              <div className="relative aspect-[2/1] w-full overflow-hidden bg-muted flex items-center justify-center group-hover:bg-charcoal-blue/5 dark:group-hover:bg-verdigris/5 transition-colors">
+            <Card className="h-full pt-0 flex flex-col overflow-hidden border border-white/10 hover:border-red-500/50 hover:shadow-[0_0_15px_rgba(229,9,20,0.15)] transition-all duration-300 group bg-white/[0.03] backdrop-blur-xl">
+              <div className="relative aspect-[2/1] w-full overflow-hidden bg-black/50 flex items-center justify-center group-hover:bg-primary/5 transition-colors">
                 {project.images && project.images.length > 0 ? (
                   <ProjectCarousel
                     images={project.images}
@@ -79,11 +84,11 @@ export function Projects({ isPage = false }) {
                     name={project.name}
                   />
                 ) : (
-                  <Code2 className="h-16 w-16 text-muted-foreground/30 group-hover:text-burnt-peach/50 transition-colors" />
+                  <Code2 className="h-16 w-16 text-muted-foreground/30 group-hover:text-primary/50 transition-colors" />
                 )}
                 <div className="absolute top-4 right-4 flex gap-2">
                   {project.featured && (
-                    <Badge variant="secondary" className="bg-tuscan-sun text-charcoal-blue font-bold">Featured</Badge>
+                    <Badge variant="secondary" className="bg-primary text-primary-foreground font-bold">Featured</Badge>
                   )}
                 </div>
               </div>
@@ -110,7 +115,7 @@ export function Projects({ isPage = false }) {
                 <div className="flex w-full gap-0 relative">
                   <div className={`transition-all duration-300 ease-out ${project.github_url ? 'w-full group-hover:w-1/2' : 'w-full'}`}>
                     {project.live_url && (
-                      <Button size="sm" className="w-full gap-2 bg-charcoal-blue text-white hover:bg-charcoal-blue/90 dark:bg-verdigris dark:text-charcoal-blue dark:hover:bg-verdigris/90" asChild>
+                      <Button size="sm" className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90" asChild>
                         <a href={project.live_url} target="_blank" rel="noreferrer">
                           <ExternalLink className="h-4 w-4" /> Live Demo
                         </a>
@@ -119,7 +124,7 @@ export function Projects({ isPage = false }) {
                   </div>
                   {project.github_url && (
                     <div className="w-0 group-hover:w-1/2 opacity-0 group-hover:opacity-100 overflow-hidden transition-all duration-300 ease-out group-hover:ml-2">
-                      <Button variant="outline" size="sm" className="w-full gap-2 border-charcoal-blue/20 dark:border-verdigris/30 whitespace-nowrap" asChild>
+                      <Button variant="outline" size="sm" className="w-full gap-2 border-white/10 hover:bg-white/5 whitespace-nowrap" asChild>
                         <a href={project.github_url} target="_blank" rel="noreferrer">
                           <Github className="h-4 w-4" /> Code
                         </a>

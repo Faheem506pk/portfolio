@@ -149,7 +149,12 @@ export function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-[calc(100vh-4rem)] w-full overflow-hidden bg-background py-12 md:py-24 lg:py-32 flex items-center justify-center">
+    <section id="home" className="relative min-h-[calc(100vh-4rem)] w-full py-12 md:py-24 lg:py-32 flex items-center justify-center">
+      {/* Spotlight Background */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
+        <div className="w-[800px] h-[800px] bg-red-600/10 sm:bg-red-600/20 blur-[140px] rounded-full text-transparent" />
+      </div>
+      
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]"
         style={{
@@ -171,12 +176,12 @@ export function Hero() {
 
 
             <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-charcoal-blue to-verdigris dark:from-verdigris dark:to-tuscan-sun">{profile.Name}</span>
+              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400 dark:from-red-500 dark:to-red-700">{profile.Name}</span>
             </motion.h1>
 
             <motion.div variants={item} className="space-y-4">
               <h2 className="text-xl sm:text-2xl font-medium text-muted-foreground">
-                <span className="text-burnt-peach">&lt;Dev&gt;</span> {profile.Role} <span className="text-burnt-peach">/&gt;</span>
+                <span className="text-primary">&lt;Dev&gt;</span> {profile.Role} <span className="text-primary">/&gt;</span>
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 {profile.Summary?.replace(/over \d+ year(s?)/, `over ${experienceYears} year${experienceYears > 1 ? 's' : ''}`)}
@@ -184,22 +189,22 @@ export function Hero() {
             </motion.div>
 
             <motion.div variants={item} className="flex flex-col gap-3 min-[400px]:flex-row">
-              <Button size="lg" className="bg-charcoal-blue hover:bg-charcoal-blue/90 text-white dark:bg-verdigris dark:hover:bg-verdigris/90 dark:text-charcoal-blue font-bold" asChild>
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold" asChild>
                 <a href="/projects">View Projects <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-sandy-brown text-sandy-brown hover:bg-sandy-brown hover:text-white dark:border-sandy-brown dark:text-sandy-brown dark:hover:bg-sandy-brown dark:hover:text-charcoal-blue bg-transparent" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-primary-foreground bg-transparent" asChild>
                 <a href={profile.ResumeUrl || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf"} download="Muhammad_Faheem_Iqbal_CV.pdf">Download CV <Download className="ml-2 h-4 w-4" /></a>
               </Button>
             </motion.div>
 
             <motion.div variants={item} className="flex gap-4 text-muted-foreground">
-              <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+              <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">
                 <Github className="h-6 w-6" />
               </a>
-              <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+              <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">
                 <Linkedin className="h-6 w-6" />
               </a>
-              <a href={`mailto:${profile.Email}`} className="hover:text-charcoal-blue dark:hover:text-verdigris transition-colors">
+              <a href={`mailto:${profile.Email}`} className="hover:text-primary transition-colors">
                 <Mail className="h-6 w-6" />
               </a>
             </motion.div>
@@ -213,10 +218,10 @@ export function Hero() {
             className="flex items-center justify-center lg:justify-end"
           >
             <div className="relative group">
-              {/* Retro geometric shapes background */}
-              <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-tuscan-sun to-sandy-brown opacity-30 blur-2xl group-hover:opacity-50 transition-opacity duration-500" />
+              {/* Red glow behind the card */}
+              <div className="absolute -inset-4 rounded-xl bg-red-600/10 blur-2xl group-hover:bg-red-600/20 transition-all duration-500" />
 
-              <Card className="relative overflow-hidden border-2 py-0 border-charcoal-blue/10 bg-background/50 backdrop-blur-sm dark:border-verdigris/20 w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-xl">
+              <Card className="relative overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-2xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     {/* Image with Grayscale Filter */}
@@ -236,15 +241,15 @@ export function Hero() {
                   <div className="p-6 space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                        <MapPin className="h-4 w-4 text-burnt-peach" />
+                        <MapPin className="h-4 w-4 text-primary" />
                         <span className="whitespace-nowrap">Islamabad, PK</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <span className="relative flex h-3 w-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-verdigris opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-verdigris"></span>
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
                         </span>
-                        <span className="text-xs font-medium text-verdigris ml-1 whitespace-nowrap">Available to Work</span>
+                        <span className="text-xs font-medium text-primary ml-1 whitespace-nowrap">Available to Work</span>
                       </div>
                     </div>
 

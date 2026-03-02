@@ -60,15 +60,20 @@ This message was sent via faheem506pk.dev contact form.`
    }
 
    return (
-      <section id="contact" className="container py-12 md:py-24 lg:py-32 overflow-hidden">
-         <div className="flex flex-col items-center gap-4 text-center mb-16">
+      <section id="contact" className="relative container py-12 md:py-24 lg:py-32">
+         {/* Spotlight Background */}
+         <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
+            <div className="w-[1000px] h-[800px] bg-red-600/10 blur-[150px] rounded-full translate-y-1/4 text-transparent" />
+         </div>
+
+         <div className="relative flex flex-col items-center gap-4 text-center mb-16 z-10">
             <motion.div
                initial={{ opacity: 0, scale: 0.9 }}
                whileInView={{ opacity: 1, scale: 1 }}
                transition={{ duration: 0.5 }}
                viewport={{ once: true }}
             >
-               <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-burnt-peach pb-2 inline-block">
+               <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
                   Get In Touch
                </h2>
             </motion.div>
@@ -77,7 +82,7 @@ This message was sent via faheem506pk.dev contact form.`
             </p>
          </div>
 
-         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 max-w-5xl mx-auto">
+         <div className="relative grid gap-8 lg:grid-cols-2 lg:gap-12 max-w-5xl mx-auto z-10">
             <motion.div
                initial={{ opacity: 0, x: -50 }}
                whileInView={{ opacity: 1, x: 0 }}
@@ -86,45 +91,45 @@ This message was sent via faheem506pk.dev contact form.`
                className="space-y-8"
             >
                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold font-serif text-charcoal-blue dark:text-verdigris">Contact Information</h3>
+                  <h3 className="text-2xl font-bold font-serif text-foreground">Contact Information</h3>
                   <p className="text-muted-foreground leading-relaxed">
                      I&apos;m always interested in new opportunities, collaborations, or just a chat about technology.
                      Feel free to reach out via the form or my social channels.
                   </p>
 
                   <div className="space-y-4">
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
-                        <div className="h-10 w-10 rounded-full bg-verdigris/10 flex items-center justify-center text-verdigris">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <Mail className="h-5 w-5" />
                         </div>
                         <div>
                            <p className="text-sm font-medium text-muted-foreground">Email</p>
-                           <a href={`mailto:${Mydata.Email}`} className="text-foreground font-semibold hover:text-verdigris transition-colors">{Mydata.Email}</a>
+                           <a href={`mailto:${Mydata.Email}`} className="text-foreground font-semibold hover:text-primary transition-colors">{Mydata.Email}</a>
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
-                        <div className="h-10 w-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <Phone className="h-5 w-5" />
                         </div>
                         <div>
                            <p className="text-sm font-medium text-muted-foreground">Phone</p>
-                           <a href="tel:+923325194976" className="text-foreground font-semibold hover:text-blue-500 transition-colors">+92 332 5194976</a>
+                           <a href="tel:+923325194976" className="text-foreground font-semibold hover:text-primary transition-colors">+92 332 5194976</a>
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
-                        <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <MessageSquare className="h-5 w-5" />
                         </div>
                         <div>
                            <p className="text-sm font-medium text-muted-foreground">WhatsApp</p>
-                           <a href="https://wa.me/923325194976" target="_blank" rel="noreferrer" className="text-foreground font-semibold hover:text-green-500 transition-colors">Start a Chat</a>
+                           <a href="https://wa.me/923325194976" target="_blank" rel="noreferrer" className="text-foreground font-semibold hover:text-primary transition-colors">Start a Chat</a>
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border/50">
-                        <div className="h-10 w-10 rounded-full bg-tuscan-sun/10 flex items-center justify-center text-tuscan-sun">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <MessageSquare className="h-5 w-5" />
                         </div>
                         <div>
@@ -142,7 +147,7 @@ This message was sent via faheem506pk.dev contact form.`
                transition={{ duration: 0.5, delay: 0.2 }}
                viewport={{ once: true }}
             >
-               <Card className="border-2 border-charcoal-blue/10 dark:border-verdigris/20 shadow-xl bg-card/50 backdrop-blur-sm">
+               <Card className="border border-white/10 shadow-[0_0_20px_rgba(229,9,20,0.05)] bg-white/[0.03] backdrop-blur-xl">
                   <CardHeader>
                      <CardTitle>Send a Message</CardTitle>
                      <CardDescription>
@@ -153,15 +158,15 @@ This message was sent via faheem506pk.dev contact form.`
                      <form ref={formRef} onSubmit={sendMessage} className="space-y-4">
                         <div className="grid gap-2">
                            <Label htmlFor="from_name">Name</Label>
-                           <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-background/50" />
+                           <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-white/[0.03] border-white/10 focus-visible:ring-primary" />
                         </div>
                         <div className="grid gap-2">
                            <Label htmlFor="from_email">Email</Label>
-                           <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-background/50" />
+                           <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-white/[0.03] border-white/10 focus-visible:ring-primary" />
                         </div>
                         <div className="grid gap-2">
                            <Label htmlFor="message">Message</Label>
-                           <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-background/50" required />
+                           <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-white/[0.03] border-white/10 focus-visible:ring-primary" required />
                         </div>
 
                         {feedback && (
@@ -170,7 +175,7 @@ This message was sent via faheem506pk.dev contact form.`
                            </div>
                         )}
 
-                        <Button type="submit" className="w-full bg-burnt-peach hover:bg-burnt-peach/90 text-white font-bold">
+                        <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
                            <Send className="mr-2 h-4 w-4" /> Send Message
                         </Button>
                      </form>

@@ -43,15 +43,20 @@ export function Skills() {
   }
 
   return (
-    <section id="skills" className="container py-12 md:py-24 lg:py-32">
-      <div className="flex flex-col items-center gap-4 text-center mb-16">
+    <section id="skills" className="relative container py-12 md:py-24 lg:py-32">
+      {/* Spotlight Background */}
+      <div className="absolute inset-0 z-0 flex items-center justify-end pointer-events-none mix-blend-screen">
+        <div className="w-[800px] h-[800px] bg-red-600/10 blur-[140px] rounded-full translate-x-1/3 -translate-y-1/3 text-transparent" />
+      </div>
+      
+      <div className="relative flex flex-col items-center gap-4 text-center mb-16 z-10">
         <motion.div
            initial={{ opacity: 0, scale: 0.9 }}
            whileInView={{ opacity: 1, scale: 1 }}
            transition={{ duration: 0.5 }}
            viewport={{ once: true }}
         >
-            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-sandy-brown pb-2 inline-block">
+            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
                 Technical Expertise
             </h2>
         </motion.div>
@@ -60,7 +65,7 @@ export function Skills() {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-3 z-10">
         {skillCategories.map((cat, index) => (
           <motion.div
             key={cat.id}
@@ -69,9 +74,9 @@ export function Skills() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-tuscan-sun dark:hover:border-tuscan-sun transition-colors duration-300">
+            <Card className="h-full border border-white/10 hover:shadow-[0_0_15px_rgba(229,9,20,0.15)] bg-white/[0.03] backdrop-blur-xl transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl font-serif text-charcoal-blue dark:text-verdigris">{cat.category}</CardTitle>
+                <CardTitle className="text-xl font-serif text-foreground">{cat.category}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

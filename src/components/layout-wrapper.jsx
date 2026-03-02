@@ -10,7 +10,7 @@ export default function LayoutWrapper({ children }) {
   return (
     <>
       {!isAdmin && <Navbar />}
-      <main className={`flex-1 w-full flex flex-col items-center min-h-screen overflow-x-hidden`}>
+      <main className={`flex-1 w-full flex flex-col items-center min-h-screen overflow-hidden`}>
         {children}
       </main>
     </>

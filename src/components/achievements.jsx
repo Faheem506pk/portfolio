@@ -24,8 +24,8 @@ const getTypeColor = (type) => {
     case "youtube": return "bg-red-500/10 text-red-400 border-red-500/20"
     case "article": return "bg-blue-500/10 text-blue-400 border-blue-500/20"
     case "news": return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-    case "award": return "bg-tuscan-sun/10 text-tuscan-sun border-tuscan-sun/20"
-    default: return "bg-verdigris/10 text-verdigris border-verdigris/20"
+    case "award": return "bg-primary/10 text-primary border-primary/20"
+    default: return "bg-primary/10 text-primary border-primary/20"
   }
 }
 
@@ -57,7 +57,7 @@ export function Achievements() {
     <section id="achievements" className="container py-12 md:py-24 lg:py-32">
       {loading ? (
         <div className="flex justify-center p-24">
-          <Loader2 className="h-8 w-8 animate-spin text-tuscan-sun" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       ) : (
         <>
@@ -68,7 +68,7 @@ export function Achievements() {
             viewport={{ once: true }}
             className="flex flex-col items-center gap-4 text-center mb-16"
           >
-            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-tuscan-sun pb-2">
+            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2">
               Achievements & Media
             </h2>
             <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -91,7 +91,7 @@ export function Achievements() {
                   rel="noreferrer"
                   className="block group h-full"
                 >
-                  <Card className="h-full py-0 border-2 border-charcoal-blue/10 dark:border-verdigris/20 hover:border-tuscan-sun/40 hover:shadow-xl hover:shadow-tuscan-sun/5 transition-all duration-500 bg-card/50 backdrop-blur-sm overflow-hidden">
+                  <Card className="h-full py-0 border border-border/50 dark:border-red-900/40 hover:border-red-500/40 hover:shadow-[0_0_15px_rgba(229,9,20,0.1)] transition-all duration-500 bg-card/50 backdrop-blur-sm overflow-hidden">
                     {/* Thumbnail */}
                     {item.thumbnail_url && (
                       <div className="relative aspect-video w-full overflow-hidden">
@@ -129,7 +129,7 @@ export function Achievements() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-lg font-bold leading-tight line-clamp-2 group-hover:text-tuscan-sun transition-colors duration-300">
+                      <h3 className="text-lg font-bold leading-tight line-clamp-2 group-hover:text-primary transition-colors duration-300">
                         {item.title}
                       </h3>
 
@@ -141,7 +141,7 @@ export function Achievements() {
                       )}
 
                       {/* Link indicator */}
-                      <div className="flex items-center gap-1.5 text-xs font-semibold text-verdigris opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-1">
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-1">
                         <ExternalLink className="h-3.5 w-3.5" />
                         <span>{item.type === "youtube" ? "Watch Now" : "Read More"}</span>
                       </div>
