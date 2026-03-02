@@ -221,7 +221,7 @@ export function Hero() {
               {/* Red glow behind the card */}
               <div className="absolute -inset-4 rounded-xl bg-red-600/10 blur-2xl group-hover:bg-red-600/20 transition-all duration-500" />
 
-              <Card className="relative overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-2xl">
+              <Card className="relative p-0 overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-2xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     {/* Image with Grayscale Filter */}
