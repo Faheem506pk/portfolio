@@ -91,9 +91,8 @@ export function Navbar() {
     >
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="mr-8 flex items-center space-x-2" onClick={(e) => handleNavClick(e, "/")}>
-          <span className="font-serif text-xl font-bold tracking-tight text-charcoal-blue dark:text-verdigris">
-            Faheem506pk<span className="text-burnt-peach">.dev</span>
-          </span>
+          <img src="/assets/mylogo/MFI-Black.png" alt="Logo" className="h-8 w-auto dark:hidden" />
+          <img src="/assets/mylogo/MFI-White.png" alt="Logo" className="h-8 w-auto hidden dark:block" />
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navItems.map((item) => (
