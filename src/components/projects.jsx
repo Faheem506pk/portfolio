@@ -14,20 +14,32 @@ import { Button } from "@/components/ui/button"
 import { Mydata } from "@/lib/data"
 
 export function Projects({ isPage = false }) {
-  const [projects, setProjects] = useState(Mydata.Projects.map(p => ({
-    id: p.id,
-    name: p.Name,
-    description: p.Description,
-    tech: p.Tech,
-    github_url: p.GitHub,
-    live_url: p.Live,
-    featured: p.Featured,
-    year: p.Year,
-    image_url: null
-  })))
+  const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
 
-  // ... useEffect stays same ...
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select("*")
+          .order("featured", { ascending: false })
+          .order("year", { ascending: false })
+          .order("id", { ascending: false })
+        
+        if (error) {
+           console.error("Error fetching projects:", error);
+           return;
+        }
+        if (data) setProjects(data)
+      } catch (err) {
+        console.error("Error loading projects:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProjects()
+  }, [])
 
   if (loading && projects.length === 0) {
     return (
