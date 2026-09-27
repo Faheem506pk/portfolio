@@ -85,7 +85,7 @@ export default function AdminExperiencePage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-serif font-bold text-charcoal-blue dark:text-verdigris">Experience Management</h1>
+        <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris">Experience Management</h1>
         <Button onClick={handleCreate} className="bg-burnt-peach hover:bg-burnt-peach/90 text-white">
           <Plus className="mr-2 h-4 w-4" /> Add Experience
         </Button>

@@ -64,7 +64,7 @@ export function Projects({ isPage = false }) {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
+            <h2 className="font-display text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
               Selected Works
             </h2>
           </motion.div>
@@ -106,7 +106,7 @@ export function Projects({ isPage = false }) {
               </div>
 
               <CardHeader>
-                <CardTitle className="flex justify-between items-start font-bold text-xl font-serif">
+                <CardTitle className="flex justify-between items-start font-bold text-xl font-display">
                   {project.name}
                   <span className="text-sm font-mono font-normal text-muted-foreground mt-1">{project.year}</span>
                 </CardTitle>

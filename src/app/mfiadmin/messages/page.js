@@ -75,7 +75,7 @@ export default function AdminMessagesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-charcoal-blue dark:text-verdigris">
+          <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris">
             Messages
           </h1>
           <p className="text-muted-foreground">Manage your contact form submissions.</p>

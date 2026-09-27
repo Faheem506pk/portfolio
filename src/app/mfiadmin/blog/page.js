@@ -86,7 +86,7 @@ export default function AdminBlogPage() {
     <div className="space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-primary">Blog</h1>
+          <h1 className="font-display text-3xl font-bold text-primary">Blog</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {published} published &middot; {drafts} draft{drafts === 1 ? "" : "s"}
           </p>

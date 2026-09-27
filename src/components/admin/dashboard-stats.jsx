@@ -175,7 +175,7 @@ export function DashboardStats() {
                 <Icon className={`h-4 w-4 ${highlight ? "text-primary" : "text-muted-foreground"}`} />
               </CardHeader>
               <CardContent>
-                <div className="font-serif text-3xl font-bold">
+                <div className="font-display text-3xl font-bold">
                   {value === null ? "—" : value}
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">{sub}</p>

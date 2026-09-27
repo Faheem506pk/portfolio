@@ -94,7 +94,7 @@ export function AdminSidebar({ className }) {
             <LayoutDashboard className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-xl font-serif font-bold text-charcoal-blue dark:text-verdigris tracking-tight">
+            <h2 className="text-xl font-display font-bold text-charcoal-blue dark:text-verdigris tracking-tight">
               Admin
             </h2>
             <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">Portal v2.0</p>
@@ -159,7 +159,7 @@ export function AdminSidebar({ className }) {
   return (
     <>
       <div className="md:hidden h-16 border-b border-border/50 bg-background/80 backdrop-blur-md sticky top-0 z-50 px-4 flex items-center justify-between ">
-        <h2 className="text-lg font-serif font-bold text-charcoal-blue dark:text-verdigris">Faheem<span className="text-foreground">.dev</span></h2>
+        <h2 className="text-lg font-display font-bold text-charcoal-blue dark:text-verdigris">Faheem<span className="text-foreground">.dev</span></h2>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-xl hover:bg-muted">

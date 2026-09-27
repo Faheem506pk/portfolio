@@ -15,11 +15,11 @@ export default function NotFound() {
         className="space-y-6 max-w-lg"
       >
         <div className="relative">
-          <h1 className="text-[150px] font-black font-serif leading-none text-charcoal-blue/5 dark:text-verdigris/10 select-none">
+          <h1 className="text-[150px] font-black font-display leading-none text-charcoal-blue/5 dark:text-verdigris/10 select-none">
             404
           </h1>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-4xl md:text-5xl font-bold font-serif text-charcoal-blue dark:text-verdigris bg-background px-4">
+            <span className="text-4xl md:text-5xl font-bold font-display text-charcoal-blue dark:text-verdigris bg-background px-4">
               Page Not Found
             </span>
           </div>

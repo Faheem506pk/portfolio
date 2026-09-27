@@ -73,7 +73,7 @@ This message was sent via faheem506pk.dev contact form.`
                transition={{ duration: 0.5 }}
                viewport={{ once: true }}
             >
-               <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
+               <h2 className="font-display text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
                   Get In Touch
                </h2>
             </motion.div>
@@ -91,7 +91,7 @@ This message was sent via faheem506pk.dev contact form.`
                className="space-y-8"
             >
                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold font-serif text-foreground">Contact Information</h3>
+                  <h3 className="text-2xl font-bold font-display text-foreground">Contact Information</h3>
                   <p className="text-muted-foreground leading-relaxed">
                      I&apos;m always interested in new opportunities, collaborations, or just a chat about technology.
                      Feel free to reach out via the form or my social channels.

@@ -241,7 +241,7 @@ export default function BlogEditorPage() {
               value={post.title || ""}
               onChange={(e) => handleTitleChange(e.target.value)}
               placeholder="How I cut our build time in half"
-              className="h-auto py-3 font-serif text-2xl font-bold"
+              className="h-auto py-3 font-display text-2xl font-bold"
             />
           </div>
 

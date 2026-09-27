@@ -66,7 +66,7 @@ export default async function BlogIndexPage() {
                     ))}
                   </div>
 
-                  <h2 className="font-serif text-2xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary md:text-3xl">
+                  <h2 className="font-display text-2xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary md:text-3xl">
                     {post.title}
                   </h2>
 

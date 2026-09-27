@@ -1,4 +1,4 @@
-import { Outfit, Fraunces } from "next/font/google";
+import { Sora, Figtree, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
@@ -7,14 +7,24 @@ import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import GAListener from "@/components/ga-listener";
 
-const outfit = Outfit({
-  variable: "--font-sans",
+// Sora is geometric with squared terminals — it reads engineered rather than
+// decorative, which suits a page whose subject is built objects. Figtree keeps long
+// prose comfortable underneath it.
+const sora = Sora({
+  variable: "--ff-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const figtree = Figtree({
+  variable: "--ff-sans",
   subsets: ["latin"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-serif",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--ff-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 import { createClient } from "@supabase/supabase-js";
@@ -162,7 +172,7 @@ export default async function RootLayout({ children }) {
       <head>
         <JsonLd profile={profile} />
       </head>
-      <body className={`${outfit.variable} ${fraunces.variable} antialiased body min-h-screen flex flex-col`}>
+      <body className={`${sora.variable} ${figtree.variable} ${jetbrainsMono.variable} antialiased body min-h-screen flex flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LayoutWrapper>{children}</LayoutWrapper>
           <Toaster />

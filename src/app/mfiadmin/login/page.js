@@ -89,7 +89,7 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-            <CardTitle className="text-center font-serif text-2xl font-bold tracking-tight">
+            <CardTitle className="text-center font-display text-2xl font-bold tracking-tight">
               Admin sign in
             </CardTitle>
             <CardDescription className="text-center">

@@ -26,7 +26,7 @@ export function Footer() {
       <div className="container py-14">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
-            <p className="font-serif text-2xl font-bold tracking-tight text-foreground">
+            <p className="font-display text-2xl font-bold tracking-tight text-foreground">
               {Mydata.Name}
             </p>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">

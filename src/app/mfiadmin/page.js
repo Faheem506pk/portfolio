@@ -184,7 +184,7 @@ export default function AdminPage() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-charcoal-blue dark:text-verdigris mb-1">
+          <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris mb-1">
             Welcome back, {user?.user_metadata?.username || "Admin"}
           </h1>
           <p className="text-muted-foreground">Here&apos;s what&apos;s happening in your portfolio today.</p>

@@ -136,7 +136,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px] border-l border-border dark:border-primary/30">
               <SheetHeader>
-                <SheetTitle className="font-serif text-left text-2xl font-bold text-foreground">
+                <SheetTitle className="font-display text-left text-2xl font-bold text-foreground">
                   Menu
                 </SheetTitle>
               </SheetHeader>

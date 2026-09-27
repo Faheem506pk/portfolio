@@ -152,7 +152,7 @@ export function TechMetrics() {
             <Zap className="h-4 w-4 fill-current" />
             <span className="text-xs font-bold uppercase tracking-widest">Smart Analytics</span>
          </motion.div>
-         <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl text-foreground">
+         <h2 className="font-display text-3xl font-bold tracking-tighter sm:text-4xl text-foreground">
             Technical Expertise
          </h2>
          <p className="text-muted-foreground text-sm max-w-[600px]">

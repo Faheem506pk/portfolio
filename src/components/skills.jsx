@@ -56,7 +56,7 @@ export function Skills() {
            transition={{ duration: 0.5 }}
            viewport={{ once: true }}
         >
-            <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
+            <h2 className="font-display text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 inline-block">
                 Technical Expertise
             </h2>
         </motion.div>
@@ -76,7 +76,7 @@ export function Skills() {
           >
             <Card className="h-full border border-border hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] bg-card/80 backdrop-blur-xl transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl font-serif text-foreground">{cat.category}</CardTitle>
+                <CardTitle className="text-xl font-display text-foreground">{cat.category}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

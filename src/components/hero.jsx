@@ -182,7 +182,7 @@ export function Hero() {
           >
 
 
-            <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+            <motion.h1 variants={item} className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               Hi, I&apos;m <span className="text-primary">{profile.Name}</span>
             </motion.h1>
 
@@ -245,7 +245,7 @@ export function Hero() {
                           className="object-cover w-full h-full"
                         />
                       ) : (
-                        <span className="text-4xl font-serif opacity-20">&lt; /&gt;</span>
+                        <span className="text-4xl font-display opacity-20">&lt; /&gt;</span>
                       )}
                     </div>
                   </div>

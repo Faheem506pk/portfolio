@@ -65,7 +65,7 @@ export function Experience() {
         viewport={{ once: true }}
         className="flex flex-col items-center gap-4 text-center mb-16"
       >
-        <h2 className="font-serif text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 relative z-10 w-fit mx-auto">
+        <h2 className="font-display text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-4 border-primary pb-2 relative z-10 w-fit mx-auto">
           Experience
         </h2>
         <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
