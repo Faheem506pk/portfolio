@@ -41,7 +41,7 @@ export function Hero() {
               Medium: profileData.social_medium || Mydata.Socials.Medium
             },
             ResumeUrl: profileData.resume_url || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf",
-            ImageUrl: profileData.image_url || "/assets/images/faheem506pk.jpeg"
+            ImageUrl: profileData.image_url || "/assets/images/faheem506pk-2026.jpg"
           });
         }
 
@@ -237,7 +237,7 @@ export function Hero() {
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     {/* Image with Grayscale Filter */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-muted-foreground w-full h-full grayscale hover:grayscale-0 transition-all duration-500">
+                    <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-muted text-muted-foreground transition-transform duration-500 hover:scale-[1.03]">
                       {profile.ImageUrl ? (
                         <img
                           src={profile.ImageUrl}

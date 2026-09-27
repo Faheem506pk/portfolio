@@ -30,7 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 import { createClient } from "@supabase/supabase-js";
 
 const SITE_URL = "https://faheem506pk.vercel.app";
-const PROFILE_IMAGE = `${SITE_URL}/assets/images/faheem506pk.jpeg`;
+const PROFILE_IMAGE = `${SITE_URL}/assets/images/faheem506pk-2026.jpg`;
 
 // Initialize Supabase Client for Server Side
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);

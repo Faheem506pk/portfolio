@@ -12,7 +12,7 @@ export function JsonLd({ profile }) {
     jobTitle: profile?.role || "Software Engineer",
     description: profile?.summary || "Software Engineer & Frontend Developer from Islamabad, Pakistan. Expert in React.js, Next.js, TypeScript, and modern web technologies.",
     url: "https://faheem506pk.vercel.app",
-    image: profile?.image_url || "https://faheem506pk.vercel.app/assets/images/faheem506pk.jpeg",
+    image: profile?.image_url || "https://faheem506pk.vercel.app/assets/images/faheem506pk-2026.jpg",
     email: profile?.email || "faheemiqbalm@gmail.com",
     telephone: "+92-332-5194976",
     nationality: {
