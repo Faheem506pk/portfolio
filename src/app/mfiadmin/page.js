@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
+import { DashboardStats } from "@/components/admin/dashboard-stats";
 import { Loader2, Plus, Trash2, Edit, ExternalLink, Github, Trophy, Video, Newspaper, LayoutDashboard, Database, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -205,39 +206,7 @@ export default function AdminPage() {
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-gradient-to-br from-card/50 to-background/50 backdrop-blur-sm border-verdigris/10 shadow-sm hover:shadow-md transition-all group">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Total Projects</CardTitle>
-            <Database className="h-4 w-4 text-verdigris group-hover:scale-110 transition-transform" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold font-serif">{projects.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">Active portfolio items</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-card/50 to-background/50 backdrop-blur-sm border-verdigris/10 shadow-sm hover:shadow-md transition-all group">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Achievements</CardTitle>
-            <Trophy className="h-4 w-4 text-tuscan-sun group-hover:scale-110 transition-transform" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold font-serif">{achievements.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">Awards and milestones</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-card/50 to-background/50 backdrop-blur-sm border-verdigris/10 shadow-sm hover:shadow-md transition-all group">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Profile Views</CardTitle>
-            <TrendingUp className="h-4 w-4 text-purple-500 group-hover:scale-110 transition-transform" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold font-serif">1.2k</div>
-            <p className="text-xs text-green-500 font-medium mt-1 flex items-center">+12% from last month</p>
-          </CardContent>
-        </Card>
-      </div>
+      <DashboardStats />
 
       <Tabs defaultValue="projects" className="w-full">
         <TabsList className="grid w-full max-w-[400px] grid-cols-2 mb-8 bg-muted/50 p-1 rounded-xl">

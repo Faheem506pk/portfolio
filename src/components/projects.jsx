@@ -44,7 +44,7 @@ export function Projects({ isPage = false }) {
   if (loading && projects.length === 0) {
     return (
       <div className="flex justify-center p-24">
-        <Loader2 className="h-8 w-8 animate-spin text-verdigris" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     )
   }
@@ -83,7 +83,7 @@ export function Projects({ isPage = false }) {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full pt-0 flex flex-col overflow-hidden border border-white/10 hover:border-primary/50 hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] transition-all duration-300 group bg-white/[0.03] backdrop-blur-xl">
+            <Card className="h-full pt-0 flex flex-col overflow-hidden border border-border hover:border-primary/50 hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] transition-all duration-300 group bg-card/80 backdrop-blur-xl">
               <div className="relative aspect-[2/1] w-full overflow-hidden bg-black/50 flex items-center justify-center group-hover:bg-primary/5 transition-colors">
                 {project.images && project.images.length > 0 ? (
                   <ProjectCarousel
@@ -136,7 +136,7 @@ export function Projects({ isPage = false }) {
                   </div>
                   {project.github_url && (
                     <div className="w-0 group-hover:w-1/2 opacity-0 group-hover:opacity-100 overflow-hidden transition-all duration-300 ease-out group-hover:ml-2">
-                      <Button variant="outline" size="sm" className="w-full gap-2 border-white/10 hover:bg-white/5 whitespace-nowrap" asChild>
+                      <Button variant="outline" size="sm" className="w-full gap-2 border-border hover:bg-white/5 whitespace-nowrap" asChild>
                         <a href={project.github_url} target="_blank" rel="noreferrer">
                           <Github className="h-4 w-4" /> Code
                         </a>

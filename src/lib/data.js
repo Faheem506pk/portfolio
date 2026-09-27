@@ -1,6 +1,6 @@
 export const Mydata = {
   Name: "Muhammad Faheem Iqbal",
-  Role: "Full Stack Developer (React.js / Next.js)",
+  Role: "Full Stack Developer",
   Address: "Khanna Pul, Islamabad, Pakistan",
   Phone: "+92 (332) 5194976",
   Phone2: "+92 (318) 0555360",
@@ -9,7 +9,8 @@ export const Mydata = {
   Socials: {
     LinkedIn: "https://www.linkedin.com/in/faheem506pk/",
     GitHub: "https://github.com/faheem506pk",
-    Portfolio: "https://faheem506pk.vercel.app"
+    Portfolio: "https://faheem506pk.vercel.app",
+    Medium: "https://faheem506pk.medium.com/"
   },
   Summary:
     "Full Stack Developer with over 2 years of professional experience across teams in 3 countries (Pakistan, Austria and the United States), promoted to Software Engineer within 11 months. I build production web platforms with React.js, Next.js, TypeScript, Node.js and Python, and currently work on TabTake, an all-in-one restaurant management system. I write unit and end-to-end tests, automate testing and deployment with CI/CD, and use AI coding agents and LLM APIs to build AI tools and work faster. Passionate about IoT: my smart home project was featured by 3 national media outlets.",

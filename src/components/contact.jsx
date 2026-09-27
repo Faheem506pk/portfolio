@@ -98,7 +98,7 @@ This message was sent via faheem506pk.dev contact form.`
                   </p>
 
                   <div className="space-y-4">
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <Mail className="h-5 w-5" />
                         </div>
@@ -108,7 +108,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <Phone className="h-5 w-5" />
                         </div>
@@ -118,7 +118,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <MessageSquare className="h-5 w-5" />
                         </div>
@@ -128,7 +128,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-card/80 backdrop-blur-xl border border-border hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <MessageSquare className="h-5 w-5" />
                         </div>
@@ -147,7 +147,7 @@ This message was sent via faheem506pk.dev contact form.`
                transition={{ duration: 0.5, delay: 0.2 }}
                viewport={{ once: true }}
             >
-               <Card className="border border-white/10 shadow-[0_4px_24px_-6px_color-mix(in_oklch,var(--primary)_5%,transparent)] bg-white/[0.03] backdrop-blur-xl">
+               <Card className="border border-border shadow-[0_4px_24px_-6px_color-mix(in_oklch,var(--primary)_5%,transparent)] bg-card/80 backdrop-blur-xl">
                   <CardHeader>
                      <CardTitle>Send a Message</CardTitle>
                      <CardDescription>
@@ -158,15 +158,15 @@ This message was sent via faheem506pk.dev contact form.`
                      <form ref={formRef} onSubmit={sendMessage} className="space-y-4">
                         <div className="grid gap-2">
                            <Label htmlFor="from_name">Name</Label>
-                           <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-white/[0.03] border-white/10 focus-visible:ring-primary" />
+                           <Input id="from_name" name="from_name" placeholder="Your name" required className="bg-card/80 border-border focus-visible:ring-primary" />
                         </div>
                         <div className="grid gap-2">
                            <Label htmlFor="from_email">Email</Label>
-                           <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-white/[0.03] border-white/10 focus-visible:ring-primary" />
+                           <Input id="from_email" name="from_email" type="email" placeholder="your@email.com" required className="bg-card/80 border-border focus-visible:ring-primary" />
                         </div>
                         <div className="grid gap-2">
                            <Label htmlFor="message">Message</Label>
-                           <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-white/[0.03] border-white/10 focus-visible:ring-primary" required />
+                           <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] bg-card/80 border-border focus-visible:ring-primary" required />
                         </div>
 
                         {feedback && (

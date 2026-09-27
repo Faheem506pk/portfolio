@@ -3,18 +3,21 @@
 import * as React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Terminal, Loader2 } from "lucide-react"
+import { SiMedium } from "react-icons/si"
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { LiquidEther } from "@/components/liquid-ether"
 import { Mydata } from "@/lib/data"
 
 export function Hero() {
   const [profile, setProfile] = useState(Mydata);
   const [loading, setLoading] = useState(true);
   const [projectCount, setProjectCount] = useState(0);
-  const [experienceYears, setExperienceYears] = useState(1); // Default fallback
+  // null until the real span is computed, so the hero never flashes a wrong, lower number.
+  const [experienceYears, setExperienceYears] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,7 +37,8 @@ export function Hero() {
             Socials: {
               LinkedIn: profileData.social_linkedin,
               GitHub: profileData.social_github,
-              Portfolio: profileData.social_portfolio
+              Portfolio: profileData.social_portfolio,
+              Medium: profileData.social_medium || Mydata.Socials.Medium
             },
             ResumeUrl: profileData.resume_url || "/assets/PDF/CV/Muhammad_Faheem_Iqbal_CV.pdf",
             ImageUrl: profileData.image_url || "/assets/images/faheem506pk.jpeg"
@@ -127,7 +131,7 @@ export function Hero() {
   if (loading && !profile.Name) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-charcoal-blue" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -150,11 +154,14 @@ export function Hero() {
 
   return (
     <section id="home" className="relative min-h-[calc(100vh-4rem)] w-full py-12 md:py-24 lg:py-32 flex items-center justify-center">
-      {/* Spotlight Background */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
-        <div className="w-[800px] h-[800px] bg-primary/10 sm:bg-primary/20 blur-[140px] rounded-full text-transparent" />
-      </div>
-      
+      {/* Interactive WebGL ether — the hero's one authored moment. */}
+      <LiquidEther className="absolute inset-0 z-0 h-full w-full" />
+
+      {/* Scrim: keeps the text column readable over the fluid, and blends the
+          canvas into the section below instead of ending on a hard edge. */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-background from-20% via-background/80 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-40 bg-gradient-to-b from-transparent to-background" />
+
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]"
         style={{
@@ -176,7 +183,7 @@ export function Hero() {
 
 
             <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/70 dark:from-primary dark:to-primary/80">{profile.Name}</span>
+              Hi, I&apos;m <span className="text-primary">{profile.Name}</span>
             </motion.h1>
 
             <motion.div variants={item} className="space-y-4">
@@ -184,7 +191,9 @@ export function Hero() {
                 <span className="text-primary">&lt;Dev&gt;</span> {profile.Role} <span className="text-primary">/&gt;</span>
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {profile.Summary?.replace(/over \d+ year(s?)/, `over ${experienceYears} year${experienceYears > 1 ? 's' : ''}`)}
+                {experienceYears
+                  ? profile.Summary?.replace(/over \d+ year(s?)/, `over ${experienceYears} year${experienceYears > 1 ? 's' : ''}`)
+                  : profile.Summary}
               </p>
             </motion.div>
 
@@ -198,13 +207,16 @@ export function Hero() {
             </motion.div>
 
             <motion.div variants={item} className="flex gap-4 text-muted-foreground">
-              <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">
+              <a href={profile.Socials?.GitHub || "#"} target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-primary transition-colors">
                 <Github className="h-6 w-6" />
               </a>
-              <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">
+              <a href={profile.Socials?.LinkedIn || "#"} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-primary transition-colors">
                 <Linkedin className="h-6 w-6" />
               </a>
-              <a href={`mailto:${profile.Email}`} className="hover:text-primary transition-colors">
+              <a href={profile.Socials?.Medium || Mydata.Socials.Medium} target="_blank" rel="noreferrer" aria-label="Medium blog" className="hover:text-primary transition-colors">
+                <SiMedium className="h-6 w-6" />
+              </a>
+              <a href={`mailto:${profile.Email}`} aria-label="Email" className="hover:text-primary transition-colors">
                 <Mail className="h-6 w-6" />
               </a>
             </motion.div>
@@ -221,7 +233,7 @@ export function Hero() {
               {/* Red glow behind the card */}
               <div className="absolute -inset-4 rounded-xl bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all duration-500" />
 
-              <Card className="relative p-0 overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-2xl">
+              <Card className="relative p-0 overflow-hidden border border-border bg-card/80 backdrop-blur-xl w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-2xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     {/* Image with Grayscale Filter */}
@@ -256,7 +268,7 @@ export function Hero() {
                     <div className="space-y-2 font-mono text-sm border-t border-border pt-4">
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Experience:</span>
-                        <span className="text-foreground">{experienceYears}+ Years</span>
+                        <span className="text-foreground">{experienceYears ? `${experienceYears}+ Years` : "—"}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Projects:</span>

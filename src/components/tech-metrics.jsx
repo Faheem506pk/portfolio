@@ -170,7 +170,7 @@ export function TechMetrics() {
             viewport={{ once: true }}
             className="group"
           >
-            <Card className="h-full border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:bg-white/[0.06] hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
+            <Card className="h-full border border-border bg-card/80 backdrop-blur-xl hover:bg-card hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
               <CardContent className="p-4 flex flex-col items-center justify-center text-center gap-2">
                 <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:shadow-[0_4px_16px_-4px_color-mix(in_oklch,var(--primary)_30%,transparent)] transition-all">
                    <Code2 className="h-5 w-5" />

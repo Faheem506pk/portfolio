@@ -15,7 +15,7 @@ export function PageWrapper({ title, children, className }) {
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground">
             {title}
           </h1>
-          <div className="h-1 w-20 bg-burnt-peach mt-4 rounded-full" />
+          <div className="h-1 w-20 bg-primary mt-4 rounded-full" />
         </div>
 
         {children}

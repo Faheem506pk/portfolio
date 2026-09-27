@@ -43,7 +43,7 @@ export function Experience() {
   if (loading && experiences.length === 0) {
     return (
       <div className="flex justify-center p-24">
-        <Loader2 className="h-8 w-8 animate-spin text-tuscan-sun" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     )
   }
@@ -96,7 +96,7 @@ export function Experience() {
 
             {/* Content Wrapper to push to correct side */}
             <div className={`w-full sm:w-1/2 ${index % 2 === 0 ? "sm:pr-12" : "sm:pl-12 sm:ml-auto"}`}>
-              <Card className="retro-card border border-white/10 hover:shadow-lg hover:border-primary/50 transition-all duration-300 bg-white/[0.03] backdrop-blur-xl">
+              <Card className="retro-card border border-border hover:shadow-lg hover:border-primary/50 transition-all duration-300 bg-card/80 backdrop-blur-xl">
                 <CardHeader className="pb-2">
                   <div className={`flex flex-col ${index % 2 === 0 ? "sm:items-end" : "sm:items-start"}`}>
                     <span className="text-sm font-mono text-primary mb-1">{job.duration}</span>
@@ -131,7 +131,7 @@ export function Experience() {
       {otherRoles.length > 0 && (
         <div className="max-w-3xl mx-auto border-t border-border pt-12">
           <h3 className="text-xl font-bold mb-8 text-muted-foreground uppercase tracking-widest text-center">Other Professional Experience</h3>
-          <div className="relative border-l border-white/10 ml-3 md:ml-6 space-y-10 py-2">
+          <div className="relative border-l border-border ml-3 md:ml-6 space-y-10 py-2">
             {otherRoles.map((job, idx) => (
               <motion.div
                 key={job.id}

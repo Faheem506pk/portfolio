@@ -13,7 +13,8 @@ import {
   Settings,
   LogOut,
   Menu,
-  Trophy
+  Trophy,
+  PenLine
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -27,6 +28,11 @@ const sidebarItems = [
     title: "Dashboard",
     href: "/mfiadmin",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Blog",
+    href: "/mfiadmin/blog",
+    icon: PenLine,
   },
   {
     title: "Experience",

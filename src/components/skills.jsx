@@ -37,7 +37,7 @@ export function Skills() {
   if (loading && skillCategories.length === 0) {
     return (
       <div className="flex justify-center p-24">
-        <Loader2 className="h-8 w-8 animate-spin text-sandy-brown" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     )
   }
@@ -74,7 +74,7 @@ export function Skills() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full border border-white/10 hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] bg-white/[0.03] backdrop-blur-xl transition-all duration-300">
+            <Card className="h-full border border-border hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] bg-card/80 backdrop-blur-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-xl font-serif text-foreground">{cat.category}</CardTitle>
               </CardHeader>
