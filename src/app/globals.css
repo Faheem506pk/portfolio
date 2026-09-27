@@ -5,45 +5,47 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ===========================================================================
-   SIGNAL LINE
-   European transit wayfinding. Flat enamel panels, square corners, one red
-   route. See DESIGN.md for the full system and its named rules.
+   SIGNAL DEPTH
+   Modern, rounded, softly lit. Real WebGL objects lead; the interface stays
+   calm around them. One signal red. See DESIGN.md for the full system.
    =========================================================================== */
 
 :root {
-  /* --- Line colours: these encode a discipline in the skills network only --- */
-  --line-blue: oklch(0.55 0.16 250);
-  --line-green: oklch(0.55 0.13 155);
-  --line-amber: oklch(0.70 0.15 70);
-  --line-violet: oklch(0.55 0.17 300);
-  --service-green: oklch(0.60 0.15 150);
+  /* Scene colours: used inside 3D canvases and data viz, never as chrome. */
+  --accent-cyan: oklch(0.72 0.13 210);
+  --accent-amber: oklch(0.76 0.14 70);
+  --success: oklch(0.62 0.15 150);
+  --red-soft: oklch(0.95 0.04 27);
 
-  /* --- Light: the daylight platform. Primary theme. --- */
-  --background: oklch(0.97 0.002 250);      /* enamel */
-  --foreground: oklch(0.17 0.012 250);      /* platform ink */
-  --card: oklch(1 0 0);                      /* panel */
-  --card-foreground: oklch(0.17 0.012 250);
+  /* Soft ambient depth. Blur is always >= 8x the offset. */
+  --shadow-rest: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.05), 0 16px 40px rgb(0 0 0 / 0.10);
+
+  /* --- Light: daylight professional read --- */
+  --background: oklch(0.985 0.002 265);
+  --foreground: oklch(0.18 0.014 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.014 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.17 0.012 250);
+  --popover-foreground: oklch(0.18 0.014 265);
 
-  --primary: oklch(0.55 0.22 27);            /* signal red — the route */
+  --primary: oklch(0.58 0.22 27);            /* signal red */
   --primary-foreground: oklch(1 0 0);
 
-  --secondary: oklch(0.93 0.003 250);
-  --secondary-foreground: oklch(0.17 0.012 250);
-  --muted: oklch(0.93 0.003 250);
-  --muted-foreground: oklch(0.50 0.008 250);
+  --secondary: oklch(0.955 0.003 265);
+  --secondary-foreground: oklch(0.18 0.014 265);
+  --muted: oklch(0.955 0.003 265);
+  --muted-foreground: oklch(0.52 0.010 265);
 
-  /* Red is a route, not an accent — accent stays neutral on purpose. */
-  --accent: oklch(0.93 0.003 250);
-  --accent-foreground: oklch(0.17 0.012 250);
+  --accent: oklch(0.955 0.003 265);
+  --accent-foreground: oklch(0.18 0.014 265);
 
-  --destructive: oklch(0.52 0.20 15);
+  --destructive: oklch(0.55 0.20 15);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.86 0.004 250);           /* rule grey */
-  --input: oklch(0.86 0.004 250);
-  --ring: oklch(0.55 0.22 27);
+  --border: oklch(0.90 0.004 265);
+  --input: oklch(0.90 0.004 265);
+  --ring: oklch(0.58 0.22 27);
 
   --chart-1: oklch(0.55 0.22 27);
   --chart-2: oklch(0.55 0.16 250);
@@ -51,8 +53,8 @@
   --chart-4: oklch(0.70 0.15 70);
   --chart-5: oklch(0.55 0.17 300);
 
-  /* Signage is cut metal. Nothing is rounded but stations and line badges. */
-  --radius: 0px;
+  /* Rounded throughout; radius steps down with element size. */
+  --radius: 16px;
 
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.17 0.012 250);
@@ -64,38 +66,40 @@
   --sidebar-ring: oklch(0.55 0.22 27);
 }
 
-/* --- Dark: the night platform. Composed, not inverted. --- */
+/* --- Dark: the showcase. Depth comes from surface lightness, not shadow. --- */
 .dark {
-  --line-blue: oklch(0.68 0.15 250);
-  --line-green: oklch(0.68 0.13 155);
-  --line-amber: oklch(0.78 0.14 70);
-  --line-violet: oklch(0.68 0.16 300);
-  --service-green: oklch(0.70 0.15 150);
+  --accent-cyan: oklch(0.78 0.12 210);
+  --accent-amber: oklch(0.82 0.13 70);
+  --success: oklch(0.70 0.15 150);
+  --red-soft: oklch(0.32 0.09 27);
 
-  --background: oklch(0.17 0.012 250);
-  --foreground: oklch(0.97 0.002 250);
-  --card: oklch(0.22 0.010 250);
-  --card-foreground: oklch(0.97 0.002 250);
-  --popover: oklch(0.22 0.010 250);
-  --popover-foreground: oklch(0.97 0.002 250);
+  --shadow-rest: 0 1px 2px rgb(0 0 0 / 0.30), 0 8px 24px rgb(0 0 0 / 0.24);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.34), 0 16px 40px rgb(0 0 0 / 0.34);
 
-  --primary: oklch(0.62 0.22 27);
+  --background: oklch(0.16 0.012 265);
+  --foreground: oklch(0.97 0.002 265);
+  --card: oklch(0.21 0.013 265);
+  --card-foreground: oklch(0.97 0.002 265);
+  --popover: oklch(0.21 0.013 265);
+  --popover-foreground: oklch(0.97 0.002 265);
+
+  --primary: oklch(0.64 0.21 27);
   --primary-foreground: oklch(1 0 0);
 
-  --secondary: oklch(0.26 0.010 250);
-  --secondary-foreground: oklch(0.97 0.002 250);
-  --muted: oklch(0.26 0.010 250);
-  --muted-foreground: oklch(0.70 0.008 250);
+  --secondary: oklch(0.25 0.012 265);
+  --secondary-foreground: oklch(0.97 0.002 265);
+  --muted: oklch(0.25 0.012 265);
+  --muted-foreground: oklch(0.72 0.010 265);
 
-  --accent: oklch(0.26 0.010 250);
-  --accent-foreground: oklch(0.97 0.002 250);
+  --accent: oklch(0.25 0.012 265);
+  --accent-foreground: oklch(0.97 0.002 265);
 
-  --destructive: oklch(0.58 0.20 15);
+  --destructive: oklch(0.60 0.20 15);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.30 0.008 250);
-  --input: oklch(0.30 0.008 250);
-  --ring: oklch(0.62 0.22 27);
+  --border: oklch(0.28 0.010 265);
+  --input: oklch(0.28 0.010 265);
+  --ring: oklch(0.64 0.21 27);
 
   --chart-1: oklch(0.62 0.22 27);
   --chart-2: oklch(0.68 0.15 250);
@@ -139,18 +143,16 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  --color-line-blue: var(--line-blue);
-  --color-line-green: var(--line-green);
-  --color-line-amber: var(--line-amber);
-  --color-line-violet: var(--line-violet);
-  --color-service-green: var(--service-green);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-amber: var(--accent-amber);
+  --color-success: var(--success);
+  --color-red-soft: var(--red-soft);
 
-  /* Square by system. Station dots and line badges opt in to rounded-full. */
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
-  --radius-2xl: 0px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
 
   --font-display: var(--ff-display);
   --font-sans: var(--ff-sans);
@@ -177,30 +179,33 @@
   }
 }
 
-/* Signage lettering: display face, tight, at scale. */
+/* Display lettering. Large type always carries negative tracking. */
 @utility sign {
   font-family: var(--ff-display), "Helvetica Neue", Arial, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.94;
-}
-
-/* Line designations, platform numbers, section kickers, buttons. */
-@utility label-sign {
-  font-family: var(--ff-display), "Helvetica Neue", Arial, sans-serif;
   font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
 }
 
-/* Anything that would appear on a departure board. */
+/* Dates, counts, versions — anything numeric. */
 @utility data-sign {
   font-family: var(--ff-mono), ui-monospace, monospace;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.8125rem;
-  letter-spacing: 0.02em;
+}
+
+/* Soft ambient depth, per The Soft Light Rule. */
+@utility depth-rest {
+  box-shadow: var(--shadow-rest);
+}
+
+@utility depth-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+/* Primary action glow. Buttons only. */
+@utility depth-action {
+  box-shadow: 0 8px 24px color-mix(in oklch, var(--primary) 28%, transparent);
 }
 
 .body {
@@ -215,11 +220,6 @@
 body {
   @apply bg-background text-foreground;
   font-family: var(--ff-sans), "Helvetica Neue", Arial, sans-serif;
-}
-
-/* The Flat Rule: no shadows in this system, at rest or on hover. */
-.body :where(.shadow-sm, .shadow, .shadow-md, .shadow-lg, .shadow-xl, .shadow-2xl) {
-  box-shadow: none;
 }
 
 /* ---------------------------------------------------------------------------
