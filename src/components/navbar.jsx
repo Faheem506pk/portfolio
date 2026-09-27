@@ -111,11 +111,11 @@ export function Navbar() {
             >
               {item.name}
               <span className={cn(
-                "absolute -bottom-1 left-0 w-full h-[2px] bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
+                "absolute -bottom-1 left-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
                 (pathname === "/"
                   ? activeSection === item.href
                   : pathname === item.href)
-                  ? "scale-x-100 bg-red-500"
+                  ? "scale-x-100 bg-primary"
                   : ""
               )} />
             </Link>
@@ -133,7 +133,7 @@ export function Navbar() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] border-l border-border dark:border-red-900/50">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] border-l border-border dark:border-primary/30">
               <SheetHeader>
                 <SheetTitle className="font-serif text-left text-2xl font-bold text-foreground">
                   Menu

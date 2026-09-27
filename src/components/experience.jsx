@@ -55,7 +55,7 @@ export function Experience() {
     <section id="experience" className="relative container py-12 md:py-24 lg:py-32">
       {/* Spotlight Background */}
       <div className="absolute inset-0 z-0 flex items-center justify-start pointer-events-none mix-blend-screen">
-        <div className="w-[800px] h-[800px] bg-red-600/10 blur-[140px] rounded-full -translate-x-1/2 text-transparent" />
+        <div className="w-[800px] h-[800px] bg-primary/10 blur-[140px] rounded-full -translate-x-1/2 text-transparent" />
       </div>
 
       <motion.div
@@ -92,14 +92,14 @@ export function Experience() {
               } gap-8 group`}
           >
             {/* Timeline Dot */}
-            <div className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background -translate-x-[calc(50%-1px)] mt-1.5 z-10 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_rgba(229,9,20,0.5)]"></div>
+            <div className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background -translate-x-[calc(50%-1px)] mt-1.5 z-10 group-hover:scale-125 transition-transform duration-300 shadow-[0_2px_10px_-2px_color-mix(in_oklch,var(--primary)_50%,transparent)]"></div>
 
             {/* Content Wrapper to push to correct side */}
             <div className={`w-full sm:w-1/2 ${index % 2 === 0 ? "sm:pr-12" : "sm:pl-12 sm:ml-auto"}`}>
-              <Card className="retro-card border border-white/10 hover:shadow-lg hover:border-red-500/50 transition-all duration-300 bg-white/[0.03] backdrop-blur-xl">
+              <Card className="retro-card border border-white/10 hover:shadow-lg hover:border-primary/50 transition-all duration-300 bg-white/[0.03] backdrop-blur-xl">
                 <CardHeader className="pb-2">
                   <div className={`flex flex-col ${index % 2 === 0 ? "sm:items-end" : "sm:items-start"}`}>
-                    <span className="text-sm font-mono text-red-500 mb-1">{job.duration}</span>
+                    <span className="text-sm font-mono text-primary mb-1">{job.duration}</span>
                     <CardTitle className="text-xl font-bold text-foreground">{job.position}</CardTitle>
                     <h4 className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
                       <Briefcase className="w-3 h-3" />
@@ -141,7 +141,7 @@ export function Experience() {
                 viewport={{ once: true }}
                 className="relative pl-8 md:pl-12"
               >
-                <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-background shadow-[0_0_8px_rgba(229,9,20,0.4)]" />
+                <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-background shadow-[0_2px_8px_-2px_color-mix(in_oklch,var(--primary)_40%,transparent)]" />
 
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
                   <div className="space-y-1">
@@ -153,7 +153,7 @@ export function Experience() {
                       {job.company}
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-medium text-red-500/80 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20 w-fit">
+                  <span className="text-xs font-mono font-medium text-primary/80 bg-primary/10 px-2 py-0.5 rounded border border-primary/20 w-fit">
                     {job.duration}
                   </span>
                 </div>

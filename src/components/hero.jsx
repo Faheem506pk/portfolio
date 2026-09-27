@@ -152,7 +152,7 @@ export function Hero() {
     <section id="home" className="relative min-h-[calc(100vh-4rem)] w-full py-12 md:py-24 lg:py-32 flex items-center justify-center">
       {/* Spotlight Background */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
-        <div className="w-[800px] h-[800px] bg-red-600/10 sm:bg-red-600/20 blur-[140px] rounded-full text-transparent" />
+        <div className="w-[800px] h-[800px] bg-primary/10 sm:bg-primary/20 blur-[140px] rounded-full text-transparent" />
       </div>
       
       {/* Background Pattern */}
@@ -176,7 +176,7 @@ export function Hero() {
 
 
             <motion.h1 variants={item} className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400 dark:from-red-500 dark:to-red-700">{profile.Name}</span>
+              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/70 dark:from-primary dark:to-primary/80">{profile.Name}</span>
             </motion.h1>
 
             <motion.div variants={item} className="space-y-4">
@@ -219,7 +219,7 @@ export function Hero() {
           >
             <div className="relative group">
               {/* Red glow behind the card */}
-              <div className="absolute -inset-4 rounded-xl bg-red-600/10 blur-2xl group-hover:bg-red-600/20 transition-all duration-500" />
+              <div className="absolute -inset-4 rounded-xl bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all duration-500" />
 
               <Card className="relative p-0 overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl w-full max-w-md rotate-3 hover:rotate-0 transition-transform duration-300 shadow-2xl">
                 <CardContent className="p-0">

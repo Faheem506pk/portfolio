@@ -140,7 +140,7 @@ export function AdminSidebar({ className }) {
         </div>
         <Button
           variant="ghost"
-          className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl transition-colors h-11"
+          className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 dark:hover:bg-destructive/10 rounded-xl transition-colors h-11"
           onClick={handleLogout}
         >
           <LogOut className="mr-3 h-4 w-4" />

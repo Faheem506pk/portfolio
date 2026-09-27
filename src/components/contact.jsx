@@ -63,7 +63,7 @@ This message was sent via faheem506pk.dev contact form.`
       <section id="contact" className="relative container py-12 md:py-24 lg:py-32">
          {/* Spotlight Background */}
          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
-            <div className="w-[1000px] h-[800px] bg-red-600/10 blur-[150px] rounded-full translate-y-1/4 text-transparent" />
+            <div className="w-[1000px] h-[800px] bg-primary/10 blur-[150px] rounded-full translate-y-1/4 text-transparent" />
          </div>
 
          <div className="relative flex flex-col items-center gap-4 text-center mb-16 z-10">
@@ -98,7 +98,7 @@ This message was sent via faheem506pk.dev contact form.`
                   </p>
 
                   <div className="space-y-4">
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <Mail className="h-5 w-5" />
                         </div>
@@ -108,7 +108,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <Phone className="h-5 w-5" />
                         </div>
@@ -118,7 +118,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <MessageSquare className="h-5 w-5" />
                         </div>
@@ -128,7 +128,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-red-500/50 transition-colors">
+                     <div className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-colors">
                         <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                            <MessageSquare className="h-5 w-5" />
                         </div>
@@ -147,7 +147,7 @@ This message was sent via faheem506pk.dev contact form.`
                transition={{ duration: 0.5, delay: 0.2 }}
                viewport={{ once: true }}
             >
-               <Card className="border border-white/10 shadow-[0_0_20px_rgba(229,9,20,0.05)] bg-white/[0.03] backdrop-blur-xl">
+               <Card className="border border-white/10 shadow-[0_4px_24px_-6px_color-mix(in_oklch,var(--primary)_5%,transparent)] bg-white/[0.03] backdrop-blur-xl">
                   <CardHeader>
                      <CardTitle>Send a Message</CardTitle>
                      <CardDescription>
@@ -170,7 +170,7 @@ This message was sent via faheem506pk.dev contact form.`
                         </div>
 
                         {feedback && (
-                           <div className={`p-3 rounded-md text-sm ${feedback.type === 'success' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                           <div className={`p-3 rounded-md text-sm ${feedback.type === 'success' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive'}`}>
                               {feedback.message}
                            </div>
                         )}

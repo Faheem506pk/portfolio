@@ -138,7 +138,7 @@ export function TechMetrics() {
     <section className="relative container py-12 md:py-20">
       {/* Spotlight Background */}
       <div className="absolute inset-0 z-0 flex items-center justify-end pointer-events-none mix-blend-screen">
-        <div className="w-[600px] h-[600px] bg-red-600/10 blur-[120px] rounded-full translate-x-1/4 text-transparent" />
+        <div className="w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full translate-x-1/4 text-transparent" />
       </div>
 
       <div className="relative flex flex-col items-center gap-3 text-center mb-10 z-10">
@@ -170,14 +170,14 @@ export function TechMetrics() {
             viewport={{ once: true }}
             className="group"
           >
-            <Card className="h-full border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:bg-white/[0.06] hover:border-red-500/50 hover:-translate-y-1 transition-all duration-300">
+            <Card className="h-full border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:bg-white/[0.06] hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
               <CardContent className="p-4 flex flex-col items-center justify-center text-center gap-2">
-                <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:shadow-[0_0_15px_rgba(229,9,20,0.3)] transition-all">
+                <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:shadow-[0_4px_16px_-4px_color-mix(in_oklch,var(--primary)_30%,transparent)] transition-all">
                    <Code2 className="h-5 w-5" />
                 </div>
                 <div className="space-y-0.5">
                    <div className="font-bold text-sm tracking-tight">{tech.name}</div>
-                   <div className="text-[10px] font-mono font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded">
+                   <div className="text-[10px] font-mono font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
                       {tech.years} YEARS
                    </div>
                 </div>

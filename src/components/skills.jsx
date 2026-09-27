@@ -46,7 +46,7 @@ export function Skills() {
     <section id="skills" className="relative container py-12 md:py-24 lg:py-32">
       {/* Spotlight Background */}
       <div className="absolute inset-0 z-0 flex items-center justify-end pointer-events-none mix-blend-screen">
-        <div className="w-[800px] h-[800px] bg-red-600/10 blur-[140px] rounded-full translate-x-1/3 -translate-y-1/3 text-transparent" />
+        <div className="w-[800px] h-[800px] bg-primary/10 blur-[140px] rounded-full translate-x-1/3 -translate-y-1/3 text-transparent" />
       </div>
       
       <div className="relative flex flex-col items-center gap-4 text-center mb-16 z-10">
@@ -74,7 +74,7 @@ export function Skills() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full border border-white/10 hover:shadow-[0_0_15px_rgba(229,9,20,0.15)] bg-white/[0.03] backdrop-blur-xl transition-all duration-300">
+            <Card className="h-full border border-white/10 hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] bg-white/[0.03] backdrop-blur-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-xl font-serif text-foreground">{cat.category}</CardTitle>
               </CardHeader>

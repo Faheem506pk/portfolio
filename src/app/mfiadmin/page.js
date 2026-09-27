@@ -339,7 +339,7 @@ export default function AdminPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+                              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 dark:hover:bg-destructive/10"
                               onClick={() => handleDeleteProject(project.id)}
                             >
                               <Trash2 className="h-4 w-4 mr-2" /> Delete
@@ -444,7 +444,7 @@ export default function AdminPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 hidden md:flex"
+                              className="text-destructive hover:text-destructive hover:bg-destructive/10 dark:hover:bg-destructive/10 hidden md:flex"
                               onClick={() => handleDeleteAchievement(item.id)}
                             >
                               <Trash2 className="h-4 w-4" />
@@ -452,7 +452,7 @@ export default function AdminPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 md:hidden flex-1"
+                              className="text-destructive hover:text-destructive hover:bg-destructive/10 dark:hover:bg-destructive/10 md:hidden flex-1"
                               onClick={() => handleDeleteAchievement(item.id)}
                             >
                               <Trash2 className="h-4 w-4 mr-2" /> Delete

@@ -1,6 +1,6 @@
 export const Mydata = {
   Name: "Muhammad Faheem Iqbal",
-  Role: "Software Engineer | Frontend Developer",
+  Role: "Full Stack Developer (React.js / Next.js)",
   Address: "Khanna Pul, Islamabad, Pakistan",
   Phone: "+92 (332) 5194976",
   Phone2: "+92 (318) 0555360",
@@ -12,7 +12,7 @@ export const Mydata = {
     Portfolio: "https://faheem506pk.vercel.app"
   },
   Summary:
-    "ReactJS Frontend Developer with over 1 year of experience building scalable, responsive, and user-friendly web applications. Skilled in React.js, Next.js, TypeScript, JavaScript, and modern frontend technologies. Expert in converting Figma designs to pixel-perfect, production-ready code with attention to detail. Strong understanding of SEO best practices, semantic HTML, API integration, and web performance optimization. Proficient in WordPress with Advanced Custom Fields and UI frameworks including Ant Design, Tailwind CSS, Material UI, and Chakra UI. Experienced with Frappe, ERPNext, Firebase integration, state management solutions, and Vercel deployment.",
+    "Full Stack Developer with over 2 years of professional experience across teams in 3 countries (Pakistan, Austria and the United States), promoted to Software Engineer within 11 months. I build production web platforms with React.js, Next.js, TypeScript, Node.js and Python, and currently work on TabTake, an all-in-one restaurant management system. I write unit and end-to-end tests, automate testing and deployment with CI/CD, and use AI coding agents and LLM APIs to build AI tools and work faster. Passionate about IoT: my smart home project was featured by 3 national media outlets.",
   Education: {
     Degree: "Bachelor of Science in Information Technology",
     Period: "Oct 2020 – Sep 2024",
@@ -20,35 +20,52 @@ export const Mydata = {
   },
   Experience: [
     {
-      Company: "MicroMerger Pvt Ltd",
-      Position: "Software Engineer",
+      Company: "MicroMerger (Pvt.) Ltd.",
+      Position: "Software Engineer (Full Stack)",
       Location: "Islamabad, Pakistan",
-      Description: "Develop dynamic web applications using React.js, Next.js, and WordPress solutions with ACF. Convert Figma designs into pixel-perfect, responsive React components with strong attention to UI/UX. Implement SEO best practices. Build responsive dashboards using Ant Design, Material UI, Chakra UI. Work with Frappe and ERPNext frameworks.",
-      Duration: "Feb 2025 – Present",
+      Description: "Full stack development with React.js, Next.js, Node.js, Python and the Frappe/ERPNext ecosystem, promoted from Associate Software Engineer. Contributed to 5+ confidential client projects using React.js, Next.js, Redux, Frappe/ERPNext and UI libraries such as Chakra UI. Currently building TabTake, an all-in-one restaurant management system covering online ordering, delivery and collection, QR ordering, reservations, menus and multi-location management — working across the frontend (React.js, Next.js, TypeScript) and backend, building responsive, reusable components from Figma designs and applying SEO best practices.",
+      Duration: "Jan 2026 – Present",
+    },
+    {
+      Company: "MicroMerger (Pvt.) Ltd.",
+      Position: "Associate Software Engineer",
+      Location: "Islamabad, Pakistan",
+      Description: "Frontend development with React.js, TypeScript and Tailwind CSS, and support on ERPNext implementations. Delivered WordPress sites with Advanced Custom Fields, including Speedy Eats, a restaurant website with a custom theme and CMS. Built admin panels with Ant Design, Material UI and Chakra UI; deployed production apps on Vercel.",
+      Duration: "Feb 2025 – Jan 2026",
     },
     {
       Company: "Alphabase (US-based)",
       Position: "Frontend Development Intern",
       Location: "NSTP, Islamabad, Pakistan",
-      Description: "Developed Qotion, a Notion-style collaborative table application. Converted Figma mockups into functional React components. Implemented state management using Jotai, Zustand, React Context API. Enhanced UI/UX on Zaplead.ai platform.",
+      Description: "Developed Qotion, a Notion-style collaborative table app with drag-and-drop and real-time sync (React, TypeScript, Firebase). Improved UI/UX on the Zaplead.ai platform. Managed application state with Jotai, Zustand and React Context API.",
       Duration: "Nov 2024 – Feb 2025",
     },
     {
-      Company: "Juhuu Gmbh (Austria-based)",
+      Company: "JUHUU GmbH (Austria)",
       Position: "Frontend Developer",
       Location: "Remote",
-      Description: "Designed, developed and maintained web applications using React.js, Tailwind CSS, and JavaScript. Built the JUHUU Marketplace and BikeBox websites, optimizing for performance and responsive design. Collaborated remotely with the JUHUU team.",
+      Description: "Built the JUHUU Marketplace and BikeBox websites with React.js, Tailwind CSS and JavaScript. Implemented BikeBox bike rental features: product listing, filtering, booking flow and mobile optimisation.",
       Duration: "Sep 2023 – Mar 2024",
     },
     {
       Company: "BestMobile.pk",
-      Position: "Social Media Manager",
+      Position: "Social Media Manager (Part-time)",
       Location: "Remote",
-      Description: "Managed social media strategy across multiple platforms. Created visual content using Photoshop and After Effects.",
+      Description: "Managed social media content and visuals (Photoshop, After Effects) alongside university studies.",
       Duration: "Jan 2020 – Jun 2024",
     },
   ],
   Projects: [
+    {
+      id: 9,
+      Name: "TabTake",
+      Description: "All-in-one restaurant management system covering online ordering, delivery and collection, QR ordering, table reservations, digital menus, kitchen printing and multi-location management. Built responsive, reusable components from Figma designs across frontend and backend.",
+      Tech: ["React.js", "Next.js", "TypeScript", "Node.js", "Frappe"],
+      GitHub: "",
+      Live: "https://tabtake.com",
+      Featured: true,
+      Year: "2026"
+    },
     {
       id: 1,
       Name: "PeekGamer",
@@ -132,10 +149,12 @@ export const Mydata = {
   ],
   Skills: {
     Languages: ["TypeScript", "JavaScript", "HTML5", "CSS3", "Python", "PHP"],
-    Frameworks: ["React.js", "Next.js", "Node.js", "Express.js", "WordPress"],
-    "UI Libraries": ["Tailwind CSS", "Shadcn/UI", "Ant Design", "Material UI", "Chakra UI", "Radix UI", "Framer Motion"],
-    Tools: ["Git", "GitHub", "Vercel", "Figma", "Canva", "Jira", "Postman"],
-    Database: ["MySQL", "Firebase Firestore", "MongoDB", "IndexedDB"],
-    Other: ["REST APIs", "SEO", "Responsive Design", "Web Performance", "ERPNext", "Frappe"]
+    Frameworks: ["React.js", "Next.js", "Node.js", "Express.js", "WordPress", "Frappe", "ERPNext"],
+    "UI Libraries": ["Tailwind CSS", "Ant Design", "Shadcn/UI", "Material UI", "Chakra UI", "Radix UI", "Framer Motion", "Bootstrap"],
+    Tools: ["Git", "GitHub", "GitLab", "Vercel", "Figma", "Postman", "Jira", "Linux (Ubuntu)", "CLI"],
+    "Database & Storage": ["MySQL", "PostgreSQL", "Supabase", "Neon", "MongoDB", "Redis", "Firebase", "IndexedDB", "Clerk", "NextAuth"],
+    "IoT & Hardware": ["Arduino", "ESP32", "C++", "Blynk IoT", "Amazon Alexa", "Sensors", "PCB & Circuit Design"],
+    "Testing & CI/CD": ["Jest", "Playwright", "GitHub Actions"],
+    "AI Tools": ["Claude Code", "Codex", "Google Antigravity", "Google Jules", "Google Stitch", "Claude Design", "Google Flow", "OpenRouter API"]
   }
 };

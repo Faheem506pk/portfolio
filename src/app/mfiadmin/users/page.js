@@ -99,7 +99,7 @@ export default function AdminUsersPage() {
                                         <Button 
                                             variant="ghost" 
                                             size="icon" 
-                                            className="text-red-500 hover:text-red-600 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="text-destructive hover:text-destructive hover:bg-destructive/10 opacity-0 group-hover:opacity-100 transition-opacity"
                                             onClick={() => handleDeleteUser(u.id, u.email)}
                                         >
                                             <Trash2 className="h-4 w-4" />

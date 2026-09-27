@@ -103,7 +103,7 @@ export default function AdminSkillsPage() {
                         <Button variant="ghost" size="icon" onClick={() => handleEdit(skill)}>
                             <Pencil className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="text-red-500" onClick={() => handleDelete(skill.id)}>
+                        <Button variant="ghost" size="icon" className="text-destructive" onClick={() => handleDelete(skill.id)}>
                             <Trash2 className="h-4 w-4" />
                         </Button>
                     </div>

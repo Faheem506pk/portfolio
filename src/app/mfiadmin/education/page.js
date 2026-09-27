@@ -108,7 +108,7 @@ export default function AdminEducationPage() {
                         <Button variant="ghost" size="icon" onClick={() => handleEdit(edu)}>
                             <Pencil className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="text-red-500" onClick={() => handleDelete(edu.id)}>
+                        <Button variant="ghost" size="icon" className="text-destructive" onClick={() => handleDelete(edu.id)}>
                             <Trash2 className="h-4 w-4" />
                         </Button>
                     </div>

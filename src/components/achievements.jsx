@@ -21,7 +21,7 @@ const getIcon = (type) => {
 
 const getTypeColor = (type) => {
   switch (type) {
-    case "youtube": return "bg-red-500/10 text-red-400 border-red-500/20"
+    case "youtube": return "bg-primary/10 text-primary border-primary/20"
     case "article": return "bg-blue-500/10 text-blue-400 border-blue-500/20"
     case "news": return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
     case "award": return "bg-primary/10 text-primary border-primary/20"
@@ -91,7 +91,7 @@ export function Achievements() {
                   rel="noreferrer"
                   className="block group h-full"
                 >
-                  <Card className="h-full py-0 border border-border/50 dark:border-red-900/40 hover:border-red-500/40 hover:shadow-[0_0_15px_rgba(229,9,20,0.1)] transition-all duration-500 bg-card/50 backdrop-blur-sm overflow-hidden">
+                  <Card className="h-full py-0 border border-border/50 dark:border-primary/30 hover:border-primary/40 hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_10%,transparent)] transition-all duration-500 bg-card/50 backdrop-blur-sm overflow-hidden">
                     {/* Thumbnail */}
                     {item.thumbnail_url && (
                       <div className="relative aspect-video w-full overflow-hidden">
@@ -106,7 +106,7 @@ export function Achievements() {
                         {/* Play button overlay for YouTube */}
                         {item.type === "youtube" && (
                           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl shadow-red-600/30 group-hover:scale-110 transition-transform">
+                            <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-2xl shadow-primary/30 group-hover:scale-110 transition-transform">
                               <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                               </svg>

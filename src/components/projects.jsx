@@ -53,7 +53,7 @@ export function Projects({ isPage = false }) {
     <section id="projects" className={isPage ? "w-full" : "relative container py-12 md:py-24 lg:py-32"}>
       {!isPage && (
         <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
-          <div className="w-[800px] h-[800px] bg-red-600/10 blur-[140px] rounded-full translate-y-1/4 text-transparent" />
+          <div className="w-[800px] h-[800px] bg-primary/10 blur-[140px] rounded-full translate-y-1/4 text-transparent" />
         </div>
       )}
       {!isPage && (
@@ -83,7 +83,7 @@ export function Projects({ isPage = false }) {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="h-full pt-0 flex flex-col overflow-hidden border border-white/10 hover:border-red-500/50 hover:shadow-[0_0_15px_rgba(229,9,20,0.15)] transition-all duration-300 group bg-white/[0.03] backdrop-blur-xl">
+            <Card className="h-full pt-0 flex flex-col overflow-hidden border border-white/10 hover:border-primary/50 hover:shadow-[0_4px_20px_-4px_color-mix(in_oklch,var(--primary)_15%,transparent)] transition-all duration-300 group bg-white/[0.03] backdrop-blur-xl">
               <div className="relative aspect-[2/1] w-full overflow-hidden bg-black/50 flex items-center justify-center group-hover:bg-primary/5 transition-colors">
                 {project.images && project.images.length > 0 ? (
                   <ProjectCarousel
