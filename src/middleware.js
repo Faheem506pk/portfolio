@@ -32,11 +32,20 @@ export async function middleware(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Supabase refreshes tokens indefinitely, so cap how long one sign-in stays
+  // valid. last_sign_in_at comes from the auth server and cannot be forged client
+  // side. Enforced here rather than only in the UI so the limit is real.
+  const MAX_SESSION_MS = 2 * 24 * 60 * 60 * 1000; // 2 days
+  const signedInAt = user?.last_sign_in_at ? Date.parse(user.last_sign_in_at) : NaN;
+  const sessionExpired =
+    Boolean(user) && !Number.isNaN(signedInAt) && Date.now() - signedInAt > MAX_SESSION_MS;
+
   // Protect /mfiadmin routes
   if (request.nextUrl.pathname.startsWith("/mfiadmin") && !request.nextUrl.pathname.startsWith("/mfiadmin/login")) {
-    if (!user) {
-      // If no user, redirect to login
-      return NextResponse.redirect(new URL("/mfiadmin/login", request.url));
+    if (!user || sessionExpired) {
+      const loginUrl = new URL("/mfiadmin/login", request.url);
+      if (sessionExpired) loginUrl.searchParams.set("expired", "1");
+      return NextResponse.redirect(loginUrl);
     }
   }
 
@@ -45,9 +54,10 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL("/mfiadmin/login", request.url));
   }
 
-  // If at login page and user is logged in, redirect to dashboard
+  // If at login page and user is logged in, redirect to dashboard — unless the
+  // session has aged out, in which case they need to sign in again.
   if (request.nextUrl.pathname === "/mfiadmin/login") {
-    if (user) {
+    if (user && !sessionExpired) {
       return NextResponse.redirect(new URL("/mfiadmin", request.url));
     }
   }
