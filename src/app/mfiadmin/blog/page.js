@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PostStats } from "@/components/admin/post-stats"
 
 export default function AdminBlogPage() {
   const router = useRouter()
@@ -151,6 +152,11 @@ export default function AdminBlogPage() {
                   <p className="mt-1 truncate font-mono text-xs text-muted-foreground">
                     /blog/{post.slug}
                   </p>
+                  {post.status === "published" && (
+                    <div className="mt-2">
+                      <PostStats slug={post.slug} compact />
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-1">

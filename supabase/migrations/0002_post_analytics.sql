@@ -30,6 +30,26 @@ create policy "admins read analytics"
   to authenticated
   using (true);
 
+-- Likes. One per visitor per post, enforced by the unique constraint.
+create table if not exists public.post_likes (
+  id           bigint generated always as identity primary key,
+  slug         text        not null,
+  visitor_hash text        not null,
+  created_at   timestamptz not null default now(),
+  unique (slug, visitor_hash)
+);
+
+create index if not exists post_likes_slug_idx on public.post_likes (slug);
+
+alter table public.post_likes enable row level security;
+
+-- Anyone may read the like count; writes go through the server only.
+drop policy if exists "anyone reads likes" on public.post_likes;
+create policy "anyone reads likes"
+  on public.post_likes
+  for select
+  using (true);
+
 -- Aggregate rollup for one post. security definer so the admin UI can call it
 -- without needing row-level read access to every underlying row.
 create or replace function public.post_stats(post_slug text)
@@ -39,24 +59,26 @@ returns table (
   avg_seconds      numeric,
   completion_rate  numeric,
   views_7d         bigint,
-  views_30d        bigint
+  views_30d        bigint,
+  likes            bigint
 )
 language sql
 security definer
 set search_path = public
 as $$
   select
-    count(*)                                                        as views,
-    count(distinct visitor_hash)                                    as unique_visitors,
-    coalesce(round(avg(nullif(duration_seconds, 0)), 0), 0)         as avg_seconds,
+    count(v.*)                                                          as views,
+    count(distinct v.visitor_hash)                                      as unique_visitors,
+    coalesce(round(avg(nullif(v.duration_seconds, 0)), 0), 0)           as avg_seconds,
     coalesce(
-      round(100.0 * count(*) filter (where scroll_percent >= 90) / nullif(count(*), 0), 0),
+      round(100.0 * count(v.*) filter (where v.scroll_percent >= 90) / nullif(count(v.*), 0), 0),
       0
-    )                                                               as completion_rate,
-    count(*) filter (where created_at > now() - interval '7 days')  as views_7d,
-    count(*) filter (where created_at > now() - interval '30 days') as views_30d
-  from public.post_views
-  where slug = post_slug;
+    )                                                                   as completion_rate,
+    count(v.*) filter (where v.created_at > now() - interval '7 days')  as views_7d,
+    count(v.*) filter (where v.created_at > now() - interval '30 days') as views_30d,
+    (select count(*) from public.post_likes l where l.slug = post_slug) as likes
+  from public.post_views v
+  where v.slug = post_slug;
 $$;
 
 grant execute on function public.post_stats(text) to authenticated;

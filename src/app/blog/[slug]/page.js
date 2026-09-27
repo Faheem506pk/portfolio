@@ -5,6 +5,8 @@ import { ArrowLeft, Clock } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Markdown } from "@/components/markdown"
+import { PostAnalytics } from "@/components/post-analytics"
+import { LikeButton } from "@/components/like-button"
 import {
   getPostBySlug,
   getPublishedPosts,
@@ -170,7 +172,19 @@ export default async function BlogPostPage({ params }) {
         <div className="mt-12">
           <Markdown content={post.content} />
         </div>
+
+        <footer className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8">
+          <LikeButton slug={post.slug} />
+          <Link
+            href="/blog"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          >
+            Read more articles
+          </Link>
+        </footer>
       </article>
+
+      <PostAnalytics slug={post.slug} />
     </>
   )
 }

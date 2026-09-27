@@ -32,6 +32,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Markdown } from "@/components/markdown"
 import { MediaUploader } from "@/components/admin/media-uploader"
+import { PostStats } from "@/components/admin/post-stats"
 import { SITE_URL, readingMinutes } from "@/lib/posts"
 
 function slugify(value = "") {
@@ -387,6 +388,17 @@ export default function BlogEditorPage() {
               </label>
             </CardContent>
           </Card>
+
+          {post.status === "published" && (
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">Performance</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <PostStats slug={post.slug} />
+              </CardContent>
+            </Card>
+          )}
 
           <Card>
             <CardHeader className="pb-3">
