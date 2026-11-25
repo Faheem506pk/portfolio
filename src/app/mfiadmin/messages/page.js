@@ -68,14 +68,14 @@ export default function AdminMessagesPage() {
   }
 
   if (loading) {
-    return <div className="flex justify-center p-8"><Loader2 className="animate-spin text-verdigris" /></div>;
+    return <div className="flex justify-center p-8"><Loader2 className="animate-spin text-primary" /></div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris">
+          <h1 className="text-[23px] font-normal text-foreground">
             Messages
           </h1>
           <p className="text-muted-foreground">Manage your contact form submissions.</p>
@@ -85,13 +85,13 @@ export default function AdminMessagesPage() {
 
       <div className="grid gap-4">
         {messages.map((msg) => (
-          <Card key={msg.id} className={`border-border/50 bg-card/50 transition-all ${!msg.is_read ? 'border-l-4 border-l-tuscan-sun bg-tuscan-sun/5' : ''}`}>
+          <Card key={msg.id} className={`border-border/50 bg-card/50 transition-all ${!msg.is_read ? 'border-l-4 border-l-primary bg-primary/5' : ''}`}>
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-lg font-bold">{msg.name}</CardTitle>
-                    {!msg.is_read && <Badge className="bg-tuscan-sun text-white">New</Badge>}
+                    {!msg.is_read && <Badge className="bg-primary text-primary-foreground">New</Badge>}
                   </div>
                   <CardDescription className="flex items-center gap-2">
                     <Mail className="h-3 w-3" /> {msg.email}
@@ -111,7 +111,7 @@ export default function AdminMessagesPage() {
                 <Button 
                     variant="ghost" 
                     size="sm" 
-                    className={msg.is_read ? "text-muted-foreground" : "text-tuscan-sun hover:text-tuscan-sun"}
+                    className={msg.is_read ? "text-muted-foreground" : "text-primary hover:text-primary"}
                     onClick={() => toggleReadStatus(msg.id, msg.is_read)}
                 >
                   {msg.is_read ? (

@@ -85,7 +85,7 @@ export default function AdminExperiencePage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris">Experience Management</h1>
+        <h1 className="text-[23px] font-normal text-foreground">Experience Management</h1>
         <Button onClick={handleCreate} className="bg-burnt-peach hover:bg-burnt-peach/90 text-white">
           <Plus className="mr-2 h-4 w-4" /> Add Experience
         </Button>
@@ -102,7 +102,7 @@ export default function AdminExperiencePage() {
                       <div className="flex items-center gap-2">
                         <h3 className="text-xl font-bold">{exp.position}</h3>
                         {exp.is_development !== false ? (
-                          <Badge variant="secondary" className="bg-tuscan-sun/20 text-tuscan-sun border-tuscan-sun/30">
+                          <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/30">
                             Dev Role
                           </Badge>
                         ) : (

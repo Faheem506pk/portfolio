@@ -49,7 +49,7 @@ export function PostStats({ slug, compact = false }) {
   }
 
   if (!stats) {
-    return <div className="h-5 w-40 animate-pulse rounded bg-muted" />
+    return <div className="h-5 w-40  rounded bg-muted" />
   }
 
   if (compact) {

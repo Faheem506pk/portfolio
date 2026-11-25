@@ -81,7 +81,7 @@ export default function AdminEducationPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris">
+        <h1 className="text-[23px] font-normal text-foreground">
           Education Management
         </h1>
         <Button onClick={handleCreate} className="bg-burnt-peach hover:bg-burnt-peach/90 text-white">
@@ -96,7 +96,7 @@ export default function AdminEducationPage() {
                 <div className="flex justify-between items-start">
                     <div className="flex gap-4">
                         <div className="mt-1">
-                            <GraduationCap className="h-6 w-6 text-verdigris" />
+                            <GraduationCap className="h-6 w-6 text-primary" />
                         </div>
                         <div>
                             <h3 className="text-xl font-bold">{edu.degree}</h3>
