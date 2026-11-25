@@ -1,0 +1,15 @@
+---
+description: Commit messages must start with a Jira key, like "KAN-396: fix logo size"
+alwaysApply: true
+---
+
+When writing or suggesting a git commit message (including Cursor's generated commit messages):
+
+- Start with the Jira key, a colon and a space: `KAN-396: fix logo size on Native receipts`.
+- Take the key from: the user's request, else the branch name, else the most recent commit on this branch that has a key.
+- If no key can be found, ask for it. Never invent one and never write `KAN-XXXX`.
+- One short summary line in plain words; optional body after a blank line. No em dashes.
+- Before committing, if `git config core.hooksPath` is not `.githooks`, run `bash .githooks/ensure-hooks.sh` and tell the developer.
+- Commits without a key are refused by `.githooks/commit-msg`, and pushes by `.githooks/pre-push`.
+
+Canonical: `.claude/rules/commit-messages.md`.

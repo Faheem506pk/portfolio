@@ -1,0 +1,13 @@
+---
+description: No raw error codes or database errors on any screen; always a friendly message
+alwaysApply: true
+---
+
+No person (guest, owner, reseller, super admin, landing-page visitor) ever sees a raw error: codes like `QUOTE_STAGING_FAILED: STAFF_ACTION_RETRY`, database text like `duplicate key value violates`, or "Edge Function returned a non-2xx status code".
+
+Every shown error goes through the app's helper (never import across apps):
+- `storefront-next/src/lib/guestErrorMessage.ts` → `friendlyGuestMessage(raw, fallback)`
+- `src/lib/friendlyError.ts` → `friendlyErrorMessage(raw, fallback)` (toasts also pass through `src/lib/friendlyToast.ts`)
+- `landing-page/src/lib/friendlyError.ts` → `friendlyErrorMessage(raw, fallback)`
+
+New server error codes get a friendly sentence in the helper in the same change. Canonical: `.claude/skills/friendly-errors/SKILL.md`.
