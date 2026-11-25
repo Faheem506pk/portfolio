@@ -79,7 +79,7 @@ export default function AdminProfilePage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      <h1 className="text-[23px] font-normal text-foreground">
+      <h1 className="text-2xl font-semibold tracking-tight text-foreground">
         Settings
       </h1>
 

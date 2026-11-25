@@ -61,21 +61,23 @@ export function ContentPipelineCard() {
         ) : (
           <>
             <div>
-              <div className="flex h-2 overflow-hidden rounded-full bg-muted" role="img" aria-label="Pipeline progress by stage">
-                {PIPELINE_STATUSES.map((s, i) => (
-                  <div
+              <div className="wp-bar" role="img" aria-label="Stories by stage">
+                {PIPELINE_STATUSES.filter((s) => counts[s.value] > 0).map((s) => (
+                  <span
                     key={s.value}
-                    style={{ width: `${(counts[s.value] / total) * 100}%`, opacity: 0.35 + i * 0.13 }}
-                    className="bg-primary"
+                    style={{ width: `${(counts[s.value] / total) * 100}%`, background: s.tone === "primary" ? "var(--primary)" : `var(--tone-${s.tone})` }}
                     title={`${s.label}: ${counts[s.value]}`}
                   />
                 ))}
               </div>
-              <dl className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-6">
+              <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
                 {PIPELINE_STATUSES.map((s) => (
                   <div key={s.value}>
-                    <dt className="text-xs text-muted-foreground">{s.label}</dt>
-                    <dd className="font-display text-xl font-bold">{counts[s.value]}</dd>
+                    <dt className="flex items-center gap-1.5 text-muted-foreground">
+                      <span className="wp-dot" data-tone={s.tone} aria-hidden="true" />
+                      {s.label}
+                    </dt>
+                    <dd className="text-xl font-semibold">{counts[s.value]}</dd>
                   </div>
                 ))}
               </dl>
@@ -83,7 +85,7 @@ export function ContentPipelineCard() {
             </div>
 
             <div>
-              <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">Next up</p>
+              <p className="mb-2 font-medium">Next up</p>
               <ul className="divide-y divide-border">
                 {next.map((idea) => (
                   <li key={idea.id}>
@@ -93,9 +95,9 @@ export function ContentPipelineCard() {
                     >
                       <PenLine className="h-4 w-4 shrink-0 text-muted-foreground" />
                       <span className="min-w-0 flex-1 truncate">
-                        <span className="font-mono text-xs text-muted-foreground">#{idea.number}</span> {idea.title}
+                        <span className="text-muted-foreground">#{idea.number}</span> {idea.title}
                       </span>
-                      <span className="font-mono text-xs text-muted-foreground">{idea.score}/20</span>
+                      <span className="text-muted-foreground tabular-nums">{idea.score}/20</span>
                     </Link>
                   </li>
                 ))}
