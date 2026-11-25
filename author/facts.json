@@ -163,27 +163,27 @@
       "what": "Game discovery platform",
       "tech": "Next.js, TypeScript, Ant Design",
       "demo": "https://devpeekgamer.vercel.app",
-      "allowedInStories": true
+      "allowedInStories": false
     },
     {
       "name": "Cinematic Vistas",
       "what": "Movie browsing platform",
       "tech": "React, TypeScript, Tailwind",
       "demo": "https://cinematic-vistas.vercel.app",
-      "allowedInStories": true
+      "allowedInStories": false
     },
     {
       "name": "CupChase",
       "what": "High-performance web app",
       "tech": "React, TanStack Router, Tailwind, Vite",
       "demo": "https://cupchase.vercel.app",
-      "allowedInStories": true
+      "allowedInStories": false
     },
     {
       "name": "ExplorePak",
       "what": "Tour packages manager with admin login",
       "tech": "HTML, CSS, Bootstrap 5, PHP, MySQL",
-      "allowedInStories": true
+      "allowedInStories": false
     },
     {
       "name": "Speedy Eats",
@@ -257,6 +257,11 @@
       "Alphabase",
       "JUHUU"
     ],
-    "askFirstNote": "Employer company names: ask the author before naming them in a new piece."
+    "askFirstNote": "Employer company names: ask the author before naming them in a new piece.",
+    "allowedPersonalProjects": [
+      "PlantPulse",
+      "StitchSmart"
+    ],
+    "otherProjects": "Other personal projects (PeekGamer, Cinematic Vistas, CupChase, ExplorePak, Alexa and ESP8266 home, fingerprint lock) are not approved for stories yet. Ask the author first."
   }
 }

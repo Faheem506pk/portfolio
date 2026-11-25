@@ -1,6 +1,6 @@
 # Brief 40: Role-Based Access in an Admin Panel
 
-- **Status:** brief (outline stage). No prose written yet. Needs the author's input before drafting.
+- **Status:** DRAFTED (free track, AI-assisted) from the real public StitchSmart code. See medium.md. Needs author confirmation and a rewrite in his own words.
 - **Pillar:** JS/TS/React/Next.js in production
 - **Score:** 14/20 (Demand 3, Gap 3, Fit 5, Proof 3). Judgment, not measured data. Demand is inferred.
 - **Verdict:** Write if the author supplies real details

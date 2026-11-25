@@ -24,6 +24,8 @@ Format: date | area | lesson | why
 ## Hard author rules
 - 2026-11-25 | confidentiality | The author does not want stories about his employer or client projects, or their names (TabTake, other work projects). Use personal projects only. Check `neverMention` in facts.json before drafting. | His explicit instruction.
 
+- 2026-11-25 | projects | Approved personal projects for stories: StitchSmart and PlantPulse only. Ask before using any other project. | Author's choice.
+
 ## Platform policy
 - 2026-11-25 | medium | Medium AI policy (updated 2026-11-12): AI-generated text cannot be paywalled, AI-assisted text needs a disclosure sentence in the first two paragraphs or gets Network Only distribution, AI images need captions. No official per-day story limit found in the help pages, spam rules apply. | Account safety. Agents draft, the author rewrites and owns the text.
 - 2026-11-25 | scale | Do not mass-produce full stories. 60 full AI drafts would break the spirit of Medium's policy and the no-invention rule. Make briefs and outlines, write full drafts one at a time with the author's real details. | Quality and account risk.

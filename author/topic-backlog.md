@@ -57,7 +57,7 @@ Briefs live in `drafts/2026-11-25-<slug>/brief.md`. Status: brief, drafted, revi
 | 31 | JS/TS/React/Next.js in production | Building a Notion-Style Table in React | 14 | N | brief | `drafts/2026-11-25-notion-style-table/brief.md` |
 | 32 | JS/TS/React/Next.js in production | State Management in React: Context, Zustand, Jotai or Redux | 14 | N | brief | `drafts/2026-11-25-react-state-management-2026/brief.md` |
 | 39 | JS/TS/React/Next.js in production | Firebase vs Supabase for a Small Business App | 14 | N | brief | `drafts/2026-11-25-firebase-vs-supabase/brief.md` |
-| 40 | JS/TS/React/Next.js in production | Role-Based Access in an Admin Panel | 14 | N | brief | `drafts/2026-11-25-role-based-admin-panel/brief.md` |
+| 40 | JS/TS/React/Next.js in production | Role-Based Access in an Admin Panel | 14 | N | drafted (free track, from public StitchSmart code) | `drafts/2026-11-25-role-based-admin-panel/brief.md` |
 | 48 | AI-native engineering | Plan, Review, Commit: A Safe Daily Workflow With a Coding Agent | 14 | N | brief | `drafts/2026-11-25-safe-daily-agent-workflow/brief.md` |
 | 56 | AI-native engineering | A Tiny Eval Harness for AI Features in TypeScript | 14 | S | brief | `drafts/2026-11-25-tiny-eval-harness/brief.md` |
 | 14 | Career for juniors | Learning React With AI Without Losing the Fundamentals | 13 | N | brief | `drafts/2026-11-25-learn-react-with-ai/brief.md` |
