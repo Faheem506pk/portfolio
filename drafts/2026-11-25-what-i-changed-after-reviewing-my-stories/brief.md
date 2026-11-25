@@ -4,6 +4,7 @@
 - **Pillar:** Content and creator ops
 - **Score:** 15/20 (Demand 3, Gap 3, Fit 5, Proof 4). Judgment, not measured data. Demand is inferred.
 - **Verdict:** Write if the author supplies real details
+- **Policy note:** Stories about Medium itself are Network Distribution by default and cannot be paywalled. Publish free and tag medium-meta. Low priority while the goal is Partner Program income.
 - **Reader:** Developer writers
 - **Differentiator:** From our real review of his 7 stories.
 

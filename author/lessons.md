@@ -26,6 +26,11 @@ Format: date | area | lesson | why
 - 2026-11-25 | scale | Do not mass-produce full stories. 60 full AI drafts would break the spirit of Medium's policy and the no-invention rule. Make briefs and outlines, write full drafts one at a time with the author's real details. | Quality and account risk.
 - 2026-11-25 | vercel | A branch preview build failed with "supabaseUrl is required" because Supabase environment variables were not set for the Preview scope. Our branch changes no site code. Fix in Vercel env settings, never paste keys in chat or commit them. | Previews need their own env vars.
 
+- 2026-11-25 | earning | The author wants Partner Program income. Paid-track stories must be his own writing; AI-generated text cannot be paywalled. Pakistan is a supported country. Payouts need Stripe (legal name, bank account) and tax info, which only he enters. | Protect enrollment and earnings.
+- 2026-11-25 | medium | Medium-focused stories (topic 60) cannot be paywalled and get Network Only distribution. Urdu stories get no General Distribution or Boost. Templated near-duplicate posts count as spam. | Affects topic choice and pacing.
+
+- 2026-11-25 | ethics | Never help bypass, disguise or evade detection of Medium's AI-paywall rule (for example humanizing text to hide AI writing). Decline, and offer the paid track where the author writes the text and agents research, fact-check and edit. | Deception breaks Medium rules and risks the account and earnings.
+
 ## Author facts to confirm (do not assume)
 - Whether he wants an AI-assistance disclosure line on posts.
 - Which TabTake or JavaScript lessons are safe to publish.

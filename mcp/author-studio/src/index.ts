@@ -88,6 +88,95 @@ server.tool(
 );
 
 server.tool(
+  "get_medium_policy",
+  "Medium rules, AI policy, distribution, paywall and the pre-publish gate. Read before drafting or handing over any story.",
+  {},
+  async () => {
+    const t = await readOrNull(path.join(SKILLS, "medium-policy", "SKILL.md"));
+    return t ? text(t) : fail("skills/medium-policy/SKILL.md not found");
+  },
+);
+
+function words(t: string) {
+  return t.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+}
+function shingles(t: string, n = 5) {
+  const w = words(t);
+  const s = new Set<string>();
+  for (let i = 0; i + n <= w.length; i++) s.add(w.slice(i, i + n).join(" "));
+  return s;
+}
+
+server.tool(
+  "check_medium_policy",
+  "Heuristic Medium policy check for a story: AI disclosure in first two paragraphs, tags, mentions, clickbait title, forms, affiliate, privacy, meta-Medium topic, and similarity to existing drafts and articles. Signals only, not a guarantee. Read get_medium_policy for the full gate.",
+  {
+    content: z.string().min(1).max(200_000).describe("Full story markdown"),
+    aiAssisted: z.boolean().default(true).describe("true if any text was written or rewritten by AI"),
+    plannedPaywall: z.boolean().default(false),
+    tags: z.array(z.string()).max(20).optional(),
+    selfPath: z.string().optional().describe("repo-relative path of this draft, excluded from similarity"),
+  },
+  async ({ content, aiAssisted, plannedPaywall, tags, selfPath }) => {
+    const issues: string[] = [];
+    const body = content.replace(/<!--[\s\S]*?-->/g, "");
+    const paras = body.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !p.startsWith("#"));
+    const firstTwo = paras.slice(0, 3).join(" ").toLowerCase();
+    if (aiAssisted && !/(assistance of an ai|written with (the )?(help|assistance) of|ai writing program|ai-assisted|ai assistance)/.test(firstTwo)) {
+      issues.push("No AI disclosure sentence found near the top. Medium requires one in the first two paragraphs for AI-written or AI-assisted text, otherwise Network Only distribution.");
+    }
+    if (aiAssisted && plannedPaywall) issues.push("Paywall planned for AI-assisted text. AI-generated writing cannot be paywalled. Only paywall text that is substantially the author's own.");
+    if (/medium partner program|earn(ing)? (money )?on medium|boost(ed)? (story|stories)|medium curation|grow (on )?medium/i.test(body)) {
+      issues.push("Mentions Medium meta topics. Meta stories about Medium are Network Distribution and not paywall-eligible. Tag medium-meta.");
+      if (plannedPaywall) issues.push("Do not paywall a Medium-focused story.");
+    }
+    const h1 = body.match(/^#\s+(.+)$/m)?.[1] ?? "";
+    if (h1 && /(you won't believe|shocking|secret|insane|mind-?blowing|10x|changed my life|will blow)/i.test(h1)) issues.push("Title looks sensational. Boost and General Distribution penalize clickbait.");
+    if (h1 && h1.length > 100) issues.push("Title is very long. Keep it specific and under about 100 characters.");
+    if (tags && tags.length > 5) issues.push(`${tags.length} tags. Medium allows 5. Use fewer, relevant ones.`);
+    const mentions = (body.match(/(^|\s)@[a-z0-9_.]{2,}/gi) ?? []).length;
+    if (mentions > 5) issues.push(`${mentions} @mentions. Mass mentions disqualify General Distribution.`);
+    if (/(utm_|affiliate|amzn\.to|\?ref=|aff=)/i.test(body)) issues.push("Possible affiliate or tracking links. Disclose affiliate links in the story and keep promotion first-party.");
+    if (/<form|<iframe|typeform|forms\.gle|docs\.google\.com\/forms/i.test(body)) issues.push("Form or embed that may collect personal data. Not allowed on Medium. Link out clearly instead.");
+    if (/[a-z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.[a-z]{2,}/i.test(body) || /(\+?92\s?3\d{2}\s?\d{7}|03\d{2}[-\s]?\d{7})/.test(body)) issues.push("Personal email or phone number found. Remove it.");
+    if (/(api[_-]?key|secret|password|token)\s*[:=]\s*\S+/i.test(body)) issues.push("Possible secret in text or code. Remove it.");
+    if (/\[FILL|\[AUTHOR/i.test(body)) issues.push("Unresolved [FILL] or [AUTHOR] markers. Resolve before publishing.");
+    const nonAscii = (body.match(/[\u0600-\u06FF]/g) ?? []).length;
+    if (nonAscii > 50) issues.push("Large amount of Urdu text. Medium only curates English stories for General Distribution and Boost for now.");
+    if (/(\u2014|\u2013)/.test(body)) issues.push("Em or en dash found. Author rule: remove.");
+    const imgs = body.match(/!\[[^\]]*\]\([^)]*\)/g) ?? [];
+    for (const im of imgs) if (!/!\[[^\]]+\]/.test(im)) issues.push("Image without alt text. Add alt text and credit.");
+    // similarity to other drafts and articles
+    const mine = shingles(body);
+    const dup: string[] = [];
+    for (const dir of [DRAFTS, path.join(ROOT, "articles")]) {
+      const stack = [dir];
+      while (stack.length) {
+        const d = stack.pop()!;
+        const ents = await fs.readdir(d, { withFileTypes: true }).catch(() => []);
+        for (const e of ents) {
+          const fp = path.join(d, e.name);
+          if (e.isDirectory()) { stack.push(fp); continue; }
+          if (!/\.md$/.test(e.name) || e.name === "brief.md") continue;
+          const rel = path.relative(ROOT, fp);
+          if (selfPath && rel === selfPath) continue;
+          const other = await readOrNull(fp);
+          if (!other) continue;
+          const sh = shingles(other.replace(/<!--[\s\S]*?-->/g, ""));
+          if (!sh.size || !mine.size) continue;
+          let hit = 0;
+          for (const g of mine) if (sh.has(g)) hit++;
+          const ratio = hit / Math.min(mine.size, sh.size);
+          if (ratio > 0.3) dup.push(`${rel} (${Math.round(ratio * 100)}% overlap)`);
+        }
+      }
+    }
+    if (dup.length) issues.push(`High overlap with: ${dup.join(", ")}. Duplicate or templated content violates Medium's spam rules.`);
+    return text(issues.length ? `${issues.length} policy signal(s):\n- ${issues.join("\n- ")}` : "No policy signals found by the heuristic. Still run the full pre-publish gate in get_medium_policy and have the author read it.");
+  },
+);
+
+server.tool(
   "get_topic_backlog",
   "Researched and scored story topics with status and what real details the author must supply. Check this before proposing or writing any story.",
   {},

@@ -20,6 +20,7 @@ This repository holds two things for **Muhammad Faheem Iqbal (faheem506pk)**, a 
 | Plan or repurpose content end to end | `content-pipeline` |
 | Learn and record lessons (start and end of every task) | `lessons-learned` |
 | Decide if a topic is worth writing (always first) | `topic-research` |
+| Medium rules, AI policy, paywall, Partner Program, pre-publish gate (always) | `medium-policy` |
 | Draft a Medium story | `medium-writer` |
 | Review, score, fact-check a Medium story | `medium-editor` (root `SKILL.md`) |
 | YouTube script, title, description | `youtube-script` |
@@ -28,7 +29,7 @@ This repository holds two things for **Muhammad Faheem Iqbal (faheem506pk)**, a 
 
 Skills live in `skills/`. Run `scripts/sync-skills.sh` to copy them to `.claude/skills/` and `.agents/skills/`.
 
-3. MCP server `author-studio` (`mcp/author-studio`, build with `cd mcp/author-studio && npm install && npm run build`). Tools: `get_author_profile`, `get_voice_guide`, `get_strategy`, `get_topic_backlog`, `get_lessons`, `add_lesson`, `list_published_stories`, `list_open_questions`, `list_skills`, `get_platform_guide`, `list_drafts`, `read_draft`, `create_draft`, `check_draft`.
+3. MCP server `author-studio` (`mcp/author-studio`, build with `cd mcp/author-studio && npm install && npm run build`). Tools: `get_author_profile`, `get_voice_guide`, `get_strategy`, `get_topic_backlog`, `get_medium_policy`, `check_medium_policy`, `get_lessons`, `add_lesson`, `list_published_stories`, `list_open_questions`, `list_skills`, `get_platform_guide`, `list_drafts`, `read_draft`, `create_draft`, `check_draft`.
 
 ## Quick start (what to do next time)
 0. Read `author/lessons.md` and `author/study-queue.md` (skill `lessons-learned`). Apply them. At the end of the task add new lessons and study items.
@@ -48,6 +49,7 @@ Start: read `author/lessons.md` and `author/study-queue.md`. End: record 1 to 5 
 - Never publish, post, send or edit on Medium, LinkedIn, X, YouTube or GitHub. Draft only.
 - Confidential client work is never named. No phone or personal email in generated content.
 - No em dashes in anything written for him.
+- The author wants Partner Program income. Default to the paid track: agents research, outline, fact-check and edit feedback, the author writes the text himself. Read skill `medium-policy` and run `check_medium_policy` before handing over any story. Never buy, enroll, enter bank or tax details, or publish for him.
 - Medium policy: AI-generated text cannot be paywalled and needs a disclosure sentence in the first two paragraphs (else Network Only). The author rewrites drafts in his own words. Never batch-publish: spam rules apply, plan 1 to 2 stories per week.
 - Verify technical claims against primary sources and cite URLs.
 - Never write a story before `topic-research` says it adds value (score 16 or more, or 13 to 15 with real author details). Do not write topics on the ignore list.
