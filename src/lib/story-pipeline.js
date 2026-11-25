@@ -11,12 +11,12 @@ export const MEDIUM_STATUSES = [
 
 // Writing pipeline, in order. `label` is what the author sees.
 export const PIPELINE_STATUSES = [
-  { value: "idea", label: "Idea", hint: "Researched topic, can be started from sources" },
-  { value: "needs_details", label: "Needs my details", hint: "Waiting for real experience from the author" },
-  { value: "drafting", label: "Writing", hint: "The author is writing the story" },
-  { value: "review", label: "Review", hint: "Fact-check, policy check and edit" },
-  { value: "ready", label: "Ready to publish", hint: "Final text, publish on Medium yourself" },
-  { value: "published", label: "Published", hint: "Live on Medium" },
+  { value: "idea", label: "Idea", tone: "neutral", hint: "Researched, can start from sources" },
+  { value: "needs_details", label: "Needs my details", tone: "warning", hint: "Waiting for your real experience" },
+  { value: "drafting", label: "Writing", tone: "primary", hint: "You are writing the story" },
+  { value: "review", label: "Review", tone: "info", hint: "Fact-check, policy check and edit" },
+  { value: "ready", label: "Ready to publish", tone: "success", hint: "Final text, publish on Medium yourself" },
+  { value: "published", label: "Published", tone: "success", hint: "Live on Medium" },
 ]
 
 export function normalizeTitle(value = "") {
