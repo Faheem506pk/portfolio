@@ -1,6 +1,6 @@
 # Brief 4: An MCP Security Checklist for Developers
 
-- **Status:** brief (outline stage). Can be drafted from public sources after a verification pass, then personalized.
+- **Status:** DRAFTED (free track, AI-assisted): see medium.md in this folder. Needs author confirmation of [AUTHOR] markers and rewrite in his own words.
 - **Pillar:** AI-native engineering
 - **Score:** 17/20 (Demand 5, Gap 3, Fit 4, Proof 5). Judgment, not measured data. Demand is inferred.
 - **Verdict:** Write now

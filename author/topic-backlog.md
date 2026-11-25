@@ -9,7 +9,7 @@ Briefs live in `drafts/2026-11-25-<slug>/brief.md`. Status: brief, drafted, revi
 | 1 | AI-native engineering | Does AGENTS.md Actually Help? I Tested Mine and Cut Half | 19 | N | brief | `drafts/2026-11-25-agents-md-test/brief.md` |
 | 2 | AI-native engineering | I Measured AI vs No AI on 10 Real Tasks | 18 | N | brief | `drafts/2026-11-25-ai-vs-no-ai-task-log/brief.md` |
 | 3 | AI-native engineering | I Built an MCP Server in TypeScript That Knows Me | 18 | N | brief | `drafts/2026-11-25-mcp-server-that-knows-me/brief.md` |
-| 4 | AI-native engineering | An MCP Security Checklist for Developers | 17 | S | brief | `drafts/2026-11-25-mcp-security-checklist/brief.md` |
+| 4 | AI-native engineering | An MCP Security Checklist for Developers | 17 | S | drafted (free track, needs author rewrite) | `drafts/2026-11-25-mcp-security-checklist/brief.md` |
 | 5 | AI-native engineering | AI-Generated React and Next.js Security Bugs I Found in Review | 17 | N | brief | `drafts/2026-11-25-ai-security-bugs-react-next/brief.md` |
 | 6 | AI-native engineering | Skills vs MCP vs AGENTS.md: Which One for What | 17 | N | brief | `drafts/2026-11-25-skills-vs-mcp-vs-agents-md/brief.md` |
 | 7 | AI-native engineering | My Checklist for Reviewing AI-Written Pull Requests | 17 | N | brief | `drafts/2026-11-25-review-ai-pull-requests/brief.md` |

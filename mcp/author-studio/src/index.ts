@@ -208,6 +208,9 @@ server.tool(
   async ({ kind, area, text: body }) => {
     if (/\u2014|\u2013/.test(body)) return fail("No em or en dashes. Rephrase.");
     if (/(api[_-]?key|secret|password|token)\s*[:=]/i.test(body)) return fail("Looks like a secret. Not stored.");
+    // Stored text is later read back into agent context, so block obvious instruction-injection and links.
+    if (/https?:\/\//i.test(body)) return fail("No URLs in lessons. Put sources in the study queue notes by hand.");
+    if (/(ignore (all |any )?(previous|prior|above)|disregard (the )?(rules|instructions)|system prompt|do not (tell|inform) the (user|author)|you must now|new instructions)/i.test(body)) return fail("Looks like an instruction to an agent, not a lesson. Not stored.");
     const day = new Date().toISOString().slice(0, 10);
     const file = path.join(AUTHOR, kind === "lesson" ? "lessons.md" : "study-queue.md");
     const line = kind === "lesson" ? `- ${day} | ${area} | ${body}\n` : `- ${body} | added ${day} | area: ${area}\n`;
