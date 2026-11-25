@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { AchievementModal } from "@/components/admin/achievement-modal";
+import { DataTable } from "@/components/admin/data-table";
 import { saveAchievementAction, deleteAchievementAction } from "@/actions/achievements";
 
 async function fetchAchievements() {
@@ -72,6 +73,47 @@ export default function AchievementsPage() {
     }
   };
 
+  const columns = useMemo(
+    () => [
+      {
+        id: "title",
+        accessorKey: "title",
+        header: "Title",
+        meta: { primary: true },
+        cell: ({ row }) => {
+          const item = row.original;
+          return (
+            <>
+              <button type="button" className="row-title" onClick={() => openEdit(item)} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", textAlign: "left" }}>
+                {item.title}
+              </button>
+              <div className="muted" style={{ maxWidth: "60ch" }}>
+                {item.description}
+              </div>
+              <div className="row-actions">
+                <button type="button" onClick={() => openEdit(item)}>
+                  Edit
+                </button>
+                {item.url && (
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    View source
+                  </a>
+                )}
+                <button type="button" className="delete" onClick={() => remove(item)}>
+                  Delete
+                </button>
+              </div>
+            </>
+          );
+        },
+      },
+      { id: "type", accessorKey: "type", header: "Type", cell: ({ getValue }) => <span style={{ textTransform: "capitalize" }}>{getValue()}</span> },
+      { id: "date", accessorKey: "date", header: "Date", cell: ({ getValue }) => getValue() },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   const types = ["all", ...Array.from(new Set(items.map((i) => i.type).filter(Boolean)))];
   const visible = items.filter(
     (i) => (type === "all" || i.type === type) && `${i.title} ${i.description || ""}`.toLowerCase().includes(query.toLowerCase())
@@ -111,61 +153,7 @@ export default function AchievementsPage() {
         />
       </div>
 
-      <div className="wp-table-wrap">
-        <table className="wp-table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Type</th>
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
-              <tr>
-                <td colSpan={3} className="muted">
-                  <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
-                  Loading
-                </td>
-              </tr>
-            ) : visible.length === 0 ? (
-              <tr>
-                <td colSpan={3} className="muted">
-                  {items.length === 0 ? "No achievements yet. Use Add New to create the first one." : "No achievements match."}
-                </td>
-              </tr>
-            ) : (
-              visible.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <button type="button" className="row-title" onClick={() => openEdit(item)} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", textAlign: "left" }}>
-                      {item.title}
-                    </button>
-                    <div className="muted" style={{ maxWidth: "60ch" }}>
-                      {item.description}
-                    </div>
-                    <div className="row-actions">
-                      <button type="button" onClick={() => openEdit(item)}>
-                        Edit
-                      </button>
-                      {item.url && (
-                        <a href={item.url} target="_blank" rel="noreferrer">
-                          View source
-                        </a>
-                      )}
-                      <button type="button" className="delete" onClick={() => remove(item)}>
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                  <td data-label="Type" style={{ textTransform: "capitalize" }}>{item.type}</td>
-                  <td data-label="Date">{item.date}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+      <DataTable columns={columns} data={visible} loading={loading} initialSort={[{ id: "date", desc: true }]} emptyText={items.length === 0 ? "No achievements yet. Use Add New to create the first one." : "No achievements match."} />
 
       <AchievementModal open={modalOpen} onOpenChange={setModalOpen} initialData={editing} onSubmit={submit} isSubmitting={saving} />
     </div>

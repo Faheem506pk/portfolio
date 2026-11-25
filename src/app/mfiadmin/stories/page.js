@@ -30,7 +30,7 @@ async function fetchAll() {
   return { missing: false, ideas: ideaRes.data || [], posts: postRes.data || [] }
 }
 
-const OUTLINE = "inline-flex h-9 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm font-medium text-foreground hover:bg-muted max-sm:h-11"
+const OUTLINE = "inline-flex h-8 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm font-medium text-foreground hover:bg-muted max-sm:h-11"
 
 export default function ContentStudioPage() {
   const router = useRouter()
@@ -156,7 +156,7 @@ export default function ContentStudioPage() {
   const listItems = stage === "all" ? filtered : filtered.filter((i) => effective(i) === stage)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div className="wp-heading" style={{ marginBottom: 0 }}>
         <h1>Content Studio</h1>
         <div className="ml-auto flex flex-wrap gap-2">
@@ -183,7 +183,7 @@ export default function ContentStudioPage() {
         <label className="sr-only" htmlFor="idea-pillar">
           Filter by pillar
         </label>
-        <select id="idea-pillar" value={pillar} onChange={(e) => setPillar(e.target.value)} className="h-9 rounded-lg border border-input bg-card px-3 text-sm max-sm:h-11">
+        <select id="idea-pillar" value={pillar} onChange={(e) => setPillar(e.target.value)} className="h-8 rounded-lg border border-input bg-card px-3 text-sm max-sm:h-11">
           {pillars.map((p) => (
             <option key={p} value={p}>
               {p === "all" ? "All topics" : p}

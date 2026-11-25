@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { ProjectModal } from "@/components/admin/project-modal";
+import { DataTable } from "@/components/admin/data-table";
 
 async function fetchProjects() {
   const { data, error } = await supabase.from("projects").select("*").order("id", { ascending: false });
@@ -70,6 +71,65 @@ export default function ProjectsPage() {
     }
   };
 
+  const columns = useMemo(
+    () => [
+      {
+        id: "name",
+        accessorKey: "name",
+        header: "Project",
+        meta: { primary: true },
+        cell: ({ row }) => {
+          const project = row.original;
+          return (
+            <>
+              <button type="button" className="row-title" onClick={() => openEdit(project)} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", textAlign: "left" }}>
+                {project.name}
+              </button>
+              <div className="muted" style={{ maxWidth: "60ch" }}>
+                {project.description}
+              </div>
+              <div className="row-actions">
+                <button type="button" onClick={() => openEdit(project)}>
+                  Edit
+                </button>
+                {project.live_url && (
+                  <a href={project.live_url} target="_blank" rel="noreferrer">
+                    Live demo
+                  </a>
+                )}
+                {project.github_url && (
+                  <a href={project.github_url} target="_blank" rel="noreferrer">
+                    Repository
+                  </a>
+                )}
+                <button type="button" className="delete" onClick={() => remove(project)}>
+                  Delete
+                </button>
+              </div>
+            </>
+          );
+        },
+      },
+      {
+        id: "tech",
+        header: "Technologies",
+        enableSorting: false,
+        accessorFn: (p) => (p.tech || []).slice(0, 5).join(", ") + ((p.tech || []).length > 5 ? ` +${p.tech.length - 5}` : ""),
+        meta: { className: "muted" },
+        cell: ({ getValue }) => getValue(),
+      },
+      { id: "year", accessorKey: "year", header: "Year", cell: ({ getValue }) => getValue() },
+      {
+        id: "status",
+        header: "Status",
+        accessorFn: (p) => (p.featured ? "Featured" : "Standard"),
+        cell: ({ getValue }) => <span className={`wp-status ${getValue() === "Featured" ? "ok" : ""}`}>{getValue()}</span>,
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   const featuredCount = projects.filter((p) => p.featured).length;
   const visible = projects.filter(
     (p) => (view === "all" || p.featured) && `${p.name} ${p.description || ""}`.toLowerCase().includes(query.toLowerCase())
@@ -111,70 +171,7 @@ export default function ProjectsPage() {
         />
       </div>
 
-      <div className="wp-table-wrap">
-        <table className="wp-table">
-          <thead>
-            <tr>
-              <th scope="col">Project</th>
-              <th scope="col">Technologies</th>
-              <th scope="col">Year</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
-              <tr>
-                <td colSpan={4} className="muted">
-                  <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
-                  Loading
-                </td>
-              </tr>
-            ) : visible.length === 0 ? (
-              <tr>
-                <td colSpan={4} className="muted">
-                  {projects.length === 0 ? "No projects yet. Use Add New to create the first one." : "No projects match."}
-                </td>
-              </tr>
-            ) : (
-              visible.map((project) => (
-                <tr key={project.id}>
-                  <td>
-                    <button type="button" className="row-title" onClick={() => openEdit(project)} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", textAlign: "left" }}>
-                      {project.name}
-                    </button>
-                    <div className="muted" style={{ maxWidth: "60ch" }}>
-                      {project.description}
-                    </div>
-                    <div className="row-actions">
-                      <button type="button" onClick={() => openEdit(project)}>
-                        Edit
-                      </button>
-                      {project.live_url && (
-                        <a href={project.live_url} target="_blank" rel="noreferrer">
-                          Live demo
-                        </a>
-                      )}
-                      {project.github_url && (
-                        <a href={project.github_url} target="_blank" rel="noreferrer">
-                          Repository
-                        </a>
-                      )}
-                      <button type="button" className="delete" onClick={() => remove(project)}>
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                  <td className="muted" data-label="Technologies">{(project.tech || []).slice(0, 5).join(", ")}{(project.tech || []).length > 5 ? ` +${project.tech.length - 5}` : ""}</td>
-                  <td data-label="Year">{project.year}</td>
-                  <td data-label="Status">
-                    <span className={`wp-status ${project.featured ? "ok" : ""}`}>{project.featured ? "Featured" : "Standard"}</span>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+      <DataTable columns={columns} data={visible} loading={loading} initialSort={[{ id: "year", desc: true }]} emptyText={projects.length === 0 ? "No projects yet. Use Add New to create the first one." : "No projects match."} />
 
       <ProjectModal open={modalOpen} onOpenChange={setModalOpen} initialData={editing} onSubmit={submit} isSubmitting={saving} />
     </div>
