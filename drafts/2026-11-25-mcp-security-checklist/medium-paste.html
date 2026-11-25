@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Paste into Medium: MCP security checklist</title>
+<style>body{font:18px/1.6 Georgia,serif;max-width:720px;margin:2rem auto;padding:0 1rem}pre{background:#f4f4f4;padding:1rem;overflow:auto}.note{background:#fff8d6;border:1px solid #e6d27a;padding:.8rem;font:14px/1.4 sans-serif}</style></head><body>
+<div class="note"><b>How to use:</b> select everything below the line (Ctrl+A), copy (Ctrl+C), open Medium, click Write, paste (Ctrl+V). Then replace every [AUTHOR ...] note, rewrite in your own words, add a cover image with alt text, set tags, and publish yourself. Keep the AI disclosure sentence unless you rewrite everything. Do not paywall this version.</div><hr>
+<h1>I Audited My Own MCP Server Before Trusting It: An 8-Point Security Checklist</h1>
+<p><em>Tool poisoning, prompt injection and plain old code bugs, checked against a 16-tool server I built.</em></p>
+<p>A local MCP server is a program that an AI agent can call, and it runs with your permissions. Before I let mine near my files, I wanted to know what could go wrong.</p>
+<p><em>This story was written with the assistance of an AI writing program. I checked the sources and the code facts myself.</em> [AUTHOR: keep only if true, and rewrite in your own words.]</p>
+<p>Here is what the security research says to check, and how I applied it to a small server I built for my own writing workflow. It is a self-audit, not a penetration test, and I will say where it stops.</p>
+<h2>Why local MCP servers deserve a second look</h2>
+<p>Elastic Security Labs notes that MCP servers can run locally, where they execute code directly on your machine and carry higher system risk, or remotely, where the main concern is data access. It also points out that every MCP server is still code, so it inherits ordinary software flaws. In the research Elastic cites, 43% of tested server implementations had command injection flaws and 30% allowed unrestricted URL fetching. That figure comes from an earlier March 2025 analysis by other researchers, so treat it as secondhand.</p>
+<p>A 2026 paper, "Are AI-assisted Development Tools Immune to Prompt Injection?", tested tool-poisoning attacks against seven MCP clients: Claude Desktop, Claude Code, Cursor, Cline, Continue, Gemini CLI and Langflow. The authors found large differences. Some clients had strong guardrails, while others, such as Cursor, were highly susceptible to cross-tool poisoning, hidden parameter exploitation and unauthorized tool calls. Clients change quickly, so check current versions before you rely on that comparison.</p>
+<p>Elastic groups the risks into four classes:</p>
+<ul>
+<li><strong>Traditional vulnerabilities</strong>: The server is code and can have command injection, SQL injection or unsafe fetching</li>
+<li><strong>Tool poisoning</strong>: Malicious instructions hidden in a tool's description or parameters</li>
+<li><strong>Rug pulls, name collision, passive influence</strong>: A tool changes after you approved it, or tricks the model into picking a bad tool</li>
+<li><strong>Orchestration injection</strong>: Attacks that combine several tools or servers</li>
+</ul>
+<h2>The server I audited</h2>
+<p>My server, <code>author-studio</code>, gives an AI agent my writing profile, my voice rules, a Medium policy guide and a few draft tools. It is written in TypeScript, talks over stdio, and exposes 16 tools. Most only read project files. Two write: <code>create_draft</code> and <code>add_lesson</code>.</p>
+<p>I used the Elastic recommendations as an audit list and checked each one against the code.</p>
+<h2>The 8-point checklist</h2>
+<p><strong>1. Does any tool run shell commands or fetch URLs?</strong> This is the first thing to grep for. In my server there is no <code>child_process</code> use and no network call, so the two classic flaws behind the 43% and 30% figures have no entry point. If a tool needs a shell or a fetch, that is the code to review hardest.</p>
+<p><strong>2. How does it limit file access?</strong> Every read tool builds its path from a fixed folder plus a validated name. The draft folder name must match <code>^[a-z0-9-]+$</code>, so dots, slashes and <code>..</code> are rejected. The skill name in <code>get_platform_guide</code> uses the same rule, so it can only open <code>skills/&lt;name&gt;/SKILL.md</code>.</p>
+<p><strong>3. What can it write, and can it overwrite?</strong> <code>create_draft</code> writes only under <code>drafts/</code>, validates the slug and date, and opens files with the <code>wx</code> flag, which fails if the file already exists. An agent cannot silently replace a draft. <code>add_lesson</code> only appends to two files.</p>
+<pre><code class="language-ts">const slugSchema = z.string().regex(/^[a-z0-9][a-z0-9-]{1,60}$/);
+await fs.writeFile(file, content, { encoding: &quot;utf8&quot;, flag: &quot;wx&quot; });
+</code></pre>
+<p><strong>4. Is every input validated?</strong> Each tool declares a Zod schema with types, enums and length limits, for example a 200,000 character cap on draft content. Validation does not make a tool safe by itself, but it removes the easy mistakes.</p>
+<p><strong>5. Could the tool descriptions be poisoned or changed?</strong> Tool poisoning hides instructions in descriptions or parameters. My descriptions are short, static strings in the source, and I read them as if they were prompts. The rug-pull risk is different: it applies when you update a server you do not control. My server lives in my own repository, so the control is reading the git diff before I rebuild it. If you install a third-party server, pin the version and re-read its tool descriptions after every update.</p>
+<p><strong>6. What text does it hand back to the model?</strong> This is where I found something real. Anything a tool returns becomes model input, so a file can carry instructions. Elastic puts it plainly: any text fed to the LLM can rewrite instructions on the client side. My <code>get_lessons</code> tool returns a file that <code>add_lesson</code> writes to. That is a memory-poisoning path: a manipulated agent could store an instruction today that a different agent follows next week.</p>
+<p>I changed <code>add_lesson</code> to reject URLs and obvious instruction phrases such as "ignore previous instructions". That is a weak heuristic, and a determined attacker can phrase around it. The real control is human review, so I read changes to <code>author/lessons.md</code> in git before committing. [AUTHOR: confirm you do this, or describe what you actually do.]</p>
+<p><strong>7. Is it sandboxed and least-privilege?</strong> Elastic recommends sandboxing, for example running clients and servers in Docker so credentials are not exposed, and limiting what data an agent can reach. My server runs as my user with access to the project folder it was pointed at through one environment variable. That is better than a whole-disk server, but it is not a sandbox. Gap noted.</p>
+<p><strong>8. Is there human approval and logging?</strong> Elastic advises against "always allow" settings for sensitive tools and recommends logging all tool calls and reviewing them. My server has no audit log of its own, so it relies on the client's approval prompts. Gap noted.</p>
+<h2>A checklist you can copy</h2>
+<p>Before you run any MCP server:</p>
+<ol>
+<li>Search the code for shell execution, <code>eval</code>, and outbound network calls.</li>
+<li>Check that paths are built from fixed roots and validated names.</li>
+<li>List every write tool and confirm it cannot overwrite or escape its folder.</li>
+<li>Confirm inputs have schemas and size limits.</li>
+<li>Read every tool description like a prompt. Pin versions and re-read after updates.</li>
+<li>Ask what returned text could contain instructions, especially stored text.</li>
+<li>Run it with the least access you can, ideally in a container.</li>
+<li>Keep approvals on for sensitive tools and review the logs.</li>
+</ol>
+<h2>What this audit does not prove</h2>
+<p>I read my own code and ran a few probes. I did not run a fuzzer, a dependency audit or an independent review. A server can pass this list and still have a flaw, and the client matters as much as the server, as the seven-client study shows. The checklist lowers risk. It does not remove it.</p>
+<p>If you run MCP servers, which of these eight have you actually checked?</p>
+<h2>Sources (accessed 2026-11-25)</h2>
+<ul>
+<li>Elastic Security Labs, "MCP Tools: Attack Vectors and Defense Recommendations for Autonomous Agents" (2025-09-19): https://www.elastic.co/security-labs/mcp-tools-attack-defense-recommendations</li>
+<li>Huang, Huang, Milani Fard, "Are AI-assisted Development Tools Immune to Prompt Injection?" (arXiv 2603.21642, 2026-03-23): https://arxiv.org/abs/2603.21642</li>
+<li>Model Context Protocol: https://modelcontextprotocol.io</li>
+</ul></body></html>
