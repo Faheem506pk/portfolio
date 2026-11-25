@@ -31,7 +31,7 @@ Briefs live in `drafts/2026-11-25-<slug>/brief.md`. Status: brief, drafted, revi
 | 25 | JS/TS/React/Next.js in production | Validate Everything at the Boundary With Zod in Next.js | 15 | S | brief | `drafts/2026-11-25-zod-at-the-boundary/brief.md` |
 | 27 | JS/TS/React/Next.js in production | Playwright Tests That Catch Real Bugs in a Next.js App | 15 | N | brief | `drafts/2026-11-25-playwright-real-bugs/brief.md` |
 | 29 | JS/TS/React/Next.js in production | The Vercel Go-Live Checklist for a Next.js Portfolio | 15 | N | brief | `drafts/2026-11-25-vercel-go-live-checklist/brief.md` |
-| 30 | JS/TS/React/Next.js in production | Offline-First React With IndexedDB and Zustand | 15 | N | brief | `drafts/2026-11-25-offline-first-react-indexeddb/brief.md` |
+| 30 | JS/TS/React/Next.js in production | Offline-First React With IndexedDB and Zustand | 15 | N | drafted (free track, from public StitchSmart code) | `drafts/2026-11-25-offline-first-react-indexeddb/brief.md` |
 | 34 | JS/TS/React/Next.js in production | Choosing a UI Library for an Admin Panel | 15 | N | brief | `drafts/2026-11-25-admin-panel-ui-library/brief.md` |
 | 35 | JS/TS/React/Next.js in production | Core Web Vitals Fixes for a Next.js Portfolio | 15 | N | brief | `drafts/2026-11-25-core-web-vitals-portfolio/brief.md` |
 | 36 | JS/TS/React/Next.js in production | SEO for Next.js: Metadata, Sitemap and JSON-LD | 15 | N | brief | `drafts/2026-11-25-nextjs-seo-metadata/brief.md` |
