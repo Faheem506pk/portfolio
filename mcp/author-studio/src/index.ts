@@ -14,6 +14,7 @@ const DRAFTS = path.join(ROOT, "drafts");
 
 const PLATFORMS = ["medium", "linkedin", "x", "youtube", "brief", "sources"] as const;
 const PLATFORM_SKILL: Record<string, string> = {
+  topic: "topic-research",
   medium: "medium-writer",
   linkedin: "linkedin-post",
   x: "x-thread",
@@ -83,6 +84,16 @@ server.tool(
   async () => {
     const t = await readOrNull(path.join(AUTHOR, "stories-index.md"));
     return t ? text(t) : fail("author/stories-index.md not found");
+  },
+);
+
+server.tool(
+  "get_topic_backlog",
+  "Researched and scored story topics with status and what real details the author must supply. Check this before proposing or writing any story.",
+  {},
+  async () => {
+    const t = await readOrNull(path.join(AUTHOR, "topic-backlog.md"));
+    return t ? text(t) : fail("author/topic-backlog.md not found");
   },
 );
 
