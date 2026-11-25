@@ -5,11 +5,11 @@
 - **Score:** 15/20 (Demand 4, Gap 4, Fit 4, Proof 3). Judgment, not measured data. Demand is inferred.
 - **Verdict:** Write if the author supplies real details
 - **Reader:** Pakistani developers
-- **Differentiator:** His JUHUU and Alphabase experience.
+- **Differentiator:** His own freelance experience with international clients. No employer or client names.
 
 ## Title options
 1. Working With International Clients From Pakistan
-2. What Austria and US Teams Taught Me About Communication
+2. What Working With Clients Abroad Taught Me About Communication
 3. [pick a third after the interview]
 
 ## Outline (structure only, claims to be verified)

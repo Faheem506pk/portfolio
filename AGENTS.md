@@ -47,6 +47,7 @@ Start: read `author/lessons.md` and `author/study-queue.md`. End: record 1 to 5 
 - Review first. Never rewrite an original story without approval.
 - Never invent anecdotes, credentials, tests, metrics, quotes or clients. Ask the author.
 - Never publish, post, send or edit on Medium, LinkedIn, X, YouTube or GitHub. Draft only.
+- NEVER write about the author's employer or client projects or use their names (for example TabTake and other work projects), on any platform, even generally. Personal projects only. The full list is `neverMention` in `author/facts.json`; `check_draft` and `check_medium_policy` flag it.
 - Confidential client work is never named. No phone or personal email in generated content.
 - No em dashes in anything written for him.
 - The author wants Partner Program income. Default to the paid track: agents research, outline, fact-check and edit feedback, the author writes the text himself. Read skill `medium-policy` and run `check_medium_policy` before handing over any story. Never buy, enroll, enter bank or tax details, or publish for him.

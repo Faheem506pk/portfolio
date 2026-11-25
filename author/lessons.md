@@ -21,6 +21,9 @@ Format: date | area | lesson | why
 - 2026-11-25 | process | Run `topic-research` before drafting, then `check_draft`, then `medium-editor` review, then wait for approval before revising. | Review-first policy.
 - 2026-11-25 | cpu | Run work sequentially, one build at a time, no extra agents unless asked. | User's global CPU rule.
 
+## Hard author rules
+- 2026-11-25 | confidentiality | The author does not want stories about his employer or client projects, or their names (TabTake, other work projects). Use personal projects only. Check `neverMention` in facts.json before drafting. | His explicit instruction.
+
 ## Platform policy
 - 2026-11-25 | medium | Medium AI policy (updated 2026-11-12): AI-generated text cannot be paywalled, AI-assisted text needs a disclosure sentence in the first two paragraphs or gets Network Only distribution, AI images need captions. No official per-day story limit found in the help pages, spam rules apply. | Account safety. Agents draft, the author rewrites and owns the text.
 - 2026-11-25 | scale | Do not mass-produce full stories. 60 full AI drafts would break the spirit of Medium's policy and the no-invention rule. Make briefs and outlines, write full drafts one at a time with the author's real details. | Quality and account risk.
@@ -33,5 +36,5 @@ Format: date | area | lesson | why
 
 ## Author facts to confirm (do not assume)
 - Whether he wants an AI-assistance disclosure line on posts.
-- Which TabTake or JavaScript lessons are safe to publish.
+- Which lessons from his personal projects are safe to publish. Employer and client projects are off limits.
 - 2026-11-25 | process | When the author approves only must-fix items, apply only those and list the untouched should-fix items in the revised file header.

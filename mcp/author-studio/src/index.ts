@@ -120,6 +120,8 @@ server.tool(
   async ({ content, aiAssisted, plannedPaywall, tags, selfPath }) => {
     const issues: string[] = [];
     const body = content.replace(/<!--[\s\S]*?-->/g, "");
+    const bannedTerms = findBanned(body, await neverMentionTerms());
+    if (bannedTerms.length) issues.push(`Mentions employer or client project names the author forbids: ${bannedTerms.join(", ")}. Remove them.`);
     const paras = body.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !p.startsWith("#"));
     const firstTwo = paras.slice(0, 3).join(" ").toLowerCase();
     if (aiAssisted && !/(assistance of an ai|written with (the )?(help|assistance) of|ai writing program|ai-assisted|ai assistance)/.test(firstTwo)) {
@@ -334,6 +336,21 @@ const BANNED_PHRASES = [
   "without further ado",
 ];
 
+async function neverMentionTerms(): Promise<string[]> {
+  try {
+    const raw = await fs.readFile(path.join(AUTHOR, "facts.json"), "utf8");
+    const nm = JSON.parse(raw).neverMention;
+    return nm && Array.isArray(nm.projectNames) ? nm.projectNames : [];
+  } catch {
+    return [];
+  }
+}
+
+function findBanned(text: string, terms: string[]): string[] {
+  const lower = text.toLowerCase();
+  return terms.filter((t) => lower.includes(t.toLowerCase()));
+}
+
 function checkText(t: string, platform: string) {
   const issues: string[] = [];
   const dashes = (t.match(/—|–/g) ?? []).length;
@@ -366,6 +383,8 @@ server.tool(
   { content: z.string().min(1).max(200_000), platform: z.enum(["medium", "linkedin", "x", "youtube", "other"]).default("medium") },
   async ({ content, platform }) => {
     const { words, issues } = checkText(content, platform);
+    const banned = findBanned(content, await neverMentionTerms());
+    if (banned.length) issues.unshift(`Mentions employer or client project names the author forbids: ${banned.join(", ")}. Remove them.`);
     return text(
       issues.length
         ? `${words} words. ${issues.length} issue(s):\n- ${issues.join("\n- ")}`

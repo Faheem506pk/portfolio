@@ -1,7 +1,7 @@
 # Open questions (ask the author, then move answers into facts.json)
 
 1. Primary goal: followers, job offers, freelance clients, or brand?
-2. Which TabTake or JavaScript lessons are safe to share publicly?
+2. Which JavaScript or React lessons from your PERSONAL projects can be shared publicly? (Employer and client projects are never used.)
 3. Preferred profile photo and bio wording.
 4. Links for the UrduPoint, ARY News and PNN News coverage.
 5. Which AI tool is used for which task (Claude Code, Codex, Antigravity)?

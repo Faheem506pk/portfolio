@@ -31,4 +31,4 @@ Date: 2026-11-25. Read from the live pages. Scores are not given: this is a port
 ## Strategy that follows from the stories
 - Your strongest new angle is **AI-assisted JavaScript/TypeScript engineering with real repos** (stories 1 and 2 extended). Next stories should build on them, not on the career origin story again.
 - Retire or consolidate the career origin story into one canonical piece, and link to it.
-- Candidate next stories (needs author's real details): TabTake lessons with AI agents (non-confidential), a PlantPulse IoT build, a JavaScript/TypeScript gotcha you hit with AI help, a follow-up to story 1 with what changed after using the system for a month.
+- Candidate next stories (needs author's real details): [work project] lessons with AI agents (non-confidential), a PlantPulse IoT build, a JavaScript/TypeScript gotcha you hit with AI help, a follow-up to story 1 with what changed after using the system for a month.

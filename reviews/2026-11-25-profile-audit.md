@@ -5,7 +5,7 @@ Sources reviewed: Medium profile, one old story, portfolio (faheem506pk.vercel.a
 
 ## Snapshot
 - Medium: 7 stories (Sep 11 to Nov 2026), 2 followers, 6 following, About page empty.
-- Portfolio: Full Stack Developer, 2+ years, TabTake at MicroMerger, 3 countries.
+- Portfolio: Full Stack Developer, 2+ years, [work project] at MicroMerger, 3 countries.
 - LinkedIn: 500+ connections, headline still "Frontend Developer" keyword list.
 
 ## Old story review: "My First Year as a Software Engineer Taught Me 7 Things University Never Did"
@@ -46,7 +46,7 @@ Bio:
 > Full-stack software engineer (React, Next.js, TypeScript). I write about AI-assisted coding and my path from IT graduate to engineer in Pakistan.
 
 About page:
-> I'm Faheem, a software engineer in Islamabad working on TabTake, a restaurant management platform. I started in 2020 with a PKR 5,000 data-entry job, built my first client websites as a student, and became a Software Engineer in January 2026.
+> I'm Faheem, a software engineer in Islamabad working on [work project], a restaurant management platform. I started in 2020 with a PKR 5,000 data-entry job, built my first client websites as a student, and became a Software Engineer in January 2026.
 >
 > I write about:
 > - Using AI coding agents (Claude Code, SKILL.md workflows) in real projects
@@ -64,7 +64,7 @@ Steps:
 6. Publish one story per week, one theme each.
 
 ## Content plan (only from real experience)
-1. AI + JavaScript: how I use Claude Code on a real Next.js project (TabTake workflow).
+1. AI + JavaScript: how I use Claude Code on a real Next.js project ([work project] workflow).
 2. Rewrite of the old story (separate file in articles/, after approval).
 3. IoT: voice-controlled home with Alexa and ESP8266.
 4. One production lesson from ERPNext or React work, in the author's own words.

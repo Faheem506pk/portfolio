@@ -25,7 +25,7 @@ Angle: practical rules from real work, not hype. Connects to the author's publis
 Tags: JavaScript, TypeScript, AI, Software Development, Programming
 
 ## Questions for the author
-1. Which project can I mention (personal repo like StitchSmart/PlantPulse, or TabTake in general terms)?
+1. Which project can I mention (personal repo like StitchSmart/PlantPulse, or [work project] in general terms)?
 2. Which AI tool do you use most, and for what tasks?
 3. One time AI saved you real time. What was it, roughly how long did it take before vs after (only if you measured)?
 4. One time AI gave a wrong answer or broken code. What happened?

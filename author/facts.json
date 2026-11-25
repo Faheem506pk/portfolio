@@ -17,8 +17,7 @@
     "company": "MicroMerger (Pvt.) Ltd.",
     "since": "2026-01",
     "promotedAfterMonths": 11,
-    "publicProject": "TabTake, a restaurant management system (online ordering, delivery and collection, QR ordering, reservations, menus, multi-location)",
-    "confidentialNote": "5+ confidential client projects exist. Never name or describe them."
+    "confidentialNote": "Employer and client projects are never written about, by name or description. See neverMention."
   },
   "timeline": [
     {
@@ -142,52 +141,61 @@
       "name": "Qotion",
       "what": "Notion-style table app",
       "tech": "React, TypeScript, Vite, Chakra UI, Firebase",
-      "demo": "https://qotion.vercel.app"
+      "demo": "https://qotion.vercel.app",
+      "allowedInStories": false
     },
     {
       "name": "StitchSmart",
       "what": "Tailor shop management admin panel with offline support",
       "tech": "React, TypeScript, Tailwind, Firebase, Zustand, IndexedDB",
-      "demo": "https://stitchsmart.vercel.app"
+      "demo": "https://stitchsmart.vercel.app",
+      "allowedInStories": true
     },
     {
       "name": "PlantPulse",
       "what": "IoT greenhouse monitor",
       "tech": "ESP32, React, Firebase",
-      "demo": "https://plantpulse.vercel.app"
+      "demo": "https://plantpulse.vercel.app",
+      "allowedInStories": true
     },
     {
       "name": "PeekGamer",
       "what": "Game discovery platform",
       "tech": "Next.js, TypeScript, Ant Design",
-      "demo": "https://devpeekgamer.vercel.app"
+      "demo": "https://devpeekgamer.vercel.app",
+      "allowedInStories": true
     },
     {
       "name": "Cinematic Vistas",
       "what": "Movie browsing platform",
       "tech": "React, TypeScript, Tailwind",
-      "demo": "https://cinematic-vistas.vercel.app"
+      "demo": "https://cinematic-vistas.vercel.app",
+      "allowedInStories": true
     },
     {
       "name": "CupChase",
       "what": "High-performance web app",
       "tech": "React, TanStack Router, Tailwind, Vite",
-      "demo": "https://cupchase.vercel.app"
+      "demo": "https://cupchase.vercel.app",
+      "allowedInStories": true
     },
     {
       "name": "ExplorePak",
       "what": "Tour packages manager with admin login",
-      "tech": "HTML, CSS, Bootstrap 5, PHP, MySQL"
+      "tech": "HTML, CSS, Bootstrap 5, PHP, MySQL",
+      "allowedInStories": true
     },
     {
       "name": "Speedy Eats",
       "what": "Restaurant website",
-      "tech": "WordPress, ACF, PHP"
+      "tech": "WordPress, ACF, PHP",
+      "allowedInStories": false
     },
     {
       "name": "BikeBox",
       "what": "Bike rental platform for JUHUU GmbH",
-      "tech": "React, Tailwind, JavaScript"
+      "tech": "React, Tailwind, JavaScript",
+      "allowedInStories": false
     }
   ],
   "profiles": {
@@ -233,5 +241,22 @@
     "hosting": "Vercel, https://faheem506pk.vercel.app",
     "features": "blog, achievements, experience, admin panel, CV download",
     "conversion": "CV download"
+  },
+  "neverMention": {
+    "rule": "Never write about the author's employer or client projects, or use their names, in any story, post, script or bio. Not even in general terms. Personal projects are allowed unless the author says otherwise.",
+    "projectNames": [
+      "TabTake",
+      "Speedy Eats",
+      "BikeBox",
+      "JUHUU Marketplace",
+      "Qotion",
+      "Zaplead.ai"
+    ],
+    "askFirst": [
+      "MicroMerger",
+      "Alphabase",
+      "JUHUU"
+    ],
+    "askFirstNote": "Employer company names: ask the author before naming them in a new piece."
   }
 }

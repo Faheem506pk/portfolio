@@ -47,6 +47,9 @@ export function mediumPolicyChecks(post) {
     .filter((p) => p && !p.startsWith("#"))
   const topOfStory = paragraphs.slice(0, 3).join(" ")
 
+  if (/(tabtake|speedy eats|bikebox|juhuu marketplace|qotion|zaplead)/i.test(`${title} ${content}`)) {
+    issues.push({ level: "error", text: "Mentions an employer or client project. You asked never to write about those. Remove it." })
+  }
   if (!title || /^untitled/i.test(title)) issues.push({ level: "error", text: "Add a real title." })
   if (title.length > 100) issues.push({ level: "warn", text: "Title is over 100 characters. Keep it specific and short." })
   if (CLICKBAIT.test(title)) issues.push({ level: "warn", text: "Title looks sensational. Medium penalizes clickbait." })

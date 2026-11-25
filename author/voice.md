@@ -20,6 +20,7 @@
 - Typos: "EUR 100 EUR 120" style missing dashes.
 
 ## Hard rules
+- Never write about the author's employer or client projects, or name them (see `neverMention` in `author/facts.json`). Not in stories, posts, scripts, bios or examples. Personal projects only.
 - Never use an em dash. Use commas, periods, colons.
 - Never invent anecdotes, metrics, benchmarks, tests, quotes, clients or credentials.
 - Never reveal confidential client work, phone, personal email, or family details beyond what he already published.

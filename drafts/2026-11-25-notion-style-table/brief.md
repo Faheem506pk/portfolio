@@ -1,15 +1,15 @@
-# Brief 31: Building a Notion-Style Table in React
+# Brief 31: Building an Editable Table in React
 
 - **Status:** brief (outline stage). No prose written yet. Needs the author's input before drafting.
 - **Pillar:** JS/TS/React/Next.js in production
 - **Score:** 14/20 (Demand 3, Gap 3, Fit 5, Proof 3). Judgment, not measured data. Demand is inferred.
 - **Verdict:** Write if the author supplies real details
 - **Reader:** React developers
-- **Differentiator:** From the Qotion internship project.
+- **Differentiator:** Built from the author's own personal rebuild or demo, never an employer project.
 
 ## Title options
 1. Building a Notion-Style Table in React
-2. Drag and Drop, Editable Cells and Real-Time Sync: Building Qotion
+2. Drag and Drop and Editable Cells in a React Table
 3. [pick a third after the interview]
 
 ## Outline (structure only, claims to be verified)
@@ -20,7 +20,7 @@
 5. What he would redo
 
 ## Needed from the author (real details only)
-- Safe details of Qotion
+- A personal project or demo he built (not an employer or client project), what he built and what broke
 - Anything confidential must be left out or anonymized.
 
 ## Sources to read and verify before drafting

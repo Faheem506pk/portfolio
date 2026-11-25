@@ -16,7 +16,7 @@ Prerequisite: skill `author-profile`.
 
 ## Profile copy
 - Headline: Full Stack Software Engineer | React, Next.js, TypeScript | AI-assisted coding
-- About: update to Software Engineer (Full Stack) and TabTake in general terms. Use `author/facts.json`.
+- About: update to Software Engineer (Full Stack). Do not name or describe employer or client projects. Use `author/facts.json`.
 - Surname: "Iqbal" (profile shows "Iqbal Awan"). Ask which he wants.
 - Featured: pin best Medium story, portfolio, one GitHub demo.
 
