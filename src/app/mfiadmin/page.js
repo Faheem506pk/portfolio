@@ -4,7 +4,9 @@ import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { DashboardStats } from "@/components/admin/dashboard-stats";
-import { Loader2, Plus, Trash2, Edit, ExternalLink, Github, Trophy, Video, Newspaper, LayoutDashboard, Database, TrendingUp } from "lucide-react";
+import { ContentPipelineCard } from "@/components/admin/content-pipeline-card";
+import Link from "next/link";
+import { Loader2, Plus, PenLine, Trash2, Edit, ExternalLink, Github, Trophy, Video, Newspaper, LayoutDashboard, Database, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -190,6 +192,11 @@ export default function AdminPage() {
           <p className="text-muted-foreground">Here&apos;s what&apos;s happening in your portfolio today.</p>
         </div>
         <div className="flex gap-2">
+          <Button asChild variant="outline">
+            <Link href="/mfiadmin/stories">
+              <PenLine className="mr-2 h-4 w-4" /> Content Studio
+            </Link>
+          </Button>
           <Button
             onClick={handleCreateProject}
             className="bg-gradient-to-r from-charcoal-blue to-charcoal-blue/80 hover:from-charcoal-blue/90 hover:to-charcoal-blue/70 text-white shadow-lg shadow-charcoal-blue/20 transition-all hover:scale-105"
@@ -207,6 +214,8 @@ export default function AdminPage() {
       </div>
 
       <DashboardStats />
+
+      <ContentPipelineCard />
 
       <Tabs defaultValue="projects" className="w-full">
         <TabsList className="grid w-full max-w-[400px] grid-cols-2 mb-8 bg-muted/50 p-1 rounded-xl">

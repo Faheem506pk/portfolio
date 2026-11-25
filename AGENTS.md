@@ -57,6 +57,12 @@ Start: read `author/lessons.md` and `author/study-queue.md`. End: record 1 to 5 
 - Medium does not expose per-topic demand: say demand is inferred, not measured.
 - Keep this file and `author/` lean. Research shows long context files can raise cost and not improve results, so add only rules that change behavior.
 
+## Admin Content Studio (website)
+- `/mfiadmin/stories` is the writing pipeline (60 researched ideas, stages Idea to Published). `/mfiadmin/blog` is the Markdown editor with a Medium card: status on Medium, Medium URL, AI and paywall flags, a policy check, and Copy for Medium (rich text) so the author pastes into Medium and publishes himself.
+- Pasting rich text from Medium into the editor converts it to Markdown. "Check Medium" reads the public feed (`/api/medium/feed`) and marks matching posts as published.
+- Tables come from `supabase/migrations/0003` and `0004`. The author applies them with `npm run db:push`. Agents must not run migrations or touch `.env*`.
+- Supabase clients must not be created at module load without env checks. A missing variable on a Vercel preview used to crash the build.
+
 ## Where things go
 `drafts/<date>-<slug>/` working drafts, `reviews/` reports, `articles/` approved finals, `templates/` report templates.
 
