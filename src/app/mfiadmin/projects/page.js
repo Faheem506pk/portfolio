@@ -107,7 +107,7 @@ export default function ProjectsPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search projects"
-          className="h-8 w-60 border bg-card px-2 text-[13px]"
+          className="w-full max-w-xs"
         />
       </div>
 
@@ -164,9 +164,9 @@ export default function ProjectsPage() {
                       </button>
                     </div>
                   </td>
-                  <td className="muted">{(project.tech || []).slice(0, 5).join(", ")}{(project.tech || []).length > 5 ? ` +${project.tech.length - 5}` : ""}</td>
-                  <td>{project.year}</td>
-                  <td>
+                  <td className="muted" data-label="Technologies">{(project.tech || []).slice(0, 5).join(", ")}{(project.tech || []).length > 5 ? ` +${project.tech.length - 5}` : ""}</td>
+                  <td data-label="Year">{project.year}</td>
+                  <td data-label="Status">
                     <span className={`wp-status ${project.featured ? "ok" : ""}`}>{project.featured ? "Featured" : "Standard"}</span>
                   </td>
                 </tr>

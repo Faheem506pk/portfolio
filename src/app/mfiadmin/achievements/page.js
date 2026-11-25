@@ -107,7 +107,7 @@ export default function AchievementsPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search achievements"
-          className="h-8 w-60 border bg-card px-2 text-[13px]"
+          className="w-full max-w-xs"
         />
       </div>
 
@@ -158,8 +158,8 @@ export default function AchievementsPage() {
                       </button>
                     </div>
                   </td>
-                  <td style={{ textTransform: "capitalize" }}>{item.type}</td>
-                  <td>{item.date}</td>
+                  <td data-label="Type" style={{ textTransform: "capitalize" }}>{item.type}</td>
+                  <td data-label="Date">{item.date}</td>
                 </tr>
               ))
             )}
