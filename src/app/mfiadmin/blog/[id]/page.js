@@ -33,6 +33,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Markdown } from "@/components/markdown"
 import { MediaUploader } from "@/components/admin/media-uploader"
 import { PostStats } from "@/components/admin/post-stats"
+import { MediumPublishCard } from "@/components/admin/medium-publish-card"
+import { MediumStatusBadge } from "@/components/admin/medium-status-badge"
+import { htmlToMarkdown } from "@/lib/html-to-markdown"
 import { SITE_URL, readingMinutes } from "@/lib/posts"
 
 function slugify(value = "") {
@@ -137,6 +140,20 @@ export default function BlogEditorPage() {
     })
   }
 
+  // Pasting from Medium (or any web page) keeps headings, lists, links and code as Markdown.
+  const handlePaste = (event) => {
+    const html = event.clipboardData?.getData("text/html")
+    if (!html || !/<(h[1-6]|p|ul|ol|pre|blockquote|strong|em|a)[\s>]/i.test(html)) return
+    const markdown = htmlToMarkdown(html)
+    if (!markdown) return
+    event.preventDefault()
+    const el = event.currentTarget
+    const { selectionStart: start, selectionEnd: end } = el
+    const content = post.content || ""
+    update({ content: content.slice(0, start) + markdown + content.slice(end) })
+    toast.success("Pasted and converted to Markdown")
+  }
+
   const save = async (overrides = {}) => {
     setSaving(true)
     const payload = { ...post, ...overrides }
@@ -192,8 +209,11 @@ export default function BlogEditorPage() {
             <p className="max-w-[40ch] truncate text-sm font-semibold text-foreground">
               {post.title || "Untitled post"}
             </p>
-            <p className="text-xs text-muted-foreground">
-              {post.status === "published" ? "Published" : "Draft"} &middot; {minutes} min read
+            <p className="flex items-center gap-2 text-xs text-muted-foreground">
+              <span>
+                {post.status === "published" ? "Live on your blog" : "Draft"} &middot; {minutes} min read
+              </span>
+              <MediumStatusBadge status={post.medium_status} />
             </p>
           </div>
         </div>
@@ -282,6 +302,7 @@ export default function BlogEditorPage() {
                 ref={textareaRef}
                 value={post.content || ""}
                 onChange={(e) => update({ content: e.target.value })}
+                onPaste={handlePaste}
                 placeholder={"Write in Markdown…\n\n## A heading\n\nSome **bold** text and `code`."}
                 className="min-h-[560px] resize-y font-mono text-sm leading-relaxed"
               />
@@ -303,6 +324,8 @@ export default function BlogEditorPage() {
 
         {/* ---------------- Sidebar ---------------- */}
         <aside className="space-y-5">
+          <MediumPublishCard post={post} update={update} />
+
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base">Search appearance</CardTitle>

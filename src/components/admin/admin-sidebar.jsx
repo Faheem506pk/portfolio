@@ -14,7 +14,8 @@ import {
   LogOut,
   Menu,
   Trophy,
-  PenLine
+  PenLine,
+  Newspaper,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -23,53 +24,46 @@ import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
-const sidebarItems = [
+const sidebarGroups = [
   {
-    title: "Dashboard",
-    href: "/mfiadmin",
-    icon: LayoutDashboard,
+    label: "Overview",
+    items: [{ title: "Dashboard", href: "/mfiadmin", icon: LayoutDashboard }],
   },
   {
-    title: "Blog",
-    href: "/mfiadmin/blog",
-    icon: PenLine,
+    label: "Content",
+    items: [
+      { title: "Content Studio", href: "/mfiadmin/stories", icon: Newspaper },
+      { title: "Blog", href: "/mfiadmin/blog", icon: PenLine },
+    ],
   },
   {
-    title: "Experience",
-    href: "/mfiadmin/experience",
-    icon: Briefcase,
+    label: "Portfolio",
+    items: [
+      { title: "Experience", href: "/mfiadmin/experience", icon: Briefcase },
+      { title: "Education", href: "/mfiadmin/education", icon: GraduationCap },
+      { title: "Skills", href: "/mfiadmin/skills", icon: Wrench },
+      { title: "Achievements", href: "/mfiadmin#achievements", icon: Trophy },
+    ],
   },
   {
-    title: "Education",
-    href: "/mfiadmin/education",
-    icon: GraduationCap,
+    label: "Inbox",
+    items: [{ title: "Messages", href: "/mfiadmin/messages", icon: MessageSquare }],
   },
   {
-    title: "Skills",
-    href: "/mfiadmin/skills",
-    icon: Wrench,
-  },
-  {
-    title: "Messages",
-    href: "/mfiadmin/messages",
-    icon: MessageSquare,
-  },
-  {
-    title: "Users",
-    href: "/mfiadmin/users",
-    icon: Users,
-  },
-  {
-    title: "Achievements",
-    href: "/mfiadmin#achievements",
-    icon: Trophy,
-  },
-  {
-    title: "Settings",
-    href: "/mfiadmin/profile",
-    icon: Settings,
+    label: "System",
+    items: [
+      { title: "Users", href: "/mfiadmin/users", icon: Users },
+      { title: "Settings", href: "/mfiadmin/profile", icon: Settings },
+    ],
   },
 ];
+
+// Nested routes (for example /mfiadmin/blog/12) keep their parent highlighted; the dashboard matches exactly.
+function isItemActive(pathname, href) {
+  const path = href.split("#")[0];
+  if (href.includes("#")) return false;
+  return path === "/mfiadmin" ? pathname === path : pathname === path || pathname.startsWith(path + "/");
+}
 
 export function AdminSidebar({ className }) {
   const pathname = usePathname();
@@ -103,35 +97,40 @@ export function AdminSidebar({ className }) {
       </div>
 
       <div className="flex-1 px-4 py-2 space-y-1 overflow-y-auto custom-scrollbar  max-h-[calc(100vh-40px)]">
-        {sidebarItems.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className={cn(
-                "group flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 relative",
-                isActive
-                  ? "bg-charcoal-blue/5 text-charcoal-blue dark:bg-verdigris/10 dark:text-verdigris shadow-sm"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              <item.icon className={cn(
-                "h-5 w-5 transition-transform duration-300 group-hover:scale-110",
-                isActive ? "text-charcoal-blue dark:text-verdigris" : "text-muted-foreground/70"
-              )} />
-              {item.title}
-              {isActive && (
-                <motion.div
-                  layoutId="sidebar-active"
-                  className="absolute left-0 w-1 h-6 bg-charcoal-blue dark:bg-verdigris rounded-r-full"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-            </Link>
-          );
-        })}
+        {sidebarGroups.map((group) => (
+          <div key={group.label} className="pb-3">
+            <p className="px-4 pb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/70">{group.label}</p>
+            <div className="space-y-1">
+              {group.items.map((item) => {
+                const isActive = isItemActive(pathname, item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors duration-200 relative",
+                      isActive
+                        ? "bg-charcoal-blue/5 text-charcoal-blue dark:bg-verdigris/10 dark:text-verdigris"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                  >
+                    <item.icon className={cn("h-5 w-5", isActive ? "text-charcoal-blue dark:text-verdigris" : "text-muted-foreground/70")} />
+                    {item.title}
+                    {isActive && (
+                      <motion.div
+                        layoutId="sidebar-active"
+                        className="absolute left-0 w-1 h-6 bg-charcoal-blue dark:bg-verdigris rounded-r-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="p-4 mt-auto border-t border-border/50 bg-muted/30">

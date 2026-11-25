@@ -4,17 +4,20 @@ export const SITE_URL = "https://faheem506pk.vercel.app"
 
 // Server-side reads. The anon key is enough: RLS only exposes published posts
 // to unauthenticated callers, so drafts can never leak through these helpers.
+// Returns null when the environment variables are missing (for example a Vercel preview without Supabase
+// settings) so the build and the blog pages degrade to "no posts" instead of crashing.
 function client() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  )
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  return url && key ? createClient(url, key) : null
 }
 
 const LIST_FIELDS = "slug, title, excerpt, cover_image_url, tags, published_at, updated_at"
 
 export async function getPublishedPosts() {
-  const { data, error } = await client()
+  const db = client()
+  if (!db) return []
+  const { data, error } = await db
     .from("posts")
     .select(LIST_FIELDS)
     .eq("status", "published")
@@ -28,7 +31,9 @@ export async function getPublishedPosts() {
 }
 
 export async function getPostBySlug(slug) {
-  const { data, error } = await client()
+  const db = client()
+  if (!db) return null
+  const { data, error } = await db
     .from("posts")
     .select("*")
     .eq("slug", slug)
