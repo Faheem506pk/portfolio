@@ -48,6 +48,7 @@ Start: read `author/lessons.md` and `author/study-queue.md`. End: record 1 to 5 
 - Never publish, post, send or edit on Medium, LinkedIn, X, YouTube or GitHub. Draft only.
 - Confidential client work is never named. No phone or personal email in generated content.
 - No em dashes in anything written for him.
+- Medium policy: AI-generated text cannot be paywalled and needs a disclosure sentence in the first two paragraphs (else Network Only). The author rewrites drafts in his own words. Never batch-publish: spam rules apply, plan 1 to 2 stories per week.
 - Verify technical claims against primary sources and cite URLs.
 - Never write a story before `topic-research` says it adds value (score 16 or more, or 13 to 15 with real author details). Do not write topics on the ignore list.
 - Mark any statistic without a primary source as UNVERIFIED. Never repeat viral numbers.

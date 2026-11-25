@@ -7,6 +7,7 @@ Title options:
 3. How to Read AI Research Claims Without Fooling Yourself
 Subtitle: Four well-known AI coding studies, what they measured, and a two-minute checklist.
 Tags: AI, Software Development, Programming, Research, Developer Productivity
+Medium AI policy (help.medium.com/hc/en-us/articles/22576852947223, updated 2026-11-12): AI-generated text cannot be paywalled, AI-assisted text needs a disclosure sentence in the first two paragraphs or it is restricted to Network Only distribution, and the author should rewrite it in his own words. Publish it free (not member-only) unless he substantially rewrites it himself.
 Author must confirm before publishing:
 - The sentence in section 3 saying he recommended AGENTS.md in an earlier story (true per his story 1 text).
 - Whether to add an AI-assistance disclosure line, for example: "I used AI tools to help research and structure this article. I checked every source link myself." Only add it if true.

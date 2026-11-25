@@ -1,0 +1,64 @@
+# Drafts index
+
+Each folder holds a `brief.md` (outline stage) or a full draft. Update the status when a draft is written.
+
+- 1. `2026-11-25-agents-md-test`: Does AGENTS.md Actually Help? I Tested Mine and Cut Half
+- 2. `2026-11-25-ai-vs-no-ai-task-log`: I Measured AI vs No AI on 10 Real Tasks
+- 3. `2026-11-25-mcp-server-that-knows-me`: I Built an MCP Server in TypeScript That Knows Me
+- 4. `2026-11-25-mcp-security-checklist`: An MCP Security Checklist for Developers
+- 5. `2026-11-25-ai-security-bugs-react-next`: AI-Generated React and Next.js Security Bugs I Found in Review
+- 6. `2026-11-25-skills-vs-mcp-vs-agents-md`: Skills vs MCP vs AGENTS.md: Which One for What
+- 7. `2026-11-25-review-ai-pull-requests`: My Checklist for Reviewing AI-Written Pull Requests
+- 8. `2026-11-25-supabase-rls-ai-mistakes`: Supabase RLS Mistakes AI Makes in Next.js Apps
+- 9. `2026-11-25-vibe-coded-to-maintainable`: From Vibe-Coded Mess to Maintainable: Refactoring an AI-Built React App
+- 10. `2026-11-25-tests-as-the-gate`: Tests as the Gate: Jest and Playwright for AI-Written Code
+- 11. `2026-11-25-ai-on-esp32-firmware`: Using AI on ESP32 Firmware: What Works and What Breaks
+- 12. `2026-11-25-ai-for-frappe-erpnext`: AI for Frappe and ERPNext Customization
+- 13. `2026-11-25-pakistan-freelancers-ai`: Pakistan Freelancers and AI: How I Would Price and Position in 2026
+- 14. `2026-11-25-learn-react-with-ai`: Learning React With AI Without Losing the Fundamentals
+- 15. `2026-11-25-agent-cost-control`: Token and Cost Control With Coding Agents
+- 16. `2026-11-25-three-agents-same-task`: Same Task, Three Agents: Claude Code, Codex and Antigravity
+- 17. `2026-11-25-typescript-where-ai-fails`: TypeScript Patterns Where AI Fails
+- 18. `2026-11-25-one-story-many-formats`: One Story Into LinkedIn, X and YouTube With Agents
+- 19. `2026-11-25-read-ai-research-claims`: How to Read AI Research Claims Before You Repeat Them
+- 20. `2026-11-25-spec-driven-vs-prompting`: Spec-Driven Development vs Prompting on a Small Feature
+- 21. `2026-11-25-react-19-first-features`: React 19 Features I Would Adopt First in a Real App
+- 22. `2026-11-25-server-vs-client-components`: Server Components vs Client Components: A Decision Checklist
+- 23. `2026-11-25-nextjs-caching-explained`: Next.js Caching Explained for People Who Got Burned
+- 24. `2026-11-25-migrate-js-to-ts-strict`: Migrating a JavaScript React App to Strict TypeScript, Step by Step
+- 25. `2026-11-25-zod-at-the-boundary`: Validate Everything at the Boundary With Zod in Next.js
+- 26. `2026-11-25-clerk-nextauth-supabase-auth`: Clerk vs NextAuth vs Supabase Auth in a Real Project
+- 27. `2026-11-25-playwright-real-bugs`: Playwright Tests That Catch Real Bugs in a Next.js App
+- 28. `2026-11-25-github-actions-nextjs-ci`: A GitHub Actions Pipeline for a Next.js App
+- 29. `2026-11-25-vercel-go-live-checklist`: The Vercel Go-Live Checklist for a Next.js Portfolio
+- 30. `2026-11-25-offline-first-react-indexeddb`: Offline-First React With IndexedDB and Zustand
+- 31. `2026-11-25-notion-style-table`: Building a Notion-Style Table in React
+- 32. `2026-11-25-react-state-management-2026`: State Management in React: Context, Zustand, Jotai or Redux
+- 33. `2026-11-25-figma-to-react`: From Figma to Pixel-Perfect React: My Process
+- 34. `2026-11-25-admin-panel-ui-library`: Choosing a UI Library for an Admin Panel
+- 35. `2026-11-25-core-web-vitals-portfolio`: Core Web Vitals Fixes for a Next.js Portfolio
+- 36. `2026-11-25-nextjs-seo-metadata`: SEO for Next.js: Metadata, Sitemap and JSON-LD
+- 37. `2026-11-25-supabase-nextjs-ssr-auth`: Server-Side Auth With Supabase and Next.js, the Right Way
+- 38. `2026-11-25-rls-cheat-sheet`: A Row Level Security Cheat Sheet for Supabase
+- 39. `2026-11-25-firebase-vs-supabase`: Firebase vs Supabase for a Small Business App
+- 40. `2026-11-25-role-based-admin-panel`: Role-Based Access in an Admin Panel
+- 41. `2026-11-25-frappe-for-web-developers`: Frappe and ERPNext for Web Developers
+- 42. `2026-11-25-frappe-16-ubuntu-install`: Installing Frappe v16 on Ubuntu 24.04
+- 43. `2026-11-25-alexa-esp8266-home`: A Voice-Controlled Home With Alexa and ESP8266
+- 44. `2026-11-25-never-show-raw-errors`: Never Show Raw Database Errors to Your Users
+- 45. `2026-11-25-agents-md-for-react-ts`: An AGENTS.md for a React and TypeScript Repo: Real Example
+- 46. `2026-11-25-first-skill-md-20-minutes`: Write Your First SKILL.md in 20 Minutes
+- 47. `2026-11-25-context-engineering`: Context Engineering for Coding Agents: What to Put In and What to Leave Out
+- 48. `2026-11-25-safe-daily-agent-workflow`: Plan, Review, Commit: A Safe Daily Workflow With a Coding Agent
+- 49. `2026-11-25-git-worktrees-for-agents`: Git Worktrees for AI Agents
+- 50. `2026-11-25-claude-code-hooks-permissions`: Hooks and Permissions: Stop Your Agent From Doing Risky Things
+- 51. `2026-11-25-one-repo-three-agents`: One Repo, Three Agents: Sharing Instructions Across Claude Code, Codex and Antigravity
+- 52. `2026-11-25-vale-for-developer-writing`: Prose Linting With Vale for Developer Writing
+- 53. `2026-11-25-ai-editor-for-my-writing`: I Built an AI Editor for My Own Writing
+- 54. `2026-11-25-prompt-injection-coding-agents`: Prompt Injection in Coding Agents: Read This Before Opening a Stranger's Repo
+- 55. `2026-11-25-llm-api-streaming-react`: Calling an LLM API From React Safely
+- 56. `2026-11-25-tiny-eval-harness`: A Tiny Eval Harness for AI Features in TypeScript
+- 57. `2026-11-25-fingerprint-door-lock`: A Fingerprint Door Lock With Arduino: What I Would Do Differently
+- 58. `2026-11-25-esp32-react-firebase-dashboard`: ESP32 + React + Firebase: A Real-Time Dashboard
+- 59. `2026-11-25-international-clients-from-pakistan`: Working With International Clients From Pakistan
+- 60. `2026-11-25-what-i-changed-after-reviewing-my-stories`: What I Changed After Reviewing My Own Seven Medium Stories
