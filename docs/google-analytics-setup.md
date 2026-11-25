@@ -4,6 +4,14 @@ The dashboard box "Google Analytics, last 30 days" reads your GA4 property throu
 
 Property: `488016697` (from your GA link).
 
+## Already done (2026-11-25, in the browser, with your sign-in)
+
+- Google Analytics Data API enabled in the Cloud project `pathon`.
+- Service account `portfolio-ga-reader@pathon-454405.iam.gserviceaccount.com` created with no Cloud roles and **no key**.
+- That email added to property `faheem506pk-1` (488016697) as **Viewer**. Its web stream `faheem505pk` has measurement ID `G-GEP8VCBFXE`, which matches the tag in `layout.js`.
+
+Still to do by you: steps 3 and 5 below (create the key, add the Vercel variables).
+
 ## One-time setup
 
 1. **Enable the API.** In Google Cloud (any project you own), enable **Google Analytics Data API**.
