@@ -1,72 +1,79 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { supabase } from "@/lib/supabase"
-import {
-  Loader2,
-  Plus,
-  PenLine,
-  Trash2,
-  ExternalLink,
-  FileText,
-  CheckCircle2,
-  RefreshCw,
-} from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { PostStats } from "@/components/admin/post-stats"
-import { MediumStatusBadge } from "@/components/admin/medium-status-badge"
-import { syncWithMedium, trackMediumStory } from "@/lib/medium-sync"
+import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "sonner"
+import { Loader2, RefreshCw } from "lucide-react"
 
-export default function AdminBlogPage() {
+import { supabase } from "@/lib/supabase"
+import { MediumStatusBadge } from "@/components/admin/medium-status-badge"
+import { PostStats } from "@/components/admin/post-stats"
+import { syncWithMedium, trackMediumStory } from "@/lib/medium-sync"
+
+function formatDate(value) {
+  if (!value) return ""
+  return new Date(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+}
+
+function PostsList() {
   const router = useRouter()
+  const params = useSearchParams()
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState("")
   const [error, setError] = useState(null)
   const [creating, setCreating] = useState(false)
-  const [filter, setFilter] = useState("all") // all | not_on_medium | on_medium
+  const [view, setView] = useState("all") // all | published | draft | not_on_medium
   const [syncing, setSyncing] = useState(false)
   const [untracked, setUntracked] = useState([])
+  const autoCreated = useRef(false)
 
   async function fetchPosts() {
-    setLoading(true)
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .order("updated_at", { ascending: false })
-
+    const { data, error } = await supabase.from("posts").select("*").order("updated_at", { ascending: false })
     if (error) setError(error.message)
     else setPosts(data || [])
     setLoading(false)
   }
 
   useEffect(() => {
-    fetchPosts()
+    let alive = true
+    supabase
+      .from("posts")
+      .select("*")
+      .order("updated_at", { ascending: false })
+      .then(({ data, error }) => {
+        if (!alive) return
+        if (error) setError(error.message)
+        else setPosts(data || [])
+        setLoading(false)
+      })
+    return () => {
+      alive = false
+    }
   }, [])
 
   const handleCreate = async () => {
     setCreating(true)
-    const stamp = Date.now()
     const { data, error } = await supabase
       .from("posts")
-      .insert([{ title: "Untitled post", slug: `untitled-${stamp}`, status: "draft" }])
+      .insert([{ title: "Untitled post", slug: `untitled-${Date.now()}`, status: "draft" }])
       .select("id")
       .single()
-
     setCreating(false)
-    if (error) {
-      setError(error.message)
-      return
-    }
+    if (error) return setError(error.message)
     router.push(`/mfiadmin/blog/${data.id}`)
   }
+
+  // "New > Blog post" in the admin bar links here with ?new=1.
+  useEffect(() => {
+    if (params.get("new") === "1" && !autoCreated.current) {
+      autoCreated.current = true
+      const id = requestAnimationFrame(() => handleCreate())
+      return () => cancelAnimationFrame(id)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params])
 
   const handleDelete = async (post) => {
     if (!confirm(`Delete "${post.title}"? This cannot be undone.`)) return
@@ -76,207 +83,179 @@ export default function AdminBlogPage() {
   }
 
   const onMedium = (p) => p.medium_status === "published_on_medium"
+  const counts = {
+    all: posts.length,
+    published: posts.filter((p) => p.status === "published").length,
+    draft: posts.filter((p) => p.status !== "published").length,
+    not_on_medium: posts.filter((p) => !onMedium(p)).length,
+  }
 
   const visible = posts.filter((post) => {
-    const matches = post.title.toLowerCase().includes(query.toLowerCase())
-    if (filter === "not_on_medium") return matches && !onMedium(post)
-    if (filter === "on_medium") return matches && onMedium(post)
-    return matches
+    if (!post.title.toLowerCase().includes(query.toLowerCase())) return false
+    if (view === "published") return post.status === "published"
+    if (view === "draft") return post.status !== "published"
+    if (view === "not_on_medium") return !onMedium(post)
+    return true
   })
 
   const handleSync = async () => {
     setSyncing(true)
     const result = await syncWithMedium(posts)
     setSyncing(false)
-    if (result.error) {
-      toast.error(result.error)
-      return
-    }
+    if (result.error) return toast.error(result.error)
     setUntracked(result.untracked)
-    toast.success(
-      result.updated
-        ? `Marked ${result.updated} post${result.updated === 1 ? "" : "s"} as published on Medium`
-        : "Checked Medium. No new matches."
-    )
+    toast.success(result.updated ? `Marked ${result.updated} post${result.updated === 1 ? "" : "s"} as published on Medium` : "Checked Medium. No new matches.")
     if (result.updated) fetchPosts()
   }
 
   const handleTrack = async (item) => {
     const message = await trackMediumStory(item)
-    if (message) {
-      toast.error(message)
-      return
-    }
+    if (message) return toast.error(message)
     setUntracked((prev) => prev.filter((i) => i.url !== item.url))
     toast.success("Added as a private draft you can edit")
     fetchPosts()
   }
 
-  const published = posts.filter((p) => p.status === "published").length
-  const drafts = posts.length - published
-
-  if (loading) {
-    return (
-      <div className="flex justify-center p-16">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    )
-  }
+  const views = [
+    { key: "all", label: "All" },
+    { key: "published", label: "Live on blog" },
+    { key: "draft", label: "Drafts" },
+    { key: "not_on_medium", label: "Not on Medium" },
+  ]
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="font-display text-3xl font-bold text-primary">Blog</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {published} published &middot; {drafts} draft{drafts === 1 ? "" : "s"}
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" onClick={handleSync} disabled={syncing}>
-            {syncing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
-            Check Medium
-          </Button>
-          <Button onClick={handleCreate} disabled={creating}>
-            {creating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Plus className="mr-2 h-4 w-4" />}
-            New post
-          </Button>
-        </div>
+    <div>
+      <div className="wp-heading">
+        <h1>Posts</h1>
+        <button type="button" className="wp-btn-add" onClick={handleCreate} disabled={creating}>
+          {creating ? "Creating" : "Add New"}
+        </button>
+        <button type="button" className="wp-btn-add" onClick={handleSync} disabled={syncing}>
+          <RefreshCw className={`h-3.5 w-3.5 ${syncing ? "animate-spin" : ""}`} />
+          Check Medium
+        </button>
       </div>
 
-      {error && (
-        <div className="rounded-md border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
-          {error}
-        </div>
-      )}
-
-      <div className="flex flex-wrap items-center gap-3">
-        <Input
-          placeholder="Search posts…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="max-w-sm"
-        />
-        <div className="flex rounded-lg border border-border p-0.5 text-sm">
-          {[
-            { key: "all", label: `All (${posts.length})` },
-            { key: "not_on_medium", label: `Not on Medium (${posts.filter((p) => !onMedium(p)).length})` },
-            { key: "on_medium", label: `On Medium (${posts.filter(onMedium).length})` },
-          ].map(({ key, label }) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setFilter(key)}
-              aria-pressed={filter === key}
-              className={`rounded-md px-3 py-1.5 transition-colors ${
-                filter === key ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
+      {error && <div className="wp-notice error">{error}</div>}
 
       {untracked.length > 0 && (
-        <Card>
-          <CardContent className="space-y-3 py-4">
-            <p className="text-sm font-medium text-foreground">
-              Live on Medium but not tracked here ({untracked.length})
-            </p>
-            <ul className="divide-y divide-border">
-              {untracked.map((item) => (
-                <li key={item.url} className="flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
-                  <a href={item.url} target="_blank" rel="noreferrer" className="truncate hover:text-primary">
-                    {item.title}
-                  </a>
-                  <Button variant="outline" size="sm" onClick={() => handleTrack(item)}>
-                    Track it
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      )}
-
-      {visible.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center gap-3 py-16 text-center">
-            <FileText className="h-10 w-10 text-muted-foreground/40" />
-            <p className="font-medium text-foreground">
-              {posts.length === 0 ? "No posts yet" : "No posts match that search"}
-            </p>
-            {posts.length === 0 && (
-              <p className="max-w-sm text-sm text-muted-foreground">
-                Create your first post and it will appear on your public blog once published.
-              </p>
-            )}
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="space-y-3">
-          {visible.map((post) => (
-            <Card key={post.id} className="group transition-colors hover:border-primary/40">
-              <CardContent className="flex flex-wrap items-center justify-between gap-4 py-4">
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Link
-                      href={`/mfiadmin/blog/${post.id}`}
-                      className="truncate text-lg font-semibold text-foreground transition-colors hover:text-primary"
-                    >
-                      {post.title}
-                    </Link>
-                    {post.status === "published" ? (
-                      <Badge className="gap-1 bg-primary/10 text-primary hover:bg-primary/10">
-                        <CheckCircle2 className="h-3 w-3" />
-                        On my blog
-                      </Badge>
-                    ) : (
-                      <Badge variant="outline" className="text-muted-foreground">
-                        Draft
-                      </Badge>
-                    )}
-                    <MediumStatusBadge status={post.medium_status} />
-                  </div>
-                  <p className="mt-1 truncate font-mono text-xs text-muted-foreground">
-                    /blog/{post.slug}
-                  </p>
-                  {post.status === "published" && (
-                    <div className="mt-2">
-                      <PostStats slug={post.slug} compact />
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-1">
-                  {post.status === "published" && (
-                    <Button variant="ghost" size="icon" asChild title="View live">
-                      <a href={`/blog/${post.slug}`} target="_blank" rel="noreferrer">
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  )}
-                  <Button variant="ghost" size="icon" asChild title="Edit">
-                    <Link href={`/mfiadmin/blog/${post.id}`}>
-                      <PenLine className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-destructive hover:bg-destructive/10 hover:text-destructive"
-                    onClick={() => handleDelete(post)}
-                    title="Delete"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="wp-notice warn">
+          <strong>Live on Medium but not tracked here ({untracked.length})</strong>
+          <ul className="mt-1 list-none p-0">
+            {untracked.map((item) => (
+              <li key={item.url} className="flex flex-wrap items-center justify-between gap-2 py-1">
+                <a href={item.url} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+                  {item.title}
+                </a>
+                <button type="button" className="text-primary hover:underline" onClick={() => handleTrack(item)}>
+                  Track it
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
+
+      <ul className="wp-views">
+        {views.map((v) => (
+          <li key={v.key}>
+            <button type="button" aria-current={view === v.key} onClick={() => setView(v.key)}>
+              {v.label} <span className="count">({counts[v.key]})</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mb-2 flex justify-end">
+        <label className="sr-only" htmlFor="post-search">
+          Search posts
+        </label>
+        <input
+          id="post-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search posts"
+          className="h-8 w-60 border bg-card px-2 text-[13px]"
+        />
+      </div>
+
+      <div className="wp-table-wrap">
+        <table className="wp-table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">On your blog</th>
+              <th scope="col">On Medium</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Last modified</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr>
+                <td colSpan={5} className="muted">
+                  <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
+                  Loading
+                </td>
+              </tr>
+            ) : visible.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="muted">
+                  {posts.length === 0 ? "No posts yet. Use Add New to write the first one." : "No posts match."}
+                </td>
+              </tr>
+            ) : (
+              visible.map((post) => (
+                <tr key={post.id}>
+                  <td>
+                    <Link href={`/mfiadmin/blog/${post.id}`} className="row-title">
+                      {post.title}
+                    </Link>
+                    <div className="row-actions">
+                      <Link href={`/mfiadmin/blog/${post.id}`}>Edit</Link>
+                      {post.status === "published" && (
+                        <a href={`/blog/${post.slug}`} target="_blank" rel="noreferrer">
+                          View
+                        </a>
+                      )}
+                      {post.medium_url && (
+                        <a href={post.medium_url} target="_blank" rel="noreferrer">
+                          Medium
+                        </a>
+                      )}
+                      <button type="button" className="delete" onClick={() => handleDelete(post)}>
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <span className={`wp-status ${post.status === "published" ? "ok" : ""}`}>{post.status === "published" ? "Live" : "Draft"}</span>
+                    {post.status === "published" && (
+                      <div className="mt-1">
+                        <PostStats slug={post.slug} compact />
+                      </div>
+                    )}
+                  </td>
+                  <td>
+                    <MediumStatusBadge status={post.medium_status} />
+                  </td>
+                  <td className="muted">{(post.tags || []).join(", ")}</td>
+                  <td className="muted">{formatDate(post.updated_at)}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
+  )
+}
+
+export default function AdminBlogPage() {
+  return (
+    <Suspense fallback={null}>
+      <PostsList />
+    </Suspense>
   )
 }

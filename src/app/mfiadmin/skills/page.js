@@ -82,7 +82,7 @@ export default function AdminSkillsPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-display font-bold text-charcoal-blue dark:text-verdigris">
+        <h1 className="text-[23px] font-normal text-foreground">
           Skills Management
         </h1>
         <Button onClick={handleCreate} className="bg-burnt-peach hover:bg-burnt-peach/90 text-white">
@@ -96,7 +96,7 @@ export default function AdminSkillsPage() {
             <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-2">
-                        <Wrench className="h-5 w-5 text-verdigris" />
+                        <Wrench className="h-5 w-5 text-primary" />
                         <h3 className="text-xl font-bold font-display">{skill.category}</h3>
                     </div>
                     <div className="flex gap-2">

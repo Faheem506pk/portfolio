@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { LiquidEther } from "@/components/liquid-ether";
 import { Loader2, Eye, EyeOff, ArrowLeft, ShieldCheck } from "lucide-react";
 
 // Supabase messages are accurate but terse; these read better without
@@ -64,11 +63,8 @@ function LoginForm() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12">
-      <LiquidEther className="absolute inset-0 z-0 h-full w-full" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
-
-      <div className="relative z-10 w-full max-w-md">
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
+      <div className="w-full max-w-sm">
         <Link
           href="/"
           className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
@@ -77,7 +73,7 @@ function LoginForm() {
           Back to site
         </Link>
 
-        <Card className="border-border bg-card/90 shadow-2xl backdrop-blur-xl">
+        <Card className="border-border bg-card">
           <CardHeader className="space-y-3">
             <div className="flex justify-center">
               <div className="relative h-14 w-14">
@@ -97,7 +93,7 @@ function LoginForm() {
                 />
               </div>
             </div>
-            <CardTitle className="text-center font-display text-2xl font-bold tracking-tight">
+            <CardTitle className="text-center text-xl font-normal">
               Admin sign in
             </CardTitle>
             <CardDescription className="text-center">

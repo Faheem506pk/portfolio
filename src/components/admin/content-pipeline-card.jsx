@@ -5,8 +5,7 @@ import Link from "next/link"
 import { ArrowRight, PenLine } from "lucide-react"
 
 import { supabase } from "@/lib/supabase"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Postbox } from "@/components/admin/dashboard-widgets"
 import { PIPELINE_STATUSES } from "@/lib/story-pipeline"
 
 // Compact "what is done and what is next" view for the dashboard.
@@ -46,16 +45,15 @@ export function ContentPipelineCard() {
   const onMedium = posts.filter((p) => p.medium_status === "published_on_medium").length
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-        <CardTitle className="text-base">Writing pipeline</CardTitle>
-        <Button variant="ghost" size="sm" asChild>
-          <Link href="/mfiadmin/stories">
-            Open Content Studio <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </Button>
-      </CardHeader>
-      <CardContent className="space-y-5">
+    <Postbox
+      title="Writing pipeline"
+      action={
+        <Link href="/mfiadmin/stories" className="inline-flex items-center gap-1 text-primary hover:underline">
+          Content Studio <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      }
+    >
+      <div className="space-y-5">
         {missing ? (
           <p className="text-sm text-muted-foreground">
             The story pipeline tables are not set up yet. Run <code className="font-mono">npm run db:push</code> to add them.
@@ -105,7 +103,7 @@ export function ContentPipelineCard() {
             </div>
           </>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </Postbox>
   )
 }

@@ -20,7 +20,7 @@ import {
   Loader2,
   Quote,
   Save,
-  Columns2,
+  FileCode2,
   PenLine,
 } from "lucide-react"
 
@@ -33,6 +33,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Markdown } from "@/components/markdown"
 import { MediaUploader } from "@/components/admin/media-uploader"
 import { PostStats } from "@/components/admin/post-stats"
+import { RichEditor } from "@/components/admin/rich-editor"
 import { MediumPublishCard } from "@/components/admin/medium-publish-card"
 import { MediumStatusBadge } from "@/components/admin/medium-status-badge"
 import { htmlToMarkdown } from "@/lib/html-to-markdown"
@@ -95,7 +96,8 @@ export default function BlogEditorPage() {
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [view, setView] = useState("split") // write | split | preview
+  const [view, setView] = useState("visual") // visual | markdown | preview
+  const [editorKey, setEditorKey] = useState(0) // remount the visual editor after Markdown edits
   const [slugTouched, setSlugTouched] = useState(false)
 
   useEffect(() => {
@@ -107,6 +109,8 @@ export default function BlogEditorPage() {
         return
       }
       setPost(data)
+      // The visual editor has no table support, so posts that use tables open in Markdown mode.
+      if (/^\|.+\|\s*\n\|[\s:|-]+\|/m.test(data.content || "")) setView("markdown")
       setSlugTouched(Boolean(data.slug) && !data.slug.startsWith("untitled-"))
       setLoading(false)
     }
@@ -198,7 +202,7 @@ export default function BlogEditorPage() {
   return (
     <div className="space-y-6 pb-20">
       {/* Sticky action bar */}
-      <div className="sticky top-0 z-20 -mx-4 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur">
+      <div className="sticky top-[38px] z-20 -mx-4 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" asChild>
             <Link href="/mfiadmin/blog" aria-label="Back to posts">
@@ -221,23 +225,27 @@ export default function BlogEditorPage() {
         <div className="flex flex-wrap items-center gap-2">
           <div className="mr-1 hidden rounded-lg border border-border p-0.5 sm:flex">
             {[
-              { key: "write", icon: PenLine, label: "Write" },
-              { key: "split", icon: Columns2, label: "Split" },
+              { key: "visual", icon: PenLine, label: "Visual" },
+              { key: "markdown", icon: FileCode2, label: "Markdown" },
               { key: "preview", icon: Eye, label: "Preview" },
             ].map(({ key, icon: Icon, label }) => (
               <button
                 key={key}
                 type="button"
-                onClick={() => setView(key)}
+                onClick={() => {
+                  if (key === "visual" && view !== "visual") setEditorKey((k) => k + 1)
+                  setView(key)
+                }}
                 aria-pressed={view === key}
                 title={label}
-                className={`rounded-md px-2.5 py-1.5 transition-colors ${
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs transition-colors ${
                   view === key
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Icon className="h-4 w-4" />
+                <span className="hidden md:inline">{label}</span>
               </button>
             ))}
           </div>
@@ -247,7 +255,7 @@ export default function BlogEditorPage() {
             Save draft
           </Button>
           <Button onClick={() => save({ status: "published" })} disabled={saving}>
-            {post.status === "published" ? "Update" : "Publish"}
+            {post.status === "published" ? "Update on my blog" : "Publish to my blog"}
           </Button>
         </div>
       </div>
@@ -277,27 +285,31 @@ export default function BlogEditorPage() {
             />
           </div>
 
-          {/* Toolbar */}
-          <div className="flex flex-wrap items-center gap-1 rounded-lg border border-border bg-muted/40 p-1">
-            {TOOLBAR.map((tool) => (
-              <button
-                key={tool.label}
-                type="button"
-                title={tool.label}
-                aria-label={tool.label}
-                onClick={() => applyFormat(tool)}
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-background hover:text-primary"
-              >
-                <tool.icon className="h-4 w-4" />
-              </button>
-            ))}
-            <span className="ml-auto pr-2 font-mono text-xs text-muted-foreground">Markdown</span>
-          </div>
+          {view === "visual" && (
+            <RichEditor
+              key={editorKey}
+              value={post.content || ""}
+              onChange={(markdown) => update({ content: markdown })}
+            />
+          )}
 
-          <div
-            className={`grid gap-4 ${view === "split" ? "lg:grid-cols-2" : "grid-cols-1"}`}
-          >
-            {view !== "preview" && (
+          {view === "markdown" && (
+            <div className="space-y-2">
+              <div className="flex flex-wrap items-center gap-1 rounded-lg border border-border bg-muted/40 p-1">
+                {TOOLBAR.map((tool) => (
+                  <button
+                    key={tool.label}
+                    type="button"
+                    title={tool.label}
+                    aria-label={tool.label}
+                    onClick={() => applyFormat(tool)}
+                    className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-background hover:text-primary"
+                  >
+                    <tool.icon className="h-4 w-4" />
+                  </button>
+                ))}
+                <span className="ml-auto pr-2 font-mono text-xs text-muted-foreground">Markdown</span>
+              </div>
               <Textarea
                 ref={textareaRef}
                 value={post.content || ""}
@@ -306,20 +318,20 @@ export default function BlogEditorPage() {
                 placeholder={"Write in Markdown…\n\n## A heading\n\nSome **bold** text and `code`."}
                 className="min-h-[560px] resize-y font-mono text-sm leading-relaxed"
               />
-            )}
+            </div>
+          )}
 
-            {view !== "write" && (
-              <div className="min-h-[560px] overflow-auto rounded-lg border border-border bg-card p-6">
-                {post.content ? (
+          {view === "preview" && (
+            <div className="min-h-[560px] overflow-auto border border-border bg-card">
+              {post.content ? (
+                <div className="medium-reader">
                   <Markdown content={post.content} />
-                ) : (
-                  <p className="text-sm text-muted-foreground">
-                    Nothing to preview yet. Start writing on the left.
-                  </p>
-                )}
-              </div>
-            )}
-          </div>
+                </div>
+              ) : (
+                <p className="p-6 text-sm text-muted-foreground">Nothing to preview yet. Start writing.</p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* ---------------- Sidebar ---------------- */}
