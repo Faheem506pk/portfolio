@@ -46,7 +46,7 @@ Briefs live in `drafts/2026-11-25-<slug>/brief.md`. Status: brief, drafted, revi
 | 52 | AI-native engineering | Prose Linting With Vale for Developer Writing | 15 | N | brief | `drafts/2026-11-25-vale-for-developer-writing/brief.md` |
 | 54 | AI-native engineering | Prompt Injection in Coding Agents: Read This Before Opening a Stranger's Repo | 15 | S | brief | `drafts/2026-11-25-prompt-injection-coding-agents/brief.md` |
 | 57 | IoT and builder projects | A Fingerprint Door Lock With Arduino: What I Would Do Differently | 15 | N | brief | `drafts/2026-11-25-fingerprint-door-lock/brief.md` |
-| 58 | IoT and builder projects | ESP32 + React + Firebase: A Real-Time Dashboard | 15 | N | brief | `drafts/2026-11-25-esp32-react-firebase-dashboard/brief.md` |
+| 58 | IoT and builder projects | ESP32 + React + Firebase: A Real-Time Dashboard | 15 | N | drafted (free track, from public PlantPulse code) | `drafts/2026-11-25-esp32-react-firebase-dashboard/brief.md` |
 | 59 | Pakistan and freelancing | Working With International Clients From Pakistan | 15 | N | brief | `drafts/2026-11-25-international-clients-from-pakistan/brief.md` |
 | 60 | Content and creator ops | What I Changed After Reviewing My Own Seven Medium Stories | 15 | N | brief | `drafts/2026-11-25-what-i-changed-after-reviewing-my-stories/brief.md` |
 | 12 | JS/TS/React/Next.js in production | AI for Frappe and ERPNext Customization | 14 | N | brief | `drafts/2026-11-25-ai-for-frappe-erpnext/brief.md` |
