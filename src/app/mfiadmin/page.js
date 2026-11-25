@@ -2,7 +2,7 @@
 
 import { AtAGlance, SiteHealth, QuickDraft } from "@/components/admin/dashboard-widgets";
 import { ContentPipelineCard } from "@/components/admin/content-pipeline-card";
-import { ReadershipBox } from "@/components/admin/analytics-widgets";
+import { ReadershipBox, GoogleAnalyticsBox } from "@/components/admin/analytics-widgets";
 
 // WordPress-style dashboard: boxes, not marketing cards. Projects and achievements have their own list pages.
 export default function AdminDashboardPage() {
@@ -12,7 +12,8 @@ export default function AdminDashboardPage() {
         <h1>Dashboard</h1>
       </div>
 
-      <div className="mb-3">
+      <div className="mb-3 grid gap-3">
+        <GoogleAnalyticsBox />
         <ReadershipBox />
       </div>
 
