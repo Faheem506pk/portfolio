@@ -1,4 +1,4 @@
-import { Sora, Figtree, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
@@ -10,21 +10,29 @@ import GAListener from "@/components/ga-listener";
 // Sora is geometric with squared terminals — it reads engineered rather than
 // decorative, which suits a page whose subject is built objects. Figtree keeps long
 // prose comfortable underneath it.
-const sora = Sora({
+// Self-hosted (SIL Open Font License) latin subsets of the same three families. They used to load through
+// next/font/google, which downloads from fonts.gstatic.com at build time; a failed download made the whole
+// Vercel build fail with "Can't resolve @vercel/turbopack-next/internal/font/google/font". Local files
+// keep the build independent of the network. The files are variable fonts, so one file covers every weight.
+const sora = localFont({
+  src: "./fonts/sora-latin.woff2",
   variable: "--ff-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: "100 800",
+  display: "swap",
 });
 
-const figtree = Figtree({
+const figtree = localFont({
+  src: "./fonts/figtree-latin.woff2",
   variable: "--ff-sans",
-  subsets: ["latin"],
+  weight: "300 900",
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrainsmono-latin.woff2",
   variable: "--ff-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "100 800",
+  display: "swap",
 });
 
 import { createClient } from "@supabase/supabase-js";
