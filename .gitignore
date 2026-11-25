@@ -41,3 +41,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# author studio
+mcp/author-studio/node_modules/
+mcp/author-studio/dist/
+.vale/styles/*
+!.vale/styles/config/
+.claude/settings.local.json
