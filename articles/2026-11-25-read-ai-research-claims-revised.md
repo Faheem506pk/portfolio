@@ -21,6 +21,8 @@ Sources accessed 2026-11-25, listed at the end.
 
 Every week a new number about AI and developers goes viral. AI makes you much faster. AI makes you slower. Nearly half of AI code is insecure. Junior jobs are collapsing.
 
+*This story was written with the assistance of an AI writing program. I checked every source link and number against the original sources.* [AUTHOR: keep this line only if true, and rewrite the text in your own words before publishing.]
+
 Some of these numbers are solid. Some are true but narrow. Some I could not trace to a primary source at all. All of them travel the same way: screenshot, headline, repost.
 
 If you write about AI, teach it, or make decisions about it, people will quote you. So it is worth learning to read a claim before you repeat it. Here are four well-known examples, then a checklist.
