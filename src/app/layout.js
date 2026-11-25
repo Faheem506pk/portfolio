@@ -32,11 +32,19 @@ import { createClient } from "@supabase/supabase-js";
 const SITE_URL = "https://faheem506pk.vercel.app";
 const PROFILE_IMAGE = `${SITE_URL}/assets/images/faheem506pk-2026.jpg`;
 
-// Initialize Supabase Client for Server Side
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+// Server-side client, created lazily. createClient throws when the URL is missing, and that used to crash the
+// whole build on Vercel preview deployments that have no Supabase environment variables. Without them the
+// site falls back to its static metadata instead of failing.
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  return url && key ? createClient(url, key) : null;
+}
 
 async function getProfile() {
   try {
+    const supabase = getSupabase();
+    if (!supabase) return null;
     const { data } = await supabase.from("profiles").select("*").single();
     return data;
   } catch (error) {
