@@ -1,0 +1,237 @@
+{
+  "_note": "Source of truth for confirmed facts about the author. Only add facts the author has confirmed or that appear on his own public profiles. Never add invented details.",
+  "updated": "2026-11-25",
+  "name": "Muhammad Faheem Iqbal",
+  "handle": "faheem506pk",
+  "pronouns": "he/him",
+  "location": "Islamabad, Pakistan",
+  "headline": "Full Stack Software Engineer | React, Next.js, TypeScript | AI-assisted coding",
+  "education": {
+    "degree": "BS Information Technology",
+    "university": "The University of Chakwal",
+    "started": "2020-10",
+    "completed": "2024-09"
+  },
+  "currentRole": {
+    "title": "Software Engineer (Full Stack)",
+    "company": "MicroMerger (Pvt.) Ltd.",
+    "since": "2026-01",
+    "promotedAfterMonths": 11,
+    "publicProject": "TabTake, a restaurant management system (online ordering, delivery and collection, QR ordering, reservations, menus, multi-location)",
+    "confidentialNote": "5+ confidential client projects exist. Never name or describe them."
+  },
+  "timeline": [
+    {
+      "when": "2020",
+      "what": "Data-entry job at PKR 5,000 per month, later PKR 7,000. Also part-time Social Media Manager at BestMobile.pk, Jan 2020 to Jun 2024."
+    },
+    {
+      "when": "2020-10",
+      "what": "Started BS IT."
+    },
+    {
+      "when": "fifth semester",
+      "what": "First international client found by friend Raja Abdul Basit. About 10-page translated website in about 3 weeks, earned roughly EUR 100-120. Mentor: uncle Waqas Hussain."
+    },
+    {
+      "when": "about 2 weeks later",
+      "what": "React.js website with API integration, about 1.5 months, roughly EUR 280."
+    },
+    {
+      "when": "2021",
+      "what": "Built a fingerprint door lock and an Alexa plus ESP8266 voice-controlled home automation system. Covered by UrduPoint, ARY News and PNN News."
+    },
+    {
+      "when": "2023-09 to 2024-03",
+      "what": "Frontend Developer at JUHUU GmbH (Austria): BikeBox and JUHUU Marketplace."
+    },
+    {
+      "when": "2024-09",
+      "what": "Completed BS IT."
+    },
+    {
+      "when": "2024-11 to 2025-02",
+      "what": "Frontend Development Intern at Alphabase (US-based): Qotion, Zaplead.ai UI."
+    },
+    {
+      "when": "2025-02 to 2026-01",
+      "what": "Associate Software Engineer at MicroMerger."
+    },
+    {
+      "when": "2026-01",
+      "what": "Promoted to Software Engineer (Full Stack)."
+    }
+  ],
+  "stack": {
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Python",
+      "PHP",
+      "C++"
+    ],
+    "frameworks": [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Express",
+      "WordPress",
+      "Frappe",
+      "ERPNext"
+    ],
+    "ui": [
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Ant Design",
+      "Material UI",
+      "Chakra UI",
+      "Radix UI",
+      "Framer Motion",
+      "Bootstrap"
+    ],
+    "data": [
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "Supabase",
+      "Firebase",
+      "Redis",
+      "Neon",
+      "IndexedDB"
+    ],
+    "auth": [
+      "Clerk",
+      "NextAuth"
+    ],
+    "testing": [
+      "Jest",
+      "Playwright",
+      "GitHub Actions"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Vercel",
+      "Figma",
+      "Postman",
+      "Jira",
+      "Linux (Ubuntu)"
+    ],
+    "iot": [
+      "Arduino",
+      "ESP32",
+      "ESP8266",
+      "Blynk",
+      "Amazon Alexa",
+      "PCB design"
+    ],
+    "aiTools": [
+      "Claude Code",
+      "Codex",
+      "Google Antigravity",
+      "Google Jules",
+      "Google Stitch",
+      "OpenRouter API"
+    ]
+  },
+  "projects": [
+    {
+      "name": "Qotion",
+      "what": "Notion-style table app",
+      "tech": "React, TypeScript, Vite, Chakra UI, Firebase",
+      "demo": "https://qotion.vercel.app"
+    },
+    {
+      "name": "StitchSmart",
+      "what": "Tailor shop management admin panel with offline support",
+      "tech": "React, TypeScript, Tailwind, Firebase, Zustand, IndexedDB",
+      "demo": "https://stitchsmart.vercel.app"
+    },
+    {
+      "name": "PlantPulse",
+      "what": "IoT greenhouse monitor",
+      "tech": "ESP32, React, Firebase",
+      "demo": "https://plantpulse.vercel.app"
+    },
+    {
+      "name": "PeekGamer",
+      "what": "Game discovery platform",
+      "tech": "Next.js, TypeScript, Ant Design",
+      "demo": "https://devpeekgamer.vercel.app"
+    },
+    {
+      "name": "Cinematic Vistas",
+      "what": "Movie browsing platform",
+      "tech": "React, TypeScript, Tailwind",
+      "demo": "https://cinematic-vistas.vercel.app"
+    },
+    {
+      "name": "CupChase",
+      "what": "High-performance web app",
+      "tech": "React, TanStack Router, Tailwind, Vite",
+      "demo": "https://cupchase.vercel.app"
+    },
+    {
+      "name": "ExplorePak",
+      "what": "Tour packages manager with admin login",
+      "tech": "HTML, CSS, Bootstrap 5, PHP, MySQL"
+    },
+    {
+      "name": "Speedy Eats",
+      "what": "Restaurant website",
+      "tech": "WordPress, ACF, PHP"
+    },
+    {
+      "name": "BikeBox",
+      "what": "Bike rental platform for JUHUU GmbH",
+      "tech": "React, Tailwind, JavaScript"
+    }
+  ],
+  "profiles": {
+    "medium": "https://faheem506pk.medium.com",
+    "portfolio": "https://faheem506pk.vercel.app",
+    "linkedin": "https://www.linkedin.com/in/faheem506pk",
+    "github": "https://github.com/faheem506pk",
+    "x": "https://x.com/faheem506pk",
+    "instagram": "https://www.instagram.com/faheem506pk/",
+    "youtube": "https://www.youtube.com/channel/UCvwNpyOhC0cmMrLmlXKReLQ",
+    "portfolioRepo": "https://github.com/Faheem506pk/portfolio"
+  },
+  "audience": {
+    "medium": {
+      "followers": 2,
+      "stories": 7
+    },
+    "linkedin": {
+      "connections": "500+"
+    },
+    "github": {
+      "followers": 5
+    },
+    "x": {
+      "followers": 10
+    },
+    "instagram": {
+      "followers": 285
+    },
+    "youtube": {
+      "channel": "Technical MFI",
+      "subscribers": 1400,
+      "videos": 31
+    }
+  },
+  "mediaCoverage": [
+    "UrduPoint (YouTube)",
+    "ARY News (YouTube)",
+    "PNN News (TikTok)"
+  ],
+  "portfolioSite": {
+    "stack": "Next.js 16, React 19, Supabase, Tailwind",
+    "hosting": "Vercel, https://faheem506pk.vercel.app",
+    "features": "blog, achievements, experience, admin panel, CV download",
+    "conversion": "CV download"
+  }
+}

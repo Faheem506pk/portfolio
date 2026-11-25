@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "author-studio": {
+      "command": "node",
+      "args": ["mcp/author-studio/dist/index.js"]
+    }
+  }
+}
