@@ -18,6 +18,7 @@ This repository holds two things for **Muhammad Faheem Iqbal (faheem506pk)**, a 
 |---|---|
 | Know the author, rules, voice | `author-profile` |
 | Plan or repurpose content end to end | `content-pipeline` |
+| Learn and record lessons (start and end of every task) | `lessons-learned` |
 | Decide if a topic is worth writing (always first) | `topic-research` |
 | Draft a Medium story | `medium-writer` |
 | Review, score, fact-check a Medium story | `medium-editor` (root `SKILL.md`) |
@@ -27,15 +28,19 @@ This repository holds two things for **Muhammad Faheem Iqbal (faheem506pk)**, a 
 
 Skills live in `skills/`. Run `scripts/sync-skills.sh` to copy them to `.claude/skills/` and `.agents/skills/`.
 
-3. MCP server `author-studio` (`mcp/author-studio`, build with `cd mcp/author-studio && npm install && npm run build`). Tools: `get_author_profile`, `get_voice_guide`, `get_strategy`, `get_topic_backlog`, `list_published_stories`, `list_open_questions`, `list_skills`, `get_platform_guide`, `list_drafts`, `read_draft`, `create_draft`, `check_draft`.
+3. MCP server `author-studio` (`mcp/author-studio`, build with `cd mcp/author-studio && npm install && npm run build`). Tools: `get_author_profile`, `get_voice_guide`, `get_strategy`, `get_topic_backlog`, `get_lessons`, `add_lesson`, `list_published_stories`, `list_open_questions`, `list_skills`, `get_platform_guide`, `list_drafts`, `read_draft`, `create_draft`, `check_draft`.
 
 ## Quick start (what to do next time)
+0. Read `author/lessons.md` and `author/study-queue.md` (skill `lessons-learned`). Apply them. At the end of the task add new lessons and study items.
 1. Read this file, then `author/README.md`.
 2. New story request: run `topic-research` first. Check `author/topic-backlog.md` and `author/stories-index.md`.
 3. Ask the author for the real details listed in the backlog row. Do not write prose until you have them.
 4. Draft with `medium-writer` into `drafts/<date>-<slug>/`, run `check_draft`, then review with `medium-editor` into `reviews/`.
 5. After approval, repurpose with `linkedin-post`, `x-thread`, `youtube-script`.
 6. Update `author/stories-index.md` and the backlog status. Never publish.
+
+## Learning loop (required every task)
+Start: read `author/lessons.md` and `author/study-queue.md`. End: record 1 to 5 specific lessons and what to study next, then tell the author. Never store secrets or personal contact details in them.
 
 ## Non-negotiable rules
 - Review first. Never rewrite an original story without approval.

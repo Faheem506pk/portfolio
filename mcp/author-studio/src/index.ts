@@ -98,6 +98,36 @@ server.tool(
 );
 
 server.tool(
+  "get_lessons",
+  "Lessons learned and the study queue. Read before every task and apply them.",
+  {},
+  async () => {
+    const a = await readOrNull(path.join(AUTHOR, "lessons.md"));
+    const b = await readOrNull(path.join(AUTHOR, "study-queue.md"));
+    return text([a ?? "", b ?? ""].join("\n\n"));
+  },
+);
+
+server.tool(
+  "add_lesson",
+  "Append one lesson to author/lessons.md or one item to author/study-queue.md. Append only. Never include secrets or personal contact details.",
+  {
+    kind: z.enum(["lesson", "study"]),
+    area: z.string().min(2).max(40).describe("e.g. sources, writing, tools"),
+    text: z.string().min(10).max(600),
+  },
+  async ({ kind, area, text: body }) => {
+    if (/\u2014|\u2013/.test(body)) return fail("No em or en dashes. Rephrase.");
+    if (/(api[_-]?key|secret|password|token)\s*[:=]/i.test(body)) return fail("Looks like a secret. Not stored.");
+    const day = new Date().toISOString().slice(0, 10);
+    const file = path.join(AUTHOR, kind === "lesson" ? "lessons.md" : "study-queue.md");
+    const line = kind === "lesson" ? `- ${day} | ${area} | ${body}\n` : `- ${body} | added ${day} | area: ${area}\n`;
+    await fs.appendFile(file, line, "utf8");
+    return text(`Added to ${path.relative(ROOT, file)}`);
+  },
+);
+
+server.tool(
   "list_open_questions",
   "Facts still unknown about the author. Ask him these instead of guessing.",
   {},

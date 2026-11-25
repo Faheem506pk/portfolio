@@ -5,3 +5,4 @@
 - The `author-studio` MCP server is declared in `.mcp.json`. Rebuild with `cd mcp/author-studio && npm install && npm run build` after pulling.
 - Plan mode is fine for choosing topics. Draft only: never publish, post or edit external accounts.
 - Respect the CPU rules in the user's global CLAUDE.md: one subagent at a time, no concurrent builds.
+- Learning loop: at the start of every task read `author/lessons.md` and `author/study-queue.md`; at the end run the `lessons-learned` skill and add what you learned.
