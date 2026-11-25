@@ -22,7 +22,7 @@ Full evidence, sources and scoring: `reviews/2026-11-25-topic-research.md`. Scor
 | 16 | Same task, three agents, logged results | 13 | needs-details | He runs the same task in each |
 | 17 | TypeScript patterns where AI fails | 13 | needs-details | Real failing examples |
 | 18 | One story into LinkedIn, X, YouTube with agents | 14 | idea | Run the pipeline once |
-| 19 | How to read AI research claims before repeating them | 15 | idea | None, can be written from sources |
+| 19 | How to read AI research claims before repeating them | 15 | drafted (drafts/2026-11-25-read-ai-research-claims/medium.md) | Review, confirm AI disclosure, optional real anecdote |
 | 20 | Spec-driven development vs prompting | 11 | skip-for-now | Saturated |
 
 ## Suggested order
