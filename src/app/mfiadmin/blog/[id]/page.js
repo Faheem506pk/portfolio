@@ -200,7 +200,7 @@ export default function BlogEditorPage() {
     post.meta_description || post.excerpt || "No description set — Google will pick its own snippet."
 
   return (
-    <div className="space-y-6 pb-20">
+    <div className="space-y-3 pb-16">
       {/* Sticky action bar */}
       <div className="sticky top-14 z-20 -mx-4 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 max-lg:top-14">
         <div className="flex items-center gap-3">
@@ -260,9 +260,9 @@ export default function BlogEditorPage() {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_340px]">
         {/* ---------------- Main editor ---------------- */}
-        <div className="space-y-5">
+        <div className="space-y-3">
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input
@@ -335,7 +335,7 @@ export default function BlogEditorPage() {
         </div>
 
         {/* ---------------- Sidebar ---------------- */}
-        <aside className="space-y-5">
+        <aside className="space-y-3">
           <MediumPublishCard post={post} update={update} />
 
           <Card>

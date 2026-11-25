@@ -285,3 +285,69 @@ WebGL is unavailable or the viewport is below `md`.
 - **Don't** use warm greys or cream grounds; neutrals are cool (hue 265).
 - **Don't** reintroduce gradient text or animated gradient blobs.
 - **Don't** let a 3D canvas push the primary action below the fold.
+
+---
+
+# Admin Dashboard (`/mfiadmin`)
+
+The admin is a separate, quiet work surface. It keeps the public site's signal red (binding, see PRODUCT.md) and its Figtree text, but uses a WordPress-style structure, tighter spacing and calmer neutrals. Mode: Operate. Scanability, density and consistency come before expression. All rules below are scoped by the `.wp-admin` class in `src/app/mfiadmin/admin.css`; the public site is not affected.
+
+## Structure
+
+- **Top bar** (3rem): site mark and name, one filled red **New** menu, theme switch (Light, Dark, System), user menu. Sticky, with a soft border, never a heavy shadow.
+- **Left menu** (14rem, a drawer under 1024px): groups Overview, Content, Portfolio, Inbox, System. Sentence-case group labels. The current page is a soft red-tinted pill with a red icon.
+- **Content**: `max-width: 110rem`, centered, padded 1.25rem (0.75rem on phones). Pages open with a 22px semibold title and at most one filled primary action.
+- **Boxes** (`.wp-postbox`): bordered card, 10px 14px header with a 15px semibold title, 12px 14px body, 14px grid gap.
+- **List tables** (`DataTable`, TanStack Table): sortable headers (`aria-sort`), 7px 12px header cells, 8px 12px body cells, row actions that appear on hover or focus (always visible on touch), 20 rows per page with "21 to 40 of 134", Previous, Next.
+
+## Color roles (OKLCH)
+
+| Role | Light | Dark |
+|---|---|---|
+| Canvas (`--background`) | `oklch(0.972 0.004 265)` | `oklch(0.17 0.01 265)` |
+| Surface (`--card`) | `oklch(0.995 0.002 265)` | `oklch(0.21 0.011 265)` |
+| Text (`--foreground`) | `oklch(0.27 0.02 265)` | `oklch(0.92 0.005 265)` |
+| Muted text | `oklch(0.5 0.016 265)` | `oklch(0.72 0.012 265)` |
+| Border (`--border`) | `oklch(0.925 0.006 265)` | `oklch(0.285 0.01 265)` |
+| Field border (`--input`) | `oklch(0.85 0.009 265)` | `oklch(0.38 0.012 265)` |
+| Action and selection | brand `--primary` (signal red) | brand `--primary` |
+| Selected tint (`--accent`) | 8% red over surface | 16% red over surface |
+
+Status tones carry meaning, never decoration: neutral (idea, not on Medium), warning (needs details, draft), red (in progress), info (review), success (ready, live). Each has a fill for dots and bars and a darker text color for chips (`--tone-*` and `--tone-*-text`). Chips are always text plus a dot, so color is never the only cue.
+
+## Spacing scale and alignment
+
+One scale for the whole admin, in `rem` so it grows with the fluid root size: `--space-1` 0.25, `--space-2` 0.5, `--space-3` 0.75, `--space-4` 1, `--space-5` 1.5. Page inset is `--space-4` (`--space-3` under 1024px). Boxes and page sections are separated by `--space-3`. Box and card padding is `--space-3`. Related items sit `--space-2` apart. Table cells are `--space-2` by `--space-3`.
+
+Every control (buttons, inputs, selects, pagination) uses `--control-h`: 2rem on mouse devices, 2.75rem on touch. Icons and text share a center line, and numbers use tabular figures so columns align.
+
+## Density and responsive rules
+
+- **Compact by default.** No decorative padding. Group related things tightly, separate groups with 14px, not 24px. The shared Card is tightened inside the admin (0.875rem padding and 0.75rem gap).
+- **Fluid scale.** All admin sizes are in `rem`. On pages with the admin the root size is `clamp(16px, 0.35vw + 11px, 22px)`, so text, spacing, the menu and the bar grow gently on large and 4K monitors and stay at 16px on phones.
+- **Use the width.** Grids are `auto-fit` with a minimum column (boxes 340px, board columns 260px), so a wide screen shows more columns instead of a stretched one.
+- **Breakpoints that matter:** under 1024px the menu becomes a drawer; under 700px every table row becomes a labeled card (no sideways scrolling); the chart and side list stack under 900px.
+- **Touch.** On coarse pointers every control is at least 44px tall.
+- **Check at** 320, 375, 768, 1024, 1440, 1920 and 3840 wide. No horizontal page scroll at any width.
+
+## Components
+
+- **Chips** (`.wp-chip`, `data-tone`), **dots** (`.wp-dot`), **stage strip** (`.wp-stage`, doubles as a filter), **idea cards** (`.wp-idea`, outline buttons only), **notices** (`.wp-notice`).
+- **Charts** (Recharts, MIT) in `charts.jsx`: flat area, donut and bar fills from theme variables, no gradients, animation off. Every chart has a text equivalent (a ranked list) and an `aria-label`.
+- **Editor** (Tiptap, MIT): serif reading surface, 700px measure, Markdown stored in the database.
+- **Real data only.** Charts read your own `post_views` table. Nothing is estimated or invented, and an empty state says so.
+
+## Admin do and don't
+
+- Do keep one filled red button per area. Everything else is outline or ghost.
+- Do use semantic tokens only. No raw hex colors in components.
+- Do keep borders soft (`--border`). Tailwind's default black border is reset for the whole admin in a base layer.
+- Don't use gradients, glow, blur as decoration, or colored side borders thicker than 1px.
+- Don't use tiny uppercase tracked labels as headings, or big number cards as page structure.
+- Don't add motion for its own sake. Honor `prefers-reduced-motion`.
+- Don't use an em dash in any admin copy.
+
+## Libraries and licenses
+
+Tiptap (MIT), Recharts (MIT), TanStack Table v8 (MIT), Lucide (ISC), Sonner (MIT). Highcharts is not used: it is free only for non-commercial use and needs a paid license otherwise.
+

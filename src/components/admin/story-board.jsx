@@ -29,7 +29,7 @@ export function StageStrip({ counts, active, onSelect }) {
   )
 }
 
-const OUTLINE = "inline-flex h-9 items-center gap-1.5 rounded-lg border border-border bg-card px-3 text-sm font-medium text-foreground hover:bg-muted max-sm:h-11"
+const OUTLINE = "inline-flex h-8 items-center gap-1.5 rounded-lg border border-border bg-card px-3 text-sm font-medium text-foreground hover:bg-muted max-sm:h-11"
 
 export function IdeaCard({ idea, status, post, busy, onStage, onStart, onCopyBrief }) {
   const stage = PIPELINE_STATUSES.find((s) => s.value === status)
@@ -61,7 +61,7 @@ export function IdeaCard({ idea, status, post, busy, onStage, onStart, onCopyBri
           value={status}
           disabled={busy}
           onChange={(e) => onStage(e.target.value)}
-          className="h-9 rounded-lg border border-input bg-card px-2 text-sm max-sm:h-11"
+          className="h-8 rounded-lg border border-input bg-card px-2 text-sm max-sm:h-11"
           data-stage={stage?.tone}
         >
           {PIPELINE_STATUSES.map((s) => (

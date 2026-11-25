@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useRef, useState } from "react"
+import { Suspense, useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "sonner"
@@ -9,6 +9,7 @@ import { Loader2, RefreshCw } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { MediumStatusBadge } from "@/components/admin/medium-status-badge"
 import { PostStats } from "@/components/admin/post-stats"
+import { DataTable } from "@/components/admin/data-table"
 import { syncWithMedium, trackMediumStory } from "@/lib/medium-sync"
 
 function formatDate(value) {
@@ -116,6 +117,84 @@ function PostsList() {
     fetchPosts()
   }
 
+  const columns = useMemo(
+    () => [
+      {
+        id: "title",
+        accessorKey: "title",
+        header: "Title",
+        meta: { primary: true },
+        cell: ({ row }) => {
+          const post = row.original
+          return (
+            <>
+              <Link href={`/mfiadmin/blog/${post.id}`} className="row-title">
+                {post.title}
+              </Link>
+              <div className="row-actions">
+                <Link href={`/mfiadmin/blog/${post.id}`}>Edit</Link>
+                {post.status === "published" && (
+                  <a href={`/blog/${post.slug}`} target="_blank" rel="noreferrer">
+                    View
+                  </a>
+                )}
+                {post.medium_url && (
+                  <a href={post.medium_url} target="_blank" rel="noreferrer">
+                    Medium
+                  </a>
+                )}
+                <button type="button" className="delete" onClick={() => handleDelete(post)}>
+                  Delete
+                </button>
+              </div>
+            </>
+          )
+        },
+      },
+      {
+        id: "status",
+        header: "On your blog",
+        accessorFn: (post) => (post.status === "published" ? "Live" : "Draft"),
+        cell: ({ row }) => {
+          const post = row.original
+          return (
+            <>
+              <span className={`wp-status ${post.status === "published" ? "ok" : ""}`}>{post.status === "published" ? "Live" : "Draft"}</span>
+              {post.status === "published" && (
+                <div className="mt-1">
+                  <PostStats slug={post.slug} compact />
+                </div>
+              )}
+            </>
+          )
+        },
+      },
+      {
+        id: "medium",
+        header: "On Medium",
+        accessorFn: (post) => post.medium_status || "not_on_medium",
+        cell: ({ row }) => <MediumStatusBadge status={row.original.medium_status} />,
+      },
+      {
+        id: "tags",
+        header: "Tags",
+        enableSorting: false,
+        accessorFn: (post) => (post.tags || []).join(", "),
+        meta: { className: "muted" },
+        cell: ({ getValue }) => getValue(),
+      },
+      {
+        id: "updated_at",
+        accessorKey: "updated_at",
+        header: "Last modified",
+        meta: { className: "muted" },
+        cell: ({ getValue }) => formatDate(getValue()),
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
   const views = [
     { key: "all", label: "All" },
     { key: "published", label: "Live on blog" },
@@ -180,74 +259,7 @@ function PostsList() {
         />
       </div>
 
-      <div className="wp-table-wrap">
-        <table className="wp-table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">On your blog</th>
-              <th scope="col">On Medium</th>
-              <th scope="col">Tags</th>
-              <th scope="col">Last modified</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
-              <tr>
-                <td colSpan={5} className="muted">
-                  <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
-                  Loading
-                </td>
-              </tr>
-            ) : visible.length === 0 ? (
-              <tr>
-                <td colSpan={5} className="muted">
-                  {posts.length === 0 ? "No posts yet. Use Add New to write the first one." : "No posts match."}
-                </td>
-              </tr>
-            ) : (
-              visible.map((post) => (
-                <tr key={post.id}>
-                  <td>
-                    <Link href={`/mfiadmin/blog/${post.id}`} className="row-title">
-                      {post.title}
-                    </Link>
-                    <div className="row-actions">
-                      <Link href={`/mfiadmin/blog/${post.id}`}>Edit</Link>
-                      {post.status === "published" && (
-                        <a href={`/blog/${post.slug}`} target="_blank" rel="noreferrer">
-                          View
-                        </a>
-                      )}
-                      {post.medium_url && (
-                        <a href={post.medium_url} target="_blank" rel="noreferrer">
-                          Medium
-                        </a>
-                      )}
-                      <button type="button" className="delete" onClick={() => handleDelete(post)}>
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                  <td data-label="On your blog">
-                    <span className={`wp-status ${post.status === "published" ? "ok" : ""}`}>{post.status === "published" ? "Live" : "Draft"}</span>
-                    {post.status === "published" && (
-                      <div className="mt-1">
-                        <PostStats slug={post.slug} compact />
-                      </div>
-                    )}
-                  </td>
-                  <td data-label="On Medium">
-                    <MediumStatusBadge status={post.medium_status} />
-                  </td>
-                  <td className="muted" data-label="Tags">{(post.tags || []).join(", ")}</td>
-                  <td className="muted" data-label="Last modified">{formatDate(post.updated_at)}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+      <DataTable columns={columns} data={visible} loading={loading} initialSort={[{ id: "updated_at", desc: true }]} emptyText={posts.length === 0 ? "No posts yet. Use Add New to write the first one." : "No posts match."} />
     </div>
   )
 }
