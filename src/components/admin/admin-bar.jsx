@@ -4,7 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
-import { ChevronDown, Home, LogOut, Menu, Monitor, Moon, Plus, Sun, User } from "lucide-react"
+import { ChevronDown, LogOut, Menu, Monitor, Moon, Plus, Sun, User } from "lucide-react"
 
 import { supabase } from "@/lib/supabase"
 
@@ -61,13 +61,13 @@ export function AdminBar({ onToggleMenu, menuOpen }) {
         <Menu size={18} />
       </button>
 
-      <Link href="/" target="_blank" rel="noreferrer" aria-label="Visit the public site">
-        <Home size={16} />
-        <span>Faheem506pk</span>
+      <Link href="/" target="_blank" rel="noreferrer" aria-label="Visit the public site" className="wp-brand">
+        <span className="wp-brand-mark" aria-hidden="true">F</span>
+        <span className="wp-hide-sm">Faheem506pk</span>
       </Link>
 
       <details>
-        <summary aria-label="Add new">
+        <summary className="wp-new" aria-label="Add new">
           <Plus size={16} />
           <span>New</span>
         </summary>
@@ -84,7 +84,7 @@ export function AdminBar({ onToggleMenu, menuOpen }) {
       <details>
         <summary aria-label={`Theme: ${active.label}`}>
           <ActiveIcon size={16} />
-          <span>{active.label}</span>
+          <span className="wp-hide-sm">{active.label}</span>
         </summary>
         <div className="wp-dropdown right">
           {THEMES.map(({ value, label, icon: Icon }) => (
@@ -99,7 +99,7 @@ export function AdminBar({ onToggleMenu, menuOpen }) {
       <details>
         <summary>
           <User size={16} />
-          <span>Howdy, {name}</span>
+          <span className="wp-hide-sm">{name}</span>
           <ChevronDown size={14} />
         </summary>
         <div className="wp-dropdown right">

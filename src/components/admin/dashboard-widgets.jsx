@@ -207,7 +207,7 @@ export function QuickDraft() {
             id="qd-title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="h-8 w-full border bg-background px-2 text-[13px]"
+            className="h-9 w-full rounded-lg border border-input bg-card px-3 text-sm"
           />
         </div>
         <div>
@@ -220,13 +220,13 @@ export function QuickDraft() {
             onChange={(e) => setNotes(e.target.value)}
             rows={3}
             placeholder="What is on your mind?"
-            className="w-full border bg-background px-2 py-1.5 text-[13px]"
+            className="w-full rounded-lg border border-input bg-card px-3 py-2 text-sm"
           />
         </div>
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex h-8 items-center border border-primary bg-primary px-3 text-[13px] text-primary-foreground hover:opacity-90 disabled:opacity-60"
+          className="inline-flex h-9 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
         >
           {saving ? "Saving" : "Save draft"}
         </button>

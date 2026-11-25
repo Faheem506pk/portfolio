@@ -176,7 +176,7 @@ function PostsList() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search posts"
-          className="h-8 w-60 border bg-card px-2 text-[13px]"
+          className="w-full max-w-xs"
         />
       </div>
 
@@ -229,7 +229,7 @@ function PostsList() {
                       </button>
                     </div>
                   </td>
-                  <td>
+                  <td data-label="On your blog">
                     <span className={`wp-status ${post.status === "published" ? "ok" : ""}`}>{post.status === "published" ? "Live" : "Draft"}</span>
                     {post.status === "published" && (
                       <div className="mt-1">
@@ -237,11 +237,11 @@ function PostsList() {
                       </div>
                     )}
                   </td>
-                  <td>
+                  <td data-label="On Medium">
                     <MediumStatusBadge status={post.medium_status} />
                   </td>
-                  <td className="muted">{(post.tags || []).join(", ")}</td>
-                  <td className="muted">{formatDate(post.updated_at)}</td>
+                  <td className="muted" data-label="Tags">{(post.tags || []).join(", ")}</td>
+                  <td className="muted" data-label="Last modified">{formatDate(post.updated_at)}</td>
                 </tr>
               ))
             )}

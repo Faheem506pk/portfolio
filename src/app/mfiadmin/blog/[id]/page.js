@@ -202,7 +202,7 @@ export default function BlogEditorPage() {
   return (
     <div className="space-y-6 pb-20">
       {/* Sticky action bar */}
-      <div className="sticky top-[38px] z-20 -mx-4 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur">
+      <div className="sticky top-14 z-20 -mx-4 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 max-lg:top-14">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" asChild>
             <Link href="/mfiadmin/blog" aria-label="Back to posts">
